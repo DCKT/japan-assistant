@@ -5,10 +5,15 @@ import Home from './scenes/Home'
 import Login from './scenes/Login'
 import firebase from './services/firebase'
 
-export const UserContext = React.createContext({ user: null, setUser: () => {} })
+export const UserContext = React.createContext({ user: undefined, setUser: () => {} })
 
 const AnonymousRoutes = props => {
   const userContext = useContext(UserContext)
+
+  if (typeof userContext.user === 'undefined') {
+    return <p>waiting</p>
+  }
+
   if (userContext.user) {
     return <Redirect to="/app" noThrow />
   } else {
@@ -19,6 +24,10 @@ const AnonymousRoutes = props => {
 const AuthenticatedRoutes = props => {
   const userContext = useContext(UserContext)
 
+  if (typeof userContext.user === 'undefined') {
+    return <div />
+  }
+
   if (userContext.user) {
     return props.children
   } else {
@@ -27,7 +36,7 @@ const AuthenticatedRoutes = props => {
 }
 
 export default () => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(undefined)
 
   useEffect(
     () => {

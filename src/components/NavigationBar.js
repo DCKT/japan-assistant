@@ -88,7 +88,7 @@ const styles = theme => ({
 })
 
 function PrimarySearchAppBar(props) {
-  const { classes } = props
+  const { classes, onLogout } = props
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
   const isMenuOpen = Boolean(anchorEl)
@@ -108,7 +108,14 @@ function PrimarySearchAppBar(props) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem
+        onClick={() => {
+          handleMenuClose()
+          onLogout()
+        }}
+      >
+        Logout
+      </MenuItem>
     </Menu>
   )
 
