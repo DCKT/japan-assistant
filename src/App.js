@@ -1,28 +1,52 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useContext, useEffect } from 'react'
+import { Router, Redirect } from '@reach/router'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+import Home from './scenes/Home'
+import Login from './scenes/Login'
+import firebase from './services/firebase'
+
+export const UserContext = React.createContext({ user: null, setUser: () => {} })
+
+const AnonymousRoutes = props => {
+  const userContext = useContext(UserContext)
+  if (userContext.user) {
+    return <Redirect to="/app" noThrow />
+  } else {
+    return props.children
   }
 }
 
-export default App;
+const AuthenticatedRoutes = props => {
+  const userContext = useContext(UserContext)
+
+  if (userContext.user) {
+    return props.children
+  } else {
+    return <Redirect to="/login" noThrow />
+  }
+}
+
+export default () => {
+  const [user, setUser] = useState(null)
+
+  useEffect(
+    () => {
+      firebase.auth().onAuthStateChanged(setUser)
+    },
+    [user]
+  )
+
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      <Router>
+        <AnonymousRoutes path="/">
+          <Login path="login" />
+        </AnonymousRoutes>
+
+        <AuthenticatedRoutes path="app">
+          <Home path="/" />
+        </AuthenticatedRoutes>
+      </Router>
+    </UserContext.Provider>
+  )
+}
