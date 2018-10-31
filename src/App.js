@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Router, Redirect } from '@reach/router'
+import { IntlProvider } from 'react-intl'
 
 import Home from './scenes/Home'
 import Login from './scenes/Login'
 import firebase from './services/firebase'
+import { messages } from './locales'
 
 export const UserContext = React.createContext({ user: undefined, setUser: () => {} })
 
@@ -46,16 +48,18 @@ export default () => {
   )
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <Router>
-        <AnonymousRoutes path="/">
-          <Login path="login" />
-        </AnonymousRoutes>
+    <IntlProvider locale={navigator.language} messages={messages}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Router>
+          <AnonymousRoutes path="/">
+            <Login path="login" />
+          </AnonymousRoutes>
 
-        <AuthenticatedRoutes path="app">
-          <Home path="/" />
-        </AuthenticatedRoutes>
-      </Router>
-    </UserContext.Provider>
+          <AuthenticatedRoutes path="app">
+            <Home path="/" />
+          </AuthenticatedRoutes>
+        </Router>
+      </UserContext.Provider>
+    </IntlProvider>
   )
 }
