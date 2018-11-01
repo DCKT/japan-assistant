@@ -7,9 +7,9 @@ import Word from '../components/Word'
 
 import firebase from '../services/firebase'
 
-export default () => (
-  <>
-    <NavigationBar onLogout={() => firebase.auth().signOut()} />
+export default React.memo(() => (
+  <div>
+    <NavigationBar onLogout={() => firebase.auth().signOut()} />' '
     <div style={{ padding: 15 }}>
       <Grid container spacing={24}>
         <Grid item xs={3}>
@@ -41,5 +41,5 @@ export default () => (
         </Grid>
       </Grid>
     </div>
-  </>
-)
+  </div>
+))

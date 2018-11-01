@@ -87,7 +87,7 @@ const styles = theme => ({
   }
 })
 
-function PrimarySearchAppBar(props) {
+function PrimarySearchAppBar (props) {
   const { classes, onLogout } = props
   const [anchorEl, setAnchorEl] = useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
@@ -128,15 +128,15 @@ function PrimarySearchAppBar(props) {
       onClose={() => setMobileMoreAnchorEl(null)}
     >
       <MenuItem>
-        <IconButton color="inherit">
-          <Badge badgeContent={11} color="secondary">
+        <IconButton color='inherit'>
+          <Badge badgeContent={11} color='secondary'>
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
       <MenuItem onClick={e => setAnchorEl(e.currentTarget)}>
-        <IconButton color="inherit">
+        <IconButton color='inherit'>
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
@@ -146,20 +146,20 @@ function PrimarySearchAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position='static'>
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
+          <IconButton className={classes.menuButton} color='inherit' aria-label='Open drawer'>
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-            Kanji
+          <Typography className={classes.title} variant='h6' color='inherit' noWrap>
+            Memori
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Rechercher..."
+              placeholder='Rechercher...'
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput
@@ -168,22 +168,22 @@ function PrimarySearchAppBar(props) {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton color="inherit">
-              <Badge badgeContent={17} color="secondary">
+            <IconButton color='inherit'>
+              <Badge badgeContent={17} color='secondary'>
                 <NotificationsIcon />
               </Badge>
             </IconButton>
             <IconButton
               aria-owns={isMenuOpen ? 'material-appbar' : null}
-              aria-haspopup="true"
+              aria-haspopup='true'
               onClick={e => setAnchorEl(e.currentTarget)}
-              color="inherit"
+              color='inherit'
             >
               <AccountCircle />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
-            <IconButton aria-haspopup="true" onClick={e => setMobileMoreAnchorEl(e.currentTarget)} color="inherit">
+            <IconButton aria-haspopup='true' onClick={e => setMobileMoreAnchorEl(e.currentTarget)} color='inherit'>
               <MoreIcon />
             </IconButton>
           </div>

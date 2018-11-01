@@ -1,11 +1,14 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, Suspense } from 'react'
 import { Router, Redirect } from '@reach/router'
-import { IntlProvider } from 'react-intl'
+import { I18nProvider } from '@lingui/react'
 
-import Home from './scenes/Home'
-import Login from './scenes/Login'
+import catalogFr from './locales/fr/messages.js'
+import catalogEn from './locales/en/messages.js'
 import firebase from './services/firebase'
-import { messages } from './locales'
+
+const Home = React.lazy(() => import('./scenes/Home'))
+const Login = React.lazy(() => import('./scenes/Login'))
+const Register = React.lazy(() => import('./scenes/Register'))
 
 export const UserContext = React.createContext({ user: undefined, setUser: () => {} })
 
@@ -17,7 +20,7 @@ const AnonymousRoutes = props => {
   }
 
   if (userContext.user) {
-    return <Redirect to="/app" noThrow />
+    return <Redirect to='/app' noThrow />
   } else {
     return props.children
   }
@@ -33,7 +36,7 @@ const AuthenticatedRoutes = props => {
   if (userContext.user) {
     return props.children
   } else {
-    return <Redirect to="/login" noThrow />
+    return <Redirect to='/login' noThrow />
   }
 }
 
@@ -48,18 +51,21 @@ export default () => {
   )
 
   return (
-    <IntlProvider locale={navigator.language} messages={messages}>
+    <I18nProvider language={'fr'} catalogs={{ fr: catalogFr, en: catalogEn }}>
       <UserContext.Provider value={{ user, setUser }}>
-        <Router>
-          <AnonymousRoutes path="/">
-            <Login path="login" />
-          </AnonymousRoutes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Router>
+            <AnonymousRoutes path='/'>
+              <Login path='login' />
+              <Register path='register' />
+            </AnonymousRoutes>
 
-          <AuthenticatedRoutes path="app">
-            <Home path="/" />
-          </AuthenticatedRoutes>
-        </Router>
+            <AuthenticatedRoutes path='app'>
+              <Home path='/' />
+            </AuthenticatedRoutes>
+          </Router>
+        </Suspense>
       </UserContext.Provider>
-    </IntlProvider>
+    </I18nProvider>
   )
 }

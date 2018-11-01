@@ -12,7 +12,6 @@ import firebase from '../services/firebase'
 import TextField from '@material-ui/core/TextField'
 import { Button } from '@material-ui/core'
 import { useInput } from '../services/utils/hooks'
-import CircularProgress from '@material-ui/core/CircularProgress'
 
 const styles = theme => ({
   root: {
@@ -27,21 +26,25 @@ const styles = theme => ({
 export default React.memo(
   withStyles(styles)(({ classes }) => {
     const userContext = useContext(UserContext)
-    const [isLoading, setIsLoading] = useState(false)
     const emailInput = useInput('')
     const passwordInput = useInput('')
+    const passwordConfirmInput = useInput('')
     const [error, setError] = useState(null)
 
     const onSubmit = e => {
       e.preventDefault()
-      setIsLoading(true)
+
+      if (passwordInput !== passwordConfirmInput) {
+        setError({
+          message: <Trans>Password missmatch</Trans>
+        })
+        return
+      }
+
       firebase
         .auth()
-        .signInWithEmailAndPassword(emailInput.value, passwordInput.value)
-        .catch(err => {
-          setError(err)
-          setIsLoading(false)
-        })
+        .createUserWithEmailAndPassword(emailInput.value, passwordInput.value)
+        .catch(setError)
     }
 
     return (
@@ -49,7 +52,7 @@ export default React.memo(
         <Grid item xs style={{ maxWidth: 400 }}>
           <Paper className={classes.root} elevation={1}>
             <Typography variant='h4' component='h1' style={{ marginBottom: 15 }}>
-              <Trans>Connexion</Trans>
+              <Trans>Register</Trans>
             </Typography>
 
             {error ? (
@@ -84,9 +87,21 @@ export default React.memo(
                   {...passwordInput}
                 />
               </div>
+              <div>
+                <TextField
+                  id='passwordConfirm'
+                  label={<Trans>Confirm password</Trans>}
+                  type='password'
+                  margin='normal'
+                  variant='outlined'
+                  required
+                  fullWidth
+                  {...passwordConfirmInput}
+                />
+              </div>
               <div style={{ marginTop: 20 }}>
-                <Button type='submit' variant='contained' color='primary' size='large' fullWidth disabled={isLoading}>
-                  {isLoading ? <CircularProgress size={28} className={classes.fabProgress} /> : <Trans>Login</Trans>}
+                <Button type='submit' variant='contained' color='primary' size='large' fullWidth>
+                  <Trans>Login</Trans>
                 </Button>
               </div>
             </form>
