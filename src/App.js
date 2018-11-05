@@ -16,8 +16,10 @@ const AnonymousRoutes = props => {
   const userContext = useContext(UserContext)
 
   if (typeof userContext.user === 'undefined') {
-    return <p>waiting</p>
+    return <div />
   }
+
+  console.log('user is not undefined')
 
   if (userContext.user) {
     return <Redirect to='/app' noThrow />
@@ -56,7 +58,7 @@ export default () => {
         <Suspense fallback={<div>Loading...</div>}>
           <Router>
             <AnonymousRoutes path='/'>
-              <Login path='login' />
+              <Login path='login' default />
               <Register path='register' />
             </AnonymousRoutes>
 
