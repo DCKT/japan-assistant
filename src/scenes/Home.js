@@ -4,6 +4,7 @@ import { Router, Link } from '@reach/router'
 import { withStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
+import { Trans } from '@lingui/macro'
 
 import Word from '../components/Word'
 import AddWordDialog from '../components/AddWordDialog'
@@ -21,7 +22,7 @@ const styles = theme => ({
 export default React.memo(
   withStyles(styles)(({ classes }) => {
     const [isAddWordDialogVisible, setIsAddWordDialogVisible] = useState(false)
-    const [words, setWords] = useState(null)
+    const [words, setWords] = useState(undefined)
 
     useEffect(
       () => {
@@ -36,12 +37,12 @@ export default React.memo(
     )
 
     return (
-      <AuthenticatedNavigation onLogout={() => firebase.auth().signOut()}>
-        {words ? (
+      <AuthenticatedNavigation onLogout={() => firebase.auth().signOut()} categories={[]}>
+        {words === undefined ? null : words ? (
           <Grid container spacing={24} wrap='wrap'>
             {Object.keys(words).map((word, i) => (
               <Grid item xs={12} sm={10} md={4} lg={3} key={i}>
-                <Word word={word} />
+                <Word word={words[word]} />
               </Grid>
             ))}
           </Grid>
@@ -49,6 +50,9 @@ export default React.memo(
           <Grid container alignItems='center' justify='center' spacing={24}>
             <Grid item xs={5}>
               <p>No words yet</p>
+              <Button variant='contained' color='primary'>
+                <Trans>Add my first word</Trans>
+              </Button>
             </Grid>
           </Grid>
         )}

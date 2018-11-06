@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
@@ -24,41 +26,38 @@ const styles = {
   }
 }
 
-function SimpleCard (props) {
-  const { classes } = props
-  const bull = <span className={classes.bullet}>•</span>
+type WordProps = {|
+  classes: Object,
+  word: {|
+    traduction: string,
+    kana: string,
+    kanji: ?string,
+    note: ?string,
+    category: ?string,
+    type: ?string
+  |}
+|}
 
+function Word ({ classes, word }: WordProps) {
   return (
     <Card className={classes.card}>
       <CardContent>
         <Typography className={classes.title} color='textSecondary' gutterBottom>
-          Word of the Day
+          {word.category}
         </Typography>
-        <Typography variant='h5' component='h2'>
-          be
-          {bull}
-          nev
-          {bull}o{bull}
-          lent
+        <Typography variant='h4' component='h2'>
+          {word.kanji}
         </Typography>
         <Typography className={classes.pos} color='textSecondary'>
-          adjective
+          {word.kana}
         </Typography>
-        <Typography component='p'>
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
+        <Typography component='p'>{word.note}</Typography>
       </CardContent>
       <CardActions>
-        <Button size='small'>Learn More</Button>
+        <Button size='small'>details ??</Button>
       </CardActions>
     </Card>
   )
 }
 
-SimpleCard.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles)(SimpleCard)
+export default withStyles(styles)(Word)

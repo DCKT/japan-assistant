@@ -22,6 +22,8 @@ import { fade } from '@material-ui/core/styles/colorManipulator'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
+import Button from '@material-ui/core/Button'
+import { Trans } from '@lingui/macro'
 
 const drawerWidth = 240
 
@@ -97,10 +99,15 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1
+  },
+  addCategory: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: theme.spacing.unit * 2
   }
 })
 
-export default withStyles(styles, { withTheme: true })(({ classes, theme, children, onLogout }) => {
+export default withStyles(styles, { withTheme: true })(({ classes, theme, children, onLogout, categories }) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [isMobileOpen, setMobileOpen] = useState(false)
   const isMenuOpen = Boolean(anchorEl)
@@ -113,20 +120,17 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
     <div>
       <div className={classes.toolbar} />
       <Divider />
+      <div className={classes.addCategory}>
+        <Button variant='contained' color='primary'>
+          <Trans>Add category</Trans>
+        </Button>
+      </div>
+
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
+        {categories.map((category, index) => (
+          <ListItem button key={category}>
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={category} />
           </ListItem>
         ))}
       </List>

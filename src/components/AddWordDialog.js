@@ -13,8 +13,18 @@ import { Trans } from '@lingui/macro'
 import { useInput } from '../services/utils/hooks'
 import firebase from '../services/firebase'
 
-function AddWordDialog ({ isVisible, onClose }) {
-  const nameInput = useInput('')
+type AddWordDialogProps = {|
+  isVisible: boolean,
+  onClose: Function
+|}
+
+function AddWordDialog ({ isVisible, onClose }: AddWordDialogProps) {
+  const traductionInput = useInput('')
+  const kanaInput = useInput('')
+  const noteInput = useInput('')
+  const typeInput = useInput('')
+  const kanjiInput = useInput('')
+  const categoryInput = useInput('')
 
   function onSubmit () {
     const id = Date.now()
@@ -23,7 +33,12 @@ function AddWordDialog ({ isVisible, onClose }) {
       .ref(`words/${id}`)
       .set({
         id,
-        name: nameInput.value
+        name: traductionInput.value,
+        kana: kanaInput.value,
+        note: noteInput.value,
+        type: typeInput.value,
+        category: categoryInput.value,
+        kanji: kanjiInput.value
       })
     onClose()
   }
@@ -37,11 +52,49 @@ function AddWordDialog ({ isVisible, onClose }) {
         <TextField
           autoFocus
           margin='dense'
-          id='name'
-          label={<Trans>Name</Trans>}
+          id='traduction'
+          label={<Trans>Traduction</Trans>}
           type='text'
           fullWidth
-          {...nameInput}
+          {...traductionInput}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          id='traduction'
+          label={<Trans>Kanji</Trans>}
+          type='text'
+          fullWidth
+          {...kanjiInput}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          id='kana'
+          label={<Trans>Kana</Trans>}
+          type='text'
+          fullWidth
+          {...kanaInput}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          id='category'
+          label={<Trans>Category</Trans>}
+          type='text'
+          fullWidth
+          {...categoryInput}
+        />
+        <TextField
+          autoFocus
+          margin='dense'
+          id='note'
+          label={<Trans>Note</Trans>}
+          type='text'
+          fullWidth
+          multiline
+          variant='outlined'
+          {...noteInput}
         />
       </DialogContent>
       <DialogActions>
