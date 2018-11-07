@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
-import { Router, Link } from '@reach/router'
 import { withStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
@@ -8,6 +7,7 @@ import { Trans } from '@lingui/macro'
 
 import Word from '../components/Word'
 import AddWordDialog from '../components/AddWordDialog'
+import AddCategoryDialog from '../components/AddCategoryDialog'
 import AuthenticatedNavigation from '../components/AuthenticatedNavigation'
 import firebase from '../services/firebase'
 
@@ -20,24 +20,26 @@ const styles = theme => ({
 })
 
 export default React.memo(
-  withStyles(styles)(({ classes }) => {
+  withStyles(styles)(({ classes, viewer }) => {
     const [isAddWordDialogVisible, setIsAddWordDialogVisible] = useState(false)
+    const [isAddCategoryDialogVisible, setIsAddCategoryDialogVisible] = useState(false)
     const [words, setWords] = useState(undefined)
 
-    useEffect(
-      () => {
-        firebase
-          .database()
-          .ref('words')
-          .on('value', snap => {
-            setWords(snap.val())
-          })
-      },
-      [words]
-    )
+    useEffect(() => {
+      firebase
+        .database()
+        .ref(`users/${viewer.uid}/words`)
+        .on('value', snap => {
+          setWords(snap.val())
+        })
+    }, [])
 
     return (
-      <AuthenticatedNavigation onLogout={() => firebase.auth().signOut()} categories={[]}>
+      <AuthenticatedNavigation
+        onLogout={() => firebase.auth().signOut()}
+        categories={[]}
+        showCategoryDialog={() => setIsAddCategoryDialogVisible(true)}
+      >
         {words === undefined ? null : words ? (
           <Grid container spacing={24} wrap='wrap'>
             {Object.keys(words).map((word, i) => (
@@ -65,7 +67,15 @@ export default React.memo(
         >
           <AddIcon />
         </Button>
-        <AddWordDialog isVisible={isAddWordDialogVisible} onClose={() => setIsAddWordDialogVisible(false)} />
+        <AddWordDialog
+          viewer={viewer}
+          isVisible={isAddWordDialogVisible}
+          onClose={() => setIsAddWordDialogVisible(false)}
+        />
+        <AddCategoryDialog
+          isVisible={isAddCategoryDialogVisible}
+          onClose={() => setIsAddCategoryDialogVisible(false)}
+        />
       </AuthenticatedNavigation>
     )
   })

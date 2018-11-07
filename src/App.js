@@ -6,9 +6,11 @@ import catalogFr from './locales/fr/messages.js'
 import catalogEn from './locales/en/messages.js'
 import firebase from './services/firebase'
 
+import NotFound from './scenes/NotFound'
 const Home = React.lazy(() => import('./scenes/Home'))
 const Login = React.lazy(() => import('./scenes/Login'))
 const Register = React.lazy(() => import('./scenes/Register'))
+const WordsCategory = React.lazy(() => import('./scenes/WordsCategory'))
 
 export const UserContext = React.createContext({ user: undefined, setUser: () => {} })
 
@@ -18,8 +20,6 @@ const AnonymousRoutes = props => {
   if (typeof userContext.user === 'undefined') {
     return <div />
   }
-
-  console.log('user is not undefined')
 
   if (userContext.user) {
     return <Redirect to='/app' noThrow />
@@ -63,7 +63,9 @@ export default () => {
             </AnonymousRoutes>
 
             <AuthenticatedRoutes path='app'>
-              <Home path='/' />
+              <Home path='/' viewer={user} />
+              <WordsCategory path='/categories/:category' />
+              <NotFound default />
             </AuthenticatedRoutes>
           </Router>
         </Suspense>

@@ -1,12 +1,11 @@
 // @flow
 
-import React, { useState } from 'react'
+import React from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { Trans } from '@lingui/macro'
 
@@ -15,10 +14,11 @@ import firebase from '../services/firebase'
 
 type AddWordDialogProps = {|
   isVisible: boolean,
-  onClose: Function
+  onClose: Function,
+  viewer: Object
 |}
 
-function AddWordDialog ({ isVisible, onClose }: AddWordDialogProps) {
+function AddWordDialog ({ isVisible, onClose, viewer }: AddWordDialogProps) {
   const traductionInput = useInput('')
   const kanaInput = useInput('')
   const noteInput = useInput('')
@@ -30,7 +30,7 @@ function AddWordDialog ({ isVisible, onClose }: AddWordDialogProps) {
     const id = Date.now()
     firebase
       .database()
-      .ref(`words/${id}`)
+      .ref(`users/${viewer.uid}/words/${id}`)
       .set({
         id,
         name: traductionInput.value,

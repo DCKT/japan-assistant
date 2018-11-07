@@ -1,8 +1,7 @@
 // @flow
 
-import React, { useContext, useState } from 'react'
-import { navigate } from '@reach/router'
-import { UserContext } from '../App'
+import React, { useState } from 'react'
+
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
@@ -25,7 +24,6 @@ const styles = theme => ({
 
 export default React.memo(
   withStyles(styles)(({ classes }) => {
-    const userContext = useContext(UserContext)
     const emailInput = useInput('')
     const passwordInput = useInput('')
     const passwordConfirmInput = useInput('')

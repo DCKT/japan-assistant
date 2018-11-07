@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
@@ -107,122 +106,124 @@ const styles = theme => ({
   }
 })
 
-export default withStyles(styles, { withTheme: true })(({ classes, theme, children, onLogout, categories }) => {
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [isMobileOpen, setMobileOpen] = useState(false)
-  const isMenuOpen = Boolean(anchorEl)
+export default withStyles(styles, { withTheme: true })(
+  ({ classes, showCategoryDialog, theme, children, onLogout, categories }) => {
+    const [anchorEl, setAnchorEl] = useState(null)
+    const [isMobileOpen, setMobileOpen] = useState(false)
+    const isMenuOpen = Boolean(anchorEl)
 
-  const handleMenuClose = () => {
-    setAnchorEl(null)
-  }
+    const handleMenuClose = () => {
+      setAnchorEl(null)
+    }
 
-  const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <Divider />
-      <div className={classes.addCategory}>
-        <Button variant='contained' color='primary'>
-          <Trans>Add category</Trans>
-        </Button>
+    const drawer = (
+      <div>
+        <div className={classes.toolbar} />
+        <Divider />
+        <div className={classes.addCategory}>
+          <Button variant='contained' color='primary' onClick={showCategoryDialog}>
+            <Trans>Add category</Trans>
+          </Button>
+        </div>
+
+        <List>
+          {categories.map((category, index) => (
+            <ListItem button key={category}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText primary={category} />
+            </ListItem>
+          ))}
+        </List>
       </div>
+    )
 
-      <List>
-        {categories.map((category, index) => (
-          <ListItem button key={category}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={category} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  )
-
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position='fixed' className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color='inherit'
-            aria-label='Open drawer'
-            onClick={() => setMobileOpen(!isMobileOpen)}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant='h6' color='inherit' noWrap>
-            Memori
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+    return (
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position='fixed' className={classes.appBar}>
+          <Toolbar>
+            <IconButton
+              color='inherit'
+              aria-label='Open drawer'
+              onClick={() => setMobileOpen(!isMobileOpen)}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant='h6' color='inherit' noWrap>
+              Memori
+            </Typography>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder='Rechercher...'
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+              />
             </div>
-            <InputBase
-              placeholder='Rechercher...'
+            <div className={classes.grow} />
+            <IconButton
+              aria-owns={isMenuOpen ? 'material-appbar' : null}
+              aria-haspopup='true'
+              onClick={e => setAnchorEl(e.currentTarget)}
+              color='inherit'
+            >
+              <AccountCircle />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <nav className={classes.drawer}>
+          <Hidden smUp implementation='css'>
+            <Drawer
+              variant='temporary'
+              open={isMobileOpen}
+              onClose={() => setMobileOpen(!isMobileOpen)}
               classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
+                paper: classes.drawerPaper
               }}
-            />
-          </div>
-          <div className={classes.grow} />
-          <IconButton
-            aria-owns={isMenuOpen ? 'material-appbar' : null}
-            aria-haspopup='true'
-            onClick={e => setAnchorEl(e.currentTarget)}
-            color='inherit'
-          >
-            <AccountCircle />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <nav className={classes.drawer}>
-        <Hidden smUp implementation='css'>
-          <Drawer
-            variant='temporary'
-            open={isMobileOpen}
-            onClose={() => setMobileOpen(!isMobileOpen)}
-            classes={{
-              paper: classes.drawerPaper
-            }}
-            ModalProps={{
-              keepMounted: true // Better open performance on mobile.
-            }}
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown implementation='css'>
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper
-            }}
-            variant='permanent'
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Hidden>
-      </nav>
-      <main className={classes.content}>{children}</main>
+              ModalProps={{
+                keepMounted: true // Better open performance on mobile.
+              }}
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+          <Hidden xsDown implementation='css'>
+            <Drawer
+              classes={{
+                paper: classes.drawerPaper
+              }}
+              variant='permanent'
+              open
+            >
+              {drawer}
+            </Drawer>
+          </Hidden>
+        </nav>
+        <main className={classes.content}>{children}</main>
 
-      <Menu
-        anchorEl={anchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMenuOpen}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem
-          onClick={() => {
-            handleMenuClose()
-            onLogout()
-          }}
+        <Menu
+          anchorEl={anchorEl}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+          transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+          open={isMenuOpen}
+          onClose={handleMenuClose}
         >
-          Logout
-        </MenuItem>
-      </Menu>
-    </div>
-  )
-})
+          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleMenuClose()
+              onLogout()
+            }}
+          >
+            Logout
+          </MenuItem>
+        </Menu>
+      </div>
+    )
+  }
+)
