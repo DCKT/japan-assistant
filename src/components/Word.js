@@ -8,10 +8,12 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 const styles = {
   card: {
-    // minWidth: 275
+    position: 'relative'
   },
   bullet: {
     display: 'inline-block',
@@ -23,6 +25,11 @@ const styles = {
   },
   pos: {
     marginBottom: 12
+  },
+  deleteButton: {
+    position: 'absolute',
+    right: 2,
+    top: 2
   }
 }
 
@@ -35,12 +42,16 @@ type WordProps = {|
     note: ?string,
     category: ?string,
     type: ?string
-  |}
+  |},
+  onDeleteButtonClick: Function
 |}
 
-function Word ({ classes, word }: WordProps) {
+function Word ({ classes, word, onDeleteButtonClick }: WordProps) {
   return (
     <Card className={classes.card}>
+      <IconButton className={classes.deleteButton} aria-label='Delete' onClick={onDeleteButtonClick}>
+        <DeleteIcon />
+      </IconButton>
       <CardContent>
         <Typography className={classes.title} color='textSecondary' gutterBottom>
           {word.category}

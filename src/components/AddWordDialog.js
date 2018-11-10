@@ -10,7 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import { Trans } from '@lingui/macro'
 
 import { useInput } from '../services/utils/hooks'
-import firebase from '../services/firebase'
+import { addFirebaseValue } from '../services/firebase'
 
 type AddWordDialogProps = {|
   isVisible: boolean,
@@ -28,18 +28,16 @@ function AddWordDialog ({ isVisible, onClose, viewer }: AddWordDialogProps) {
 
   function onSubmit () {
     const id = Date.now()
-    firebase
-      .database()
-      .ref(`users/${viewer.uid}/words/${id}`)
-      .set({
-        id,
-        name: traductionInput.value,
-        kana: kanaInput.value,
-        note: noteInput.value,
-        type: typeInput.value,
-        category: categoryInput.value,
-        kanji: kanjiInput.value
-      })
+
+    addFirebaseValue(`users/${viewer.uid}/words/${id}`, {
+      id,
+      name: traductionInput.value,
+      kana: kanaInput.value,
+      note: noteInput.value,
+      type: typeInput.value,
+      category: categoryInput.value,
+      kanji: kanjiInput.value
+    })
     onClose()
   }
 
@@ -58,26 +56,9 @@ function AddWordDialog ({ isVisible, onClose, viewer }: AddWordDialogProps) {
           fullWidth
           {...traductionInput}
         />
+        <TextField margin='dense' id='traduction' label={<Trans>Kanji</Trans>} type='text' fullWidth {...kanjiInput} />
+        <TextField margin='dense' id='kana' label={<Trans>Kana</Trans>} type='text' fullWidth {...kanaInput} />
         <TextField
-          autoFocus
-          margin='dense'
-          id='traduction'
-          label={<Trans>Kanji</Trans>}
-          type='text'
-          fullWidth
-          {...kanjiInput}
-        />
-        <TextField
-          autoFocus
-          margin='dense'
-          id='kana'
-          label={<Trans>Kana</Trans>}
-          type='text'
-          fullWidth
-          {...kanaInput}
-        />
-        <TextField
-          autoFocus
           margin='dense'
           id='category'
           label={<Trans>Category</Trans>}
@@ -86,7 +67,6 @@ function AddWordDialog ({ isVisible, onClose, viewer }: AddWordDialogProps) {
           {...categoryInput}
         />
         <TextField
-          autoFocus
           margin='dense'
           id='note'
           label={<Trans>Note</Trans>}
