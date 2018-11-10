@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
+import type { FirebaseWord } from '../services/utils/types.js'
 
 const styles = {
   card: {
@@ -30,14 +31,7 @@ const styles = {
 
 type WordProps = {|
   classes: Object,
-  word: {|
-    traduction: string,
-    kana: string,
-    kanji: ?string,
-    note: ?string,
-    category: ?string,
-    type: ?string
-  |},
+  word: FirebaseWord,
   onDeleteButtonClick: Function,
   onEditionButtonClick: Function
 |}
