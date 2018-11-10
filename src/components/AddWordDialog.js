@@ -10,23 +10,32 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import { Trans } from '@lingui/macro'
 
 import { useInput } from '../services/utils/hooks'
-import { addFirebaseValue } from '../services/firebase'
+import { addFirebaseValue, updateFirebaseValue } from '../services/firebase'
 
 type AddWordDialogProps = {|
   isVisible: boolean,
   onClose: Function,
-  viewer: Object
+  viewer: Object,
+  editedWord: ?Object
 |}
 
-function AddWordDialog ({ isVisible, onClose, viewer }: AddWordDialogProps) {
-  const traductionInput = useInput('')
-  const kanaInput = useInput('')
-  const noteInput = useInput('')
-  const typeInput = useInput('')
-  const kanjiInput = useInput('')
-  const categoryInput = useInput('')
+function AddWordDialog ({ isVisible, onClose, viewer, editedWord }: AddWordDialogProps) {
+  const traductionInput = useInput(editedWord ? editedWord.traduction : '')
+  const kanaInput = useInput(editedWord ? editedWord.kana : '')
+  const noteInput = useInput(editedWord ? editedWord.note : '')
+  const typeInput = useInput(editedWord ? editedWord.type : '')
+  const kanjiInput = useInput(editedWord ? editedWord.kanji : '')
+  const categoryInput = useInput(editedWord ? editedWord.category : '')
 
   function onSubmit () {
+    if (editedWord) {
+      onEdit()
+    } else {
+      onCreate()
+    }
+  }
+
+  function onCreate () {
     const id = Date.now()
 
     addFirebaseValue(`users/${viewer.uid}/words/${id}`, {
@@ -41,10 +50,21 @@ function AddWordDialog ({ isVisible, onClose, viewer }: AddWordDialogProps) {
     onClose()
   }
 
+  function onEdit () {
+    updateFirebaseValue(`users/${viewer.uid}/words/${editedWord.id}`, {
+      name: traductionInput.value,
+      kana: kanaInput.value,
+      note: noteInput.value,
+      type: typeInput.value,
+      category: categoryInput.value,
+      kanji: kanjiInput.value
+    })
+  }
+
   return (
     <Dialog open={isVisible} onClose={onClose} aria-labelledby='form-dialog-title'>
       <DialogTitle id='form-dialog-title'>
-        <Trans>Add a new word</Trans>
+        {editedWord ? <Trans>Update {editedWord.name}</Trans> : <Trans>Add a new word</Trans>}
       </DialogTitle>
       <DialogContent>
         <TextField
@@ -82,7 +102,7 @@ function AddWordDialog ({ isVisible, onClose, viewer }: AddWordDialogProps) {
           <Trans>Cancel</Trans>
         </Button>
         <Button variant='contained' onClick={onSubmit} color='primary'>
-          <Trans>Add</Trans>
+          {editedWord ? <Trans>Update</Trans> : <Trans>Add</Trans>}
         </Button>
       </DialogActions>
     </Dialog>

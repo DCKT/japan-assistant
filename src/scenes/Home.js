@@ -38,6 +38,7 @@ export default React.memo(
   withStyles(styles)(({ classes, viewer }) => {
     const [isAddWordDialogVisible, setIsAddWordDialogVisible] = useState(false)
     const [isAddCategoryDialogVisible, setIsAddCategoryDialogVisible] = useState(false)
+    const [editedWord, setEditedWord] = useState(null)
     const [words, setWords] = useState(undefined)
     const hasWords = words !== undefined && words !== null
 
@@ -70,7 +71,14 @@ export default React.memo(
           <Grid container spacing={24} wrap='wrap'>
             {Object.keys(words).map((word, i) => (
               <Grid item xs={12} sm={10} md={4} lg={2} key={i}>
-                <Word word={words[word]} onDeleteButtonClick={() => removeWord(word)} />
+                <Word
+                  word={words[word]}
+                  onDeleteButtonClick={() => removeWord(word)}
+                  onEditionButtonClick={() => {
+                    setEditedWord(words[word])
+                    toggleAddWordDialog()
+                  }}
+                />
               </Grid>
             ))}
           </Grid>
@@ -98,11 +106,20 @@ export default React.memo(
             <AddIcon />
           </Button>
         ) : null}
-        <AddWordDialog viewer={viewer} isVisible={isAddWordDialogVisible} onClose={toggleAddWordDialog} />
-        <AddCategoryDialog
-          isVisible={isAddCategoryDialogVisible}
-          onClose={() => setIsAddCategoryDialogVisible(false)}
-        />
+        {isAddWordDialogVisible ? (
+          <AddWordDialog
+            viewer={viewer}
+            isVisible={isAddWordDialogVisible}
+            onClose={toggleAddWordDialog}
+            editedWord={editedWord}
+          />
+        ) : null}
+        {isAddCategoryDialogVisible ? (
+          <AddCategoryDialog
+            isVisible={isAddCategoryDialogVisible}
+            onClose={() => setIsAddCategoryDialogVisible(false)}
+          />
+        ) : null}
       </div>
     )
   })

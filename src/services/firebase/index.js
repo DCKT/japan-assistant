@@ -1,4 +1,6 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/database'
+import 'firebase/auth'
 import config from './config.js'
 
 firebase.initializeApp(config)
@@ -29,6 +31,15 @@ export const addFirebaseValue = (path: string, value: any): Promise<FirebaseValu
       .database()
       .ref(path)
       .set(value)
+  })
+}
+
+export const updateFirebaseValue = (path: string, value: any): Promise<FirebaseValue> => {
+  return new Promise(resolve => {
+    firebase
+      .database()
+      .ref(path)
+      .update(value)
   })
 }
 
