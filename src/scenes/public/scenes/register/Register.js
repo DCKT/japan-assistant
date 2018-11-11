@@ -7,10 +7,10 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import { Trans } from '@lingui/macro'
 import Grid from '@material-ui/core/Grid'
-import firebase from '../services/firebase'
+import firebase from '../../../../services/firebase'
 import TextField from '@material-ui/core/TextField'
 import { Button } from '@material-ui/core'
-import { useInput } from '../services/utils/hooks'
+import { useInput } from '../../../../services/utils/hooks'
 
 const styles = theme => ({
   root: {
@@ -99,7 +99,7 @@ export default React.memo(
               </div>
               <div style={{ marginTop: 20 }}>
                 <Button type='submit' variant='contained' color='primary' size='large' fullWidth>
-                  <Trans>Login</Trans>
+                  <Trans>Register</Trans>
                 </Button>
               </div>
             </form>

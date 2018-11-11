@@ -5,12 +5,12 @@ import { Button } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import { Trans } from '@lingui/macro'
 import Typography from '@material-ui/core/Typography'
-import Word from '../components/Word'
-import AddWordDialog from '../components/AddWordDialog'
-import AddCategoryDialog from '../components/AddCategoryDialog'
-import AuthenticatedNavigationBar from '../components/AuthenticatedNavigationBar'
-import firebase, { onFirebaseValue, removeFirebaseValue } from '../services/firebase'
-import emptyListSvg from '../assets/empty-list.svg'
+import Word from '../../components/Word'
+import AddWordDialog from '../../components/AddWordDialog'
+import AddCategoryDialog from '../../components/AddCategoryDialog'
+import AuthenticatedNavigationBar from '../../components/AuthenticatedNavigationBar'
+import firebase, { onFirebaseValue, removeFirebaseValue } from '../../../../services/firebase'
+import emptyListSvg from '../../assets/empty-list.svg'
 
 const styles = theme => ({
   pageContainer: {

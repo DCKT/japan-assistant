@@ -7,10 +7,10 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import { Trans } from '@lingui/macro'
 import Grid from '@material-ui/core/Grid'
-import firebase from '../services/firebase'
+import firebase from '../../../../services/firebase'
 import TextField from '@material-ui/core/TextField'
 import { Button } from '@material-ui/core'
-import { useInput } from '../services/utils/hooks'
+import { useInput } from '../../../../services/utils/hooks'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 const styles = theme => ({

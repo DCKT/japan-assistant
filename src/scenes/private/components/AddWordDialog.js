@@ -9,8 +9,8 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { Trans } from '@lingui/macro'
 
-import { useInput } from '../services/utils/hooks'
-import { addFirebaseValue, updateFirebaseValue } from '../services/firebase'
+import { useInput } from '../../../services/utils/hooks'
+import { addFirebaseValue, updateFirebaseValue } from '../../../services/firebase'
 
 type AddWordDialogProps = {|
   isVisible: boolean,

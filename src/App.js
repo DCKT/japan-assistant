@@ -1,46 +1,15 @@
-import React, { useState, useContext, useEffect, Suspense } from 'react'
-import { Router, Redirect } from '@reach/router'
+import React, { useState, useEffect, Suspense } from 'react'
+import { Router } from '@reach/router'
 import { I18nProvider } from '@lingui/react'
 
 import catalogFr from './locales/fr/messages.js'
 import catalogEn from './locales/en/messages.js'
 import firebase from './services/firebase'
 
-import NotFound from './scenes/NotFound'
-const Home = React.lazy(() => import('./scenes/Home'))
-const Login = React.lazy(() => import('./scenes/Login'))
-const Register = React.lazy(() => import('./scenes/Register'))
-const WordsCategory = React.lazy(() => import('./scenes/WordsCategory'))
+import AuthenticatedRouter from './scenes/private/AuthenticatedRouter'
+import AnonymousRouter from './scenes/public/AnonymousRouter'
 
-export const UserContext = React.createContext({ user: undefined, setUser: () => {} })
-
-const AnonymousRoutes = props => {
-  const userContext = useContext(UserContext)
-
-  if (typeof userContext.user === 'undefined') {
-    return <div />
-  }
-
-  if (userContext.user) {
-    return <Redirect to='/app' noThrow />
-  } else {
-    return props.children
-  }
-}
-
-const AuthenticatedRoutes = props => {
-  const userContext = useContext(UserContext)
-
-  if (typeof userContext.user === 'undefined') {
-    return <div />
-  }
-
-  if (userContext.user) {
-    return props.children
-  } else {
-    return <Redirect to='/login' noThrow />
-  }
-}
+import UserContext from './services/states/UserContext'
 
 export default () => {
   const [user, setUser] = useState(undefined)
@@ -57,16 +26,8 @@ export default () => {
       <UserContext.Provider value={{ user, setUser }}>
         <Suspense fallback={<div>Loading...</div>}>
           <Router>
-            <AnonymousRoutes path='/'>
-              <Login path='login' default />
-              <Register path='register' />
-            </AnonymousRoutes>
-
-            <AuthenticatedRoutes path='app'>
-              <Home path='/' viewer={user} />
-              <WordsCategory path='/categories/:category' />
-              <NotFound default />
-            </AuthenticatedRoutes>
+            <AnonymousRouter path='/*' />
+            <AuthenticatedRouter path='/app/*' />
           </Router>
         </Suspense>
       </UserContext.Provider>
