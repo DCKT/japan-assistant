@@ -40,10 +40,11 @@ export default React.memo(
     const [isAddCategoryDialogVisible, setIsAddCategoryDialogVisible] = useState(false)
     const [editedWord, setEditedWord] = useState(null)
     const [words, setWords] = useState(undefined)
+    const [categories, setCategories] = useState(undefined)
     const hasWords = words !== undefined && words !== null
 
-    function showCategoryDialog () {
-      setIsAddCategoryDialogVisible(true)
+    function toggleCategoryDialog () {
+      setIsAddCategoryDialogVisible(!isAddCategoryDialogVisible)
     }
 
     function toggleAddWordDialog () {
@@ -64,26 +65,27 @@ export default React.memo(
 
     useEffect(() => {
       onFirebaseValue(`users/${viewer.uid}/words`, setWords)
+      onFirebaseValue(`users/${viewer.uid}/categories`, setCategories)
     }, [])
 
     return (
       <div className={classes.pageContainer}>
         <AuthenticatedNavigationBar onLogout={() => firebase.auth().signOut()} />
         {hasWords ? (
-          <Button color='primary' onClick={showCategoryDialog} variant='contained'>
+          <Button color='primary' onClick={toggleCategoryDialog} variant='contained'>
             <Trans>Add a category</Trans>
           </Button>
         ) : null}
 
         {words === undefined ? null : words ? (
           <Grid container spacing={24} wrap='wrap'>
-            {Object.keys(words).map((word, i) => (
+            {Object.keys(words).map((wordKeyId, i) => (
               <Grid item xs={12} sm={10} md={4} lg={2} key={i}>
                 <Word
-                  word={words[word]}
-                  onDeleteButtonClick={() => removeWord(word)}
+                  word={words[wordKeyId]}
+                  onDeleteButtonClick={() => removeWord(wordKeyId)}
                   onEditionButtonClick={() => {
-                    setEditedWord(words[word])
+                    setEditedWord(words[wordKeyId])
                     toggleAddWordDialog()
                   }}
                 />
@@ -102,7 +104,7 @@ export default React.memo(
                 <Trans>Add my first word</Trans>
               </Button>
               &nbsp;
-              <Button color='primary' onClick={showCategoryDialog}>
+              <Button color='primary' onClick={toggleCategoryDialog}>
                 <Trans>Add a category</Trans>
               </Button>
             </Grid>
@@ -122,11 +124,12 @@ export default React.memo(
             editedWord={editedWord}
           />
         ) : null}
-        {isAddCategoryDialogVisible ? (
+        {isAddCategoryDialogVisible && typeof categories !== 'undefined' ? (
           <AddCategoryDialogForm
             isVisible={isAddCategoryDialogVisible}
-            onClose={() => setIsAddCategoryDialogVisible(false)}
+            onClose={toggleCategoryDialog}
             onSubmit={addCategoryOnSubmit}
+            categories={Object.keys(categories).map(c => categories[c])}
           />
         ) : null}
       </div>

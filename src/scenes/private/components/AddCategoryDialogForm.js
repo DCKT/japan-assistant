@@ -16,18 +16,20 @@ import { Form, Field } from 'react-final-form'
  * Utils
  */
 import * as formRules from '../../../services/utils/form-rules'
+import type { FirebaseCategory } from '../../../services/utils/types'
 
 type AddCategoryDialogProps = {|
   isVisible: boolean,
   onClose: Function,
-  onSubmit: Function
+  onSubmit: Function,
+  categories: Array<FirebaseCategory>
 |}
 
 type AddCategoryDialogFormValues = {|
   name: string
 |}
 
-function AddCategoryDialogForm ({ isVisible, onClose, onSubmit }: AddCategoryDialogProps) {
+function AddCategoryDialogForm ({ isVisible, onClose, onSubmit, categories }: AddCategoryDialogProps) {
   async function onFormSubmit (values: AddCategoryDialogFormValues) {
     onSubmit(values)
     onClose()
@@ -42,7 +44,13 @@ function AddCategoryDialogForm ({ isVisible, onClose, onSubmit }: AddCategoryDia
               <Trans>Add a new category</Trans>
             </DialogTitle>
             <DialogContent>
-              <Field name='name' validate={formRules.required}>
+              <Field
+                name='name'
+                validate={formRules.composeValidators(
+                  formRules.required,
+                  formRules.isNotDuplicate(categories.map(c => c.name))
+                )}
+              >
                 {({ input, meta }) => (
                   <FormControl error={meta.error && meta.touched}>
                     <TextField
