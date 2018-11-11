@@ -6,10 +6,10 @@ import AddIcon from '@material-ui/icons/Add'
 import { Trans } from '@lingui/macro'
 import Typography from '@material-ui/core/Typography'
 import Word from '../../components/Word'
-import AddWordDialog from '../../components/AddWordDialog'
-import AddCategoryDialog from '../../components/AddCategoryDialog'
+import AddWordDialogForm from '../../components/AddWordDialogForm'
+import AddCategoryDialogForm from '../../components/AddCategoryDialogForm'
 import AuthenticatedNavigationBar from '../../components/AuthenticatedNavigationBar'
-import firebase, { onFirebaseValue, removeFirebaseValue } from '../../../../services/firebase'
+import firebase, { onFirebaseValue, removeFirebaseValue, addFirebaseValue } from '../../../../services/firebase'
 import emptyListSvg from '../../assets/empty-list.svg'
 
 const styles = theme => ({
@@ -52,6 +52,14 @@ export default React.memo(
 
     function removeWord (id) {
       removeFirebaseValue(`users/${viewer.uid}/words/${id}`)
+    }
+
+    function addCategoryOnSubmit (values) {
+      const id = Date.now()
+      addFirebaseValue(`users/${viewer.uid}/categories/${id}`, {
+        id,
+        name: values.name
+      })
     }
 
     useEffect(() => {
@@ -107,7 +115,7 @@ export default React.memo(
           </Button>
         ) : null}
         {isAddWordDialogVisible ? (
-          <AddWordDialog
+          <AddWordDialogForm
             viewer={viewer}
             isVisible={isAddWordDialogVisible}
             onClose={toggleAddWordDialog}
@@ -115,9 +123,10 @@ export default React.memo(
           />
         ) : null}
         {isAddCategoryDialogVisible ? (
-          <AddCategoryDialog
+          <AddCategoryDialogForm
             isVisible={isAddCategoryDialogVisible}
             onClose={() => setIsAddCategoryDialogVisible(false)}
+            onSubmit={addCategoryOnSubmit}
           />
         ) : null}
       </div>
