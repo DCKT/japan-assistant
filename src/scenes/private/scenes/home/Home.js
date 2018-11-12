@@ -22,6 +22,7 @@ const styles = theme => ({
     bottom: 30
   },
   emptyListPicture: {
+    width: '100%',
     maxWidth: 450,
     marginBottom: theme.spacing.unit * 3
   },

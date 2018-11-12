@@ -8,8 +8,17 @@ import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { Trans } from '@lingui/macro'
+import Grid from '@material-ui/core/Grid'
+import FormControl from '@material-ui/core/FormControl'
+import FormHelperText from '@material-ui/core/FormHelperText'
+import { Form, Field } from 'react-final-form'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
 
-import { useInput } from '../../../services/utils/hooks'
+/**
+ * Utils
+ */
+import * as formRules from '../../../services/utils/form-rules'
 import { addFirebaseValue, updateFirebaseValue } from '../../../services/firebase'
 
 type AddWordDialogProps = {|
@@ -20,91 +29,152 @@ type AddWordDialogProps = {|
 |}
 
 function AddWordDialog ({ isVisible, onClose, viewer, editedWord }: AddWordDialogProps) {
-  const traductionInput = useInput(editedWord ? editedWord.traduction : '')
-  const kanaInput = useInput(editedWord ? editedWord.kana : '')
-  const noteInput = useInput(editedWord ? editedWord.note : '')
-  const typeInput = useInput(editedWord ? editedWord.type : '')
-  const kanjiInput = useInput(editedWord ? editedWord.kanji : '')
-  const categoryInput = useInput(editedWord ? editedWord.category : '')
-
-  function onSubmit () {
+  async function onFormSubmit (values) {
     if (editedWord) {
-      onEdit()
+      onEdit(values)
     } else {
-      onCreate()
+      onCreate(values)
     }
   }
 
-  function onCreate () {
+  function onCreate (values) {
     const id = Date.now()
 
     addFirebaseValue(`users/${viewer.uid}/words/${id}`, {
       id,
-      name: traductionInput.value,
-      kana: kanaInput.value,
-      note: noteInput.value,
-      type: typeInput.value,
-      category: categoryInput.value,
-      kanji: kanjiInput.value
+      ...values
     })
     onClose()
   }
 
-  function onEdit () {
+  function onEdit (values) {
     updateFirebaseValue(`users/${viewer.uid}/words/${editedWord.id}`, {
-      name: traductionInput.value,
-      kana: kanaInput.value,
-      note: noteInput.value,
-      type: typeInput.value,
-      category: categoryInput.value,
-      kanji: kanjiInput.value
+      ...values
     })
   }
 
   return (
     <Dialog open={isVisible} onClose={onClose} aria-labelledby='form-dialog-title'>
-      <DialogTitle id='form-dialog-title'>
-        {editedWord ? <Trans>Update {editedWord.name}</Trans> : <Trans>Add a new word</Trans>}
-      </DialogTitle>
-      <DialogContent>
-        <TextField
-          autoFocus
-          margin='dense'
-          id='traduction'
-          label={<Trans>Traduction</Trans>}
-          type='text'
-          fullWidth
-          {...traductionInput}
-        />
-        <TextField margin='dense' id='traduction' label={<Trans>Kanji</Trans>} type='text' fullWidth {...kanjiInput} />
-        <TextField margin='dense' id='kana' label={<Trans>Kana</Trans>} type='text' fullWidth {...kanaInput} />
-        <TextField
-          margin='dense'
-          id='category'
-          label={<Trans>Category</Trans>}
-          type='text'
-          fullWidth
-          {...categoryInput}
-        />
-        <TextField
-          margin='dense'
-          id='note'
-          label={<Trans>Note</Trans>}
-          type='text'
-          fullWidth
-          multiline
-          variant='outlined'
-          {...noteInput}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>
-          <Trans>Cancel</Trans>
-        </Button>
-        <Button variant='contained' onClick={onSubmit} color='primary'>
-          {editedWord ? <Trans>Update</Trans> : <Trans>Add</Trans>}
-        </Button>
-      </DialogActions>
+      <Form initialValues={editedWord || {}} onSubmit={onFormSubmit}>
+        {({ handleSubmit, pristine, invalid, submitting }) => (
+          <form onSubmit={handleSubmit}>
+            <DialogTitle id='form-dialog-title'>
+              {editedWord ? <Trans>Update {editedWord.name}</Trans> : <Trans>Add a new word</Trans>}
+            </DialogTitle>
+            <DialogContent>
+              <Grid container spacing={16}>
+                <Grid item xs={12}>
+                  <Grid container spacing={16}>
+                    <Grid item xs={12}>
+                      <Field name='name' validate={formRules.required}>
+                        {({ input, meta }) => (
+                          <FormControl error={meta.error && meta.touched} fullWidth>
+                            <TextField
+                              autoFocus
+                              margin='dense'
+                              id='name'
+                              label={<Trans>Name</Trans>}
+                              type='text'
+                              variant='outlined'
+                              fullWidth
+                              {...input}
+                            />
+                            {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
+                          </FormControl>
+                        )}
+                      </Field>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Field name='kanji' validate={formRules.japaneseCharacterOnly}>
+                        {({ input, meta }) => (
+                          <FormControl error={meta.error && meta.touched} fullWidth>
+                            <TextField
+                              margin='dense'
+                              id='kanji'
+                              label={<Trans>Kanji</Trans>}
+                              type='text'
+                              fullWidth
+                              {...input}
+                            />
+                            {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
+                          </FormControl>
+                        )}
+                      </Field>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Field
+                        name='kana'
+                        validate={formRules.composeValidators(formRules.required, formRules.japaneseCharacterOnly)}
+                      >
+                        {({ input, meta }) => (
+                          <FormControl error={meta.error && meta.touched} fullWidth>
+                            <TextField
+                              margin='dense'
+                              id='kana'
+                              label={<Trans>Kana</Trans>}
+                              type='text'
+                              fullWidth
+                              {...input}
+                            />
+                            {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
+                          </FormControl>
+                        )}
+                      </Field>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Divider style={{ margin: '8px 0 12px' }} />
+                  <Typography component='em' variant='subheading' color='textPrimary'>
+                    <Trans>Additional informations :</Trans>
+                  </Typography>
+
+                  <Field name='category'>
+                    {({ input, meta }) => (
+                      <FormControl error={meta.error && meta.touched} fullWidth>
+                        <TextField
+                          margin='dense'
+                          id='category'
+                          label={<Trans>Category</Trans>}
+                          type='text'
+                          fullWidth
+                          {...input}
+                        />
+                        {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
+                      </FormControl>
+                    )}
+                  </Field>
+
+                  <Field name='note'>
+                    {({ input, meta }) => (
+                      <FormControl error={meta.error && meta.touched} fullWidth>
+                        <TextField
+                          margin='dense'
+                          id='note'
+                          label={<Trans>Note</Trans>}
+                          type='text'
+                          multiline
+                          fullWidth
+                          {...input}
+                        />
+                        {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
+                      </FormControl>
+                    )}
+                  </Field>
+                </Grid>
+              </Grid>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={onClose}>
+                <Trans>Cancel</Trans>
+              </Button>
+              <Button type='submit' variant='contained' color='primary'>
+                {editedWord ? <Trans>Update</Trans> : <Trans>Add</Trans>}
+              </Button>
+            </DialogActions>
+          </form>
+        )}
+      </Form>
     </Dialog>
   )
 }
