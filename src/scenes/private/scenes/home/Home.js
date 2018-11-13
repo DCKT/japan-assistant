@@ -48,7 +48,20 @@ export default React.memo(
     const [editedWord, setEditedWord] = useState(null)
     const [words, setWords] = useState(undefined)
     const [categories, setCategories] = useState(undefined)
+    const [categoriesFilter, setCategoriesFilter] = useState([])
     const hasWords = words !== undefined && words !== null
+
+    const wordsList = words
+      ? Object.keys(words)
+        .filter(wordKeyId => {
+          if (categoriesFilter.length) {
+            return categoriesFilter.includes(words[wordKeyId].category)
+          } else {
+            return true
+          }
+        })
+        .map(wordKey => words[wordKey])
+      : null
 
     function toggleCategoryDialog () {
       setIsAddCategoryDialogVisible(!isAddCategoryDialogVisible)
@@ -95,6 +108,7 @@ export default React.memo(
                           label: categories[categoryId].name,
                           value: categoryId
                         }))}
+                        onChange={values => setCategoriesFilter(values.map(({ value }) => value))}
                       />
                     </Grid>
                   </Grid>
@@ -109,7 +123,7 @@ export default React.memo(
         ) : null}
 
         <div className={classes.listContainer}>
-          {words === undefined ? null : words ? (
+          {words === undefined ? null : wordsList ? (
             <Grid container wrap='wrap' spacing={16} style={{ flexGrow: 1 }}>
               {Object.keys(words).map((wordKeyId, i) => (
                 <Grid item xs={12} sm={10} md={4} lg={2} key={i}>

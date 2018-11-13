@@ -57,10 +57,11 @@ type ReactSelectOption = {|
 
 type SearchFormProps = {|
   classes: Object,
-  options: Array<ReactSelectOption>
+  options: Array<ReactSelectOption>,
+  onChange: (values: Array<ReactSelectOption>) => void
 |}
 
-export default withStyles(styles)(({ classes, options }: SearchFormProps) => {
+export default withStyles(styles)(({ classes, options, onChange }: SearchFormProps) => {
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
@@ -74,6 +75,7 @@ export default withStyles(styles)(({ classes, options }: SearchFormProps) => {
           input: classes.inputInput
         }}
         placeholder={<Trans>Search by categories</Trans>}
+        onChange={onChange}
       />
     </div>
   )
