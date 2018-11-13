@@ -1,3 +1,5 @@
+// @flow
+
 import React, { useState, useEffect } from 'react'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
@@ -11,6 +13,7 @@ import AddCategoryDialogForm from '../../components/AddCategoryDialogForm'
 import AuthenticatedNavigationBar from '../../components/AuthenticatedNavigationBar'
 import firebase, { onFirebaseValue, removeFirebaseValue, addFirebaseValue } from '../../../../services/firebase'
 import emptyListSvg from '../../assets/empty-list.svg'
+import SearchForm from '../../components/SearchForm'
 
 const styles = theme => ({
   pageContainer: {
@@ -32,6 +35,9 @@ const styles = theme => ({
   },
   emptyContainerActions: {
     marginTop: theme.spacing.unit * 4
+  },
+  listContainer: {
+    padding: theme.spacing.unit * 2
   }
 })
 
@@ -73,44 +79,70 @@ export default React.memo(
       <div className={classes.pageContainer}>
         <AuthenticatedNavigationBar onLogout={() => firebase.auth().signOut()} />
         {hasWords ? (
-          <Button color='primary' onClick={toggleCategoryDialog} variant='contained'>
-            <Trans>Add a category</Trans>
-          </Button>
+          <React.Fragment>
+            <div style={{ margin: 10 }}>
+              {categories === undefined ? null : categories ? (
+                <React.Fragment>
+                  <Grid container spacing={16}>
+                    <Grid item xs='auto'>
+                      <Button color='primary' onClick={toggleCategoryDialog} variant='contained'>
+                        <Trans>Add a category</Trans>
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                      <SearchForm
+                        options={Object.keys(categories).map(categoryId => ({
+                          label: categories[categoryId].name,
+                          value: categoryId
+                        }))}
+                      />
+                    </Grid>
+                  </Grid>
+                </React.Fragment>
+              ) : (
+                <Button color='primary' onClick={toggleCategoryDialog} variant='contained'>
+                  <Trans>Add a category</Trans>
+                </Button>
+              )}
+            </div>
+          </React.Fragment>
         ) : null}
 
-        {words === undefined ? null : words ? (
-          <Grid container spacing={24} wrap='wrap'>
-            {Object.keys(words).map((wordKeyId, i) => (
-              <Grid item xs={12} sm={10} md={4} lg={2} key={i}>
-                <Word
-                  word={words[wordKeyId]}
-                  onDeleteButtonClick={() => removeWord(wordKeyId)}
-                  onEditionButtonClick={() => {
-                    setEditedWord(words[wordKeyId])
-                    toggleAddWordDialog()
-                  }}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        ) : (
-          <Grid container alignItems='center' justify='center' spacing={24} className={classes.emptyContainer}>
-            <Grid item xs={5}>
-              <img src={emptyListSvg} alt='No words' className={classes.emptyListPicture} />
-              <Typography component='h3' variant='h4' gutterBottom>
-                <Trans>No words yet</Trans>
-              </Typography>
-              <div className={classes.emptyContainerActions} />
-              <Button variant='contained' color='primary' onClick={toggleAddWordDialog}>
-                <Trans>Add my first word</Trans>
-              </Button>
-              &nbsp;
-              <Button color='primary' onClick={toggleCategoryDialog}>
-                <Trans>Add a category</Trans>
-              </Button>
+        <div className={classes.listContainer}>
+          {words === undefined ? null : words ? (
+            <Grid container wrap='wrap' spacing={16} style={{ flexGrow: 1 }}>
+              {Object.keys(words).map((wordKeyId, i) => (
+                <Grid item xs={12} sm={10} md={4} lg={2} key={i}>
+                  <Word
+                    word={words[wordKeyId]}
+                    onDeleteButtonClick={() => removeWord(wordKeyId)}
+                    onEditionButtonClick={() => {
+                      setEditedWord(words[wordKeyId])
+                      toggleAddWordDialog()
+                    }}
+                  />
+                </Grid>
+              ))}
             </Grid>
-          </Grid>
-        )}
+          ) : (
+            <Grid container alignItems='center' justify='center' className={classes.emptyContainer}>
+              <Grid item xs={5}>
+                <img src={emptyListSvg} alt='No words' className={classes.emptyListPicture} />
+                <Typography component='h3' variant='h4' gutterBottom>
+                  <Trans>No words yet</Trans>
+                </Typography>
+                <div className={classes.emptyContainerActions} />
+                <Button variant='contained' color='primary' onClick={toggleAddWordDialog}>
+                  <Trans>Add my first word</Trans>
+                </Button>
+                &nbsp;
+                <Button color='primary' onClick={toggleCategoryDialog}>
+                  <Trans>Add a category</Trans>
+                </Button>
+              </Grid>
+            </Grid>
+          )}
+        </div>
 
         {hasWords ? (
           <Button variant='fab' color='primary' aria-label='Add' className={classes.fab} onClick={toggleAddWordDialog}>

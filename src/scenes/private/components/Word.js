@@ -46,11 +46,11 @@ function Word ({ classes, word, onDeleteButtonClick, onEditionButtonClick }: Wor
         <Typography variant='h4' component='h2'>
           {word.kanji || word.kana}
         </Typography>
-        {word.kanji ? null : (
+        {word.kanji ? (
           <Typography className={classes.pos} color='textSecondary'>
             {word.kana}
           </Typography>
-        )}
+        ) : null}
         <Typography component='p'>{word.note}</Typography>
       </CardContent>
       <CardActions>
