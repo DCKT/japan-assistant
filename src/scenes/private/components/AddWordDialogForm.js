@@ -14,21 +14,24 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 import { Form, Field } from 'react-final-form'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
+import SearchForm from './SearchForm'
 
 /**
  * Utils
  */
 import * as formRules from '../../../services/utils/form-rules'
 import { addFirebaseValue, updateFirebaseValue } from '../../../services/firebase'
+import type { ReactSelectOption } from '../../../services/utils/types'
 
 type AddWordDialogProps = {|
   isVisible: boolean,
   onClose: Function,
   viewer: Object,
-  editedWord: ?Object
+  editedWord: ?Object,
+  categories: Array<ReactSelectOption>
 |}
 
-function AddWordDialog ({ isVisible, onClose, viewer, editedWord }: AddWordDialogProps) {
+function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories }: AddWordDialogProps) {
   async function onFormSubmit (values) {
     if (editedWord) {
       onEdit(values)
@@ -129,21 +132,20 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord }: AddWordDialo
                     <Trans>Additional informations :</Trans>
                   </Typography>
 
-                  <Field name='category'>
-                    {({ input, meta }) => (
-                      <FormControl error={meta.error && meta.touched} fullWidth>
-                        <TextField
-                          margin='dense'
-                          id='category'
-                          label={<Trans>Category</Trans>}
-                          type='text'
-                          fullWidth
-                          {...input}
-                        />
-                        {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
-                      </FormControl>
-                    )}
-                  </Field>
+                  {categories.length ? (
+                    <Field name='category'>
+                      {({ input, meta }) => (
+                        <FormControl error={meta.error && meta.touched} fullWidth>
+                          <SearchForm
+                            placeholder={<Trans>Category</Trans>}
+                            options={categories.map(category => ({ label: category.name, value: category.id }))}
+                            {...input}
+                          />
+                          {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
+                        </FormControl>
+                      )}
+                    </Field>
+                  ) : null}
 
                   <Field name='note'>
                     {({ input, meta }) => (

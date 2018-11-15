@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import Select from 'react-select'
 import { Trans } from '@lingui/macro'
+import type { ReactSelectOption } from '../../../services/utils/types'
 
 const styles = theme => ({
   search: {
@@ -50,18 +51,14 @@ const styles = theme => ({
   }
 })
 
-type ReactSelectOption = {|
-  label: string,
-  value: string
-|}
-
 type SearchFormProps = {|
   classes: Object,
   options: Array<ReactSelectOption>,
+  isMulti: boolean,
   onChange: (values: Array<ReactSelectOption>) => void
 |}
 
-export default withStyles(styles)(({ classes, options, onChange }: SearchFormProps) => {
+export default withStyles(styles)(({ classes, options, onChange, isMulti }: SearchFormProps) => {
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
@@ -69,7 +66,7 @@ export default withStyles(styles)(({ classes, options, onChange }: SearchFormPro
       </div>
       <Select
         options={options}
-        isMulti
+        isMulti={isMulti}
         classes={{
           root: classes.inputRoot,
           input: classes.inputInput

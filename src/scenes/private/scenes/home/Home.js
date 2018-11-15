@@ -63,6 +63,8 @@ export default React.memo(
         .map(wordKey => words[wordKey])
       : null
 
+    const categoriesList = categories ? Object.keys(categories).map(categoryKey => categories[categoryKey]) : []
+
     function toggleCategoryDialog () {
       setIsAddCategoryDialogVisible(!isAddCategoryDialogVisible)
     }
@@ -104,9 +106,10 @@ export default React.memo(
                     </Grid>
                     <Grid item xs={12} sm={4}>
                       <SearchForm
-                        options={Object.keys(categories).map(categoryId => ({
-                          label: categories[categoryId].name,
-                          value: categoryId
+                        isMulti
+                        options={categoriesList.map(category => ({
+                          label: category.name,
+                          value: category.id
                         }))}
                         onChange={values => setCategoriesFilter(values.map(({ value }) => value))}
                       />
@@ -125,13 +128,13 @@ export default React.memo(
         <div className={classes.listContainer}>
           {words === undefined ? null : wordsList ? (
             <Grid container wrap='wrap' spacing={16} style={{ flexGrow: 1 }}>
-              {Object.keys(words).map((wordKeyId, i) => (
+              {wordsList.map((word, i) => (
                 <Grid item xs={12} sm={10} md={4} lg={2} key={i}>
                   <Word
-                    word={words[wordKeyId]}
-                    onDeleteButtonClick={() => removeWord(wordKeyId)}
+                    word={word}
+                    onDeleteButtonClick={() => removeWord(word.id)}
                     onEditionButtonClick={() => {
-                      setEditedWord(words[wordKeyId])
+                      setEditedWord(word)
                       toggleAddWordDialog()
                     }}
                   />
@@ -169,6 +172,7 @@ export default React.memo(
             isVisible={isAddWordDialogVisible}
             onClose={toggleAddWordDialog}
             editedWord={editedWord}
+            categories={categoriesList}
           />
         ) : null}
         {isAddCategoryDialogVisible && typeof categories !== 'undefined' ? (
