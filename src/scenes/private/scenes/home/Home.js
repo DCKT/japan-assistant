@@ -55,7 +55,8 @@ export default React.memo(
       ? Object.keys(words)
         .filter(wordKeyId => {
           if (categoriesFilter.length) {
-            return categoriesFilter.includes(words[wordKeyId].category)
+            const wordCategory = words[wordKeyId].category ? words[wordKeyId].category.id : ''
+            return categoriesFilter.includes(wordCategory)
           } else {
             return true
           }
@@ -170,7 +171,10 @@ export default React.memo(
           <AddWordDialogForm
             viewer={viewer}
             isVisible={isAddWordDialogVisible}
-            onClose={toggleAddWordDialog}
+            onClose={() => {
+              toggleAddWordDialog()
+              setEditedWord(null)
+            }}
             editedWord={editedWord}
             categories={categoriesList}
           />

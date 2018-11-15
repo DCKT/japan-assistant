@@ -32,6 +32,17 @@ type AddWordDialogProps = {|
 |}
 
 function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories }: AddWordDialogProps) {
+  const initialValues = editedWord
+    ? {
+      ...editedWord,
+      category: editedWord.category
+        ? {
+          label: editedWord.category.name,
+          value: editedWord.category
+        }
+        : null
+    }
+    : {}
   async function onFormSubmit (values) {
     if (editedWord) {
       onEdit(values)
@@ -44,21 +55,25 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories }: 
     const id = Date.now()
 
     addFirebaseValue(`users/${viewer.uid}/words/${id}`, {
+      ...values,
       id,
-      ...values
+      category: values.category.value
     })
     onClose()
   }
 
   function onEdit (values) {
     updateFirebaseValue(`users/${viewer.uid}/words/${editedWord.id}`, {
-      ...values
+      ...values,
+      category: values.category.value
     })
   }
 
+  console.log(initialValues)
+
   return (
     <Dialog open={isVisible} onClose={onClose} aria-labelledby='form-dialog-title'>
-      <Form initialValues={editedWord || {}} onSubmit={onFormSubmit}>
+      <Form initialValues={initialValues} onSubmit={onFormSubmit}>
         {({ handleSubmit, pristine, invalid, submitting }) => (
           <form onSubmit={handleSubmit}>
             <DialogTitle id='form-dialog-title'>
@@ -137,8 +152,8 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories }: 
                       {({ input, meta }) => (
                         <FormControl error={meta.error && meta.touched} fullWidth>
                           <SearchForm
-                            placeholder={<Trans>Category</Trans>}
-                            options={categories.map(category => ({ label: category.name, value: category.id }))}
+                            placeholder={<Trans>Associate to a category</Trans>}
+                            options={categories.map(category => ({ label: category.name, value: category }))}
                             {...input}
                           />
                           {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}

@@ -41,7 +41,7 @@ function Word ({ classes, word, onDeleteButtonClick, onEditionButtonClick }: Wor
     <Card className={classes.card}>
       <CardContent>
         <Typography className={classes.title} color='textSecondary' gutterBottom>
-          {word.category ? word.category.label : null}
+          {word.category ? word.category.name : null}
         </Typography>
         <Typography variant='h4' component='h2'>
           {word.kanji || word.kana}

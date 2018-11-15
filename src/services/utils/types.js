@@ -15,16 +15,11 @@ export type FirebaseWord = {
   type: ?string
 }
 
-export type FirebaseCategory = {|
-  id: string,
-  name: string
-|}
-
 export type Viewer = {
   email: string
 }
 
 export type ReactSelectOption = {|
   label: string,
-  value: string
+  value: any
 |}
