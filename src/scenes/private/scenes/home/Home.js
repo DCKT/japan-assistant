@@ -1,19 +1,32 @@
 // @flow
 
 import React, { useState, useEffect } from 'react'
+
+/**
+ * Components
+ */
 import Grid from '@material-ui/core/Grid'
-import { withStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
-import AddIcon from '@material-ui/icons/Add'
 import { Trans } from '@lingui/macro'
 import Typography from '@material-ui/core/Typography'
 import Word from '../../components/Word'
 import AddWordDialogForm from '../../components/AddWordDialogForm'
 import AddCategoryDialogForm from '../../components/AddCategoryDialogForm'
 import AuthenticatedNavigationBar from '../../components/AuthenticatedNavigationBar'
-import firebase, { onFirebaseValue, removeFirebaseValue, addFirebaseValue } from '../../../../services/firebase'
-import emptyListSvg from '../../assets/empty-list.svg'
 import SearchForm from '../../components/SearchForm'
+import AddIcon from '@material-ui/icons/Add'
+
+/**
+ * Utils
+ */
+import { withStyles } from '@material-ui/core/styles'
+import firebase, {
+  onFirebaseValue,
+  removeFirebaseValue,
+  addFirebaseValue,
+  updateFirebaseValue
+} from '../../../../services/firebase'
+import emptyListSvg from '../../assets/empty-list.svg'
 
 const styles = theme => ({
   pageContainer: {
@@ -65,6 +78,10 @@ export default React.memo(
       : null
 
     const categoriesList = categories ? Object.keys(categories).map(categoryKey => categories[categoryKey]) : []
+    const categoriesListOptions = categoriesList.map(category => ({
+      label: category.name,
+      value: category
+    }))
 
     function toggleCategoryDialog () {
       setIsAddCategoryDialogVisible(!isAddCategoryDialogVisible)
@@ -83,6 +100,23 @@ export default React.memo(
       addFirebaseValue(`users/${viewer.uid}/categories/${id}`, {
         id,
         name: values.name
+      })
+    }
+
+    function onWordCreation (values) {
+      const id = Date.now()
+
+      addFirebaseValue(`users/${viewer.uid}/words/${id}`, {
+        ...values,
+        id,
+        category: values.category.value
+      })
+    }
+
+    function onWordEdition (values) {
+      updateFirebaseValue(`users/${viewer.uid}/words/${editedWord.id}`, {
+        ...values,
+        category: values.category.value
       })
     }
 
@@ -108,10 +142,7 @@ export default React.memo(
                     <Grid item xs={12} sm={4}>
                       <SearchForm
                         isMulti
-                        options={categoriesList.map(category => ({
-                          label: category.name,
-                          value: category.id
-                        }))}
+                        options={categoriesListOptions}
                         onChange={values => setCategoriesFilter(values.map(({ value }) => value))}
                       />
                     </Grid>
@@ -176,7 +207,9 @@ export default React.memo(
               setEditedWord(null)
             }}
             editedWord={editedWord}
-            categories={categoriesList}
+            categories={categoriesListOptions}
+            onCreate={onWordCreation}
+            onEdit={onWordEdition}
           />
         ) : null}
         {isAddCategoryDialogVisible && typeof categories !== 'undefined' ? (

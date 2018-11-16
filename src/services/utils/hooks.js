@@ -1,7 +1,6 @@
 // @flow
 
-import { useState, useCallback, useEffect } from 'react'
-import firebase from '../firebase'
+import { useState, useCallback } from 'react'
 
 export const useInput = (initialValue: ?string) => {
   const [value, setValue] = useState(initialValue)
@@ -13,13 +12,4 @@ export const useInput = (initialValue: ?string) => {
     value,
     onChange
   }
-}
-
-export const useFirebaseListener = (path: string, callback: Function) => {
-  useEffect(() => {
-    firebase
-      .database()
-      .ref(path)
-      .on('value', callback)
-  }, [])
 }

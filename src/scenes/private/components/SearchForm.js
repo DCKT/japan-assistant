@@ -58,7 +58,7 @@ type SearchFormProps = {|
   onChange: (values: Array<ReactSelectOption>) => void
 |}
 
-export default withStyles(styles)(({ classes, options, onChange, isMulti }: SearchFormProps) => {
+export default withStyles(styles)(({ classes, options, onChange, isMulti, ...rest }: SearchFormProps) => {
   return (
     <div className={classes.search}>
       <div className={classes.searchIcon}>
@@ -73,6 +73,7 @@ export default withStyles(styles)(({ classes, options, onChange, isMulti }: Sear
         }}
         placeholder={<Trans>Search by categories</Trans>}
         onChange={onChange}
+        {...rest}
       />
     </div>
   )

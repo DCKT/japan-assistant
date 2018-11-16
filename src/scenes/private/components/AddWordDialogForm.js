@@ -20,7 +20,6 @@ import SearchForm from './SearchForm'
  * Utils
  */
 import * as formRules from '../../../services/utils/form-rules'
-import { addFirebaseValue, updateFirebaseValue } from '../../../services/firebase'
 import type { ReactSelectOption } from '../../../services/utils/types'
 
 type AddWordDialogProps = {|
@@ -28,10 +27,12 @@ type AddWordDialogProps = {|
   onClose: Function,
   viewer: Object,
   editedWord: ?Object,
-  categories: Array<ReactSelectOption>
+  categories: Array<ReactSelectOption>,
+  onCreate: Function,
+  onEdit: Function
 |}
 
-function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories }: AddWordDialogProps) {
+function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories, onCreate, onEdit }: AddWordDialogProps) {
   const initialValues = editedWord
     ? {
       ...editedWord,
@@ -43,36 +44,19 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories }: 
         : null
     }
     : {}
+
   async function onFormSubmit (values) {
     if (editedWord) {
       onEdit(values)
     } else {
       onCreate(values)
     }
-  }
 
-  function onCreate (values) {
-    const id = Date.now()
-
-    addFirebaseValue(`users/${viewer.uid}/words/${id}`, {
-      ...values,
-      id,
-      category: values.category.value
-    })
     onClose()
   }
 
-  function onEdit (values) {
-    updateFirebaseValue(`users/${viewer.uid}/words/${editedWord.id}`, {
-      ...values,
-      category: values.category.value
-    })
-  }
-
-  console.log(initialValues)
-
   return (
-    <Dialog open={isVisible} onClose={onClose} aria-labelledby='form-dialog-title'>
+    <Dialog scroll='body' open={isVisible} onClose={onClose} aria-labelledby='form-dialog-title'>
       <Form initialValues={initialValues} onSubmit={onFormSubmit}>
         {({ handleSubmit, pristine, invalid, submitting }) => (
           <form onSubmit={handleSubmit}>
@@ -153,7 +137,7 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories }: 
                         <FormControl error={meta.error && meta.touched} fullWidth>
                           <SearchForm
                             placeholder={<Trans>Associate to a category</Trans>}
-                            options={categories.map(category => ({ label: category.name, value: category }))}
+                            options={categories}
                             {...input}
                           />
                           {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
