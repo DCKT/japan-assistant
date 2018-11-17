@@ -12,8 +12,6 @@ import Grid from '@material-ui/core/Grid'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import { Form, Field } from 'react-final-form'
-import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
 import SearchForm from './SearchForm'
 
 /**
@@ -72,7 +70,6 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories, on
                         {({ input, meta }) => (
                           <FormControl error={meta.error && meta.touched} fullWidth>
                             <TextField
-                              autoFocus
                               margin='dense'
                               id='name'
                               label={<Trans>Name</Trans>}
@@ -96,6 +93,7 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories, on
                               label={<Trans>Kanji</Trans>}
                               type='text'
                               fullWidth
+                              variant='outlined'
                               {...input}
                             />
                             {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
@@ -116,6 +114,7 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories, on
                               label={<Trans>Kana</Trans>}
                               type='text'
                               fullWidth
+                              variant='outlined'
                               {...input}
                             />
                             {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
@@ -126,42 +125,45 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories, on
                   </Grid>
                 </Grid>
                 <Grid item xs={12}>
-                  <Divider style={{ margin: '8px 0 12px' }} />
-                  <Typography component='em' variant='subheading' color='textPrimary'>
-                    <Trans>Additional informations :</Trans>
-                  </Typography>
-
-                  {categories.length ? (
-                    <Field name='category'>
-                      {({ input, meta }) => (
-                        <FormControl error={meta.error && meta.touched} fullWidth>
-                          <SearchForm
-                            placeholder={<Trans>Associate to a category</Trans>}
-                            options={categories}
-                            {...input}
-                          />
-                          {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
-                        </FormControl>
-                      )}
-                    </Field>
-                  ) : null}
-
-                  <Field name='note'>
-                    {({ input, meta }) => (
-                      <FormControl error={meta.error && meta.touched} fullWidth>
-                        <TextField
-                          margin='dense'
-                          id='note'
-                          label={<Trans>Note</Trans>}
-                          type='text'
-                          multiline
-                          fullWidth
-                          {...input}
-                        />
-                        {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
-                      </FormControl>
-                    )}
-                  </Field>
+                  <Grid container spacing={16}>
+                    <Grid item xs={12}>
+                      {categories.length ? (
+                        <Field name='category'>
+                          {({ input, meta }) => (
+                            <FormControl error={meta.error && meta.touched} fullWidth>
+                              <SearchForm
+                                placeholder={<Trans>Select a category</Trans>}
+                                options={categories}
+                                {...input}
+                              />
+                              {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
+                            </FormControl>
+                          )}
+                        </Field>
+                      ) : null}
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Field name='note'>
+                        {({ input, meta }) => (
+                          <FormControl error={meta.error && meta.touched} fullWidth>
+                            <TextField
+                              margin='dense'
+                              id='note'
+                              label={<Trans>Note</Trans>}
+                              type='text'
+                              multiline
+                              fullWidth
+                              rowsMax='6'
+                              rows='6'
+                              variant='outlined'
+                              {...input}
+                            />
+                            {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
+                          </FormControl>
+                        )}
+                      </Field>
+                    </Grid>
+                  </Grid>
                 </Grid>
               </Grid>
             </DialogContent>

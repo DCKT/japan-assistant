@@ -1,16 +1,24 @@
 // @flow
 
 import React, { useState } from 'react'
-import { withStyles } from '@material-ui/core/styles'
+
+/**
+ * Components
+ */
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import CssBaseline from '@material-ui/core/CssBaseline'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
+import { Trans } from '@lingui/macro'
+
+/**
+ * Utils
+ */
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   root: {
@@ -40,7 +48,6 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <AppBar position='static' className={classes.appBar}>
         <Toolbar>
           <IconButton
@@ -74,14 +81,16 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
         open={isMenuOpen}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        <MenuItem onClick={handleMenuClose}>
+          <Trans>Profile</Trans>
+        </MenuItem>
         <MenuItem
           onClick={() => {
             handleMenuClose()
             onLogout()
           }}
         >
-          Logout
+          <Trans>Logout</Trans>
         </MenuItem>
       </Menu>
     </div>

@@ -71,6 +71,12 @@ export default withStyles(styles)(({ classes, options, onChange, isMulti, ...res
           root: classes.inputRoot,
           input: classes.inputInput
         }}
+        styles={{
+          menu: provided => ({
+            ...provided,
+            zIndex: 100000
+          })
+        }}
         placeholder={<Trans>Search by categories</Trans>}
         onChange={onChange}
         {...rest}

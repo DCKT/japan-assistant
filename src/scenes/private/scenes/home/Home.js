@@ -15,6 +15,7 @@ import AddCategoryDialogForm from '../../components/AddCategoryDialogForm'
 import AuthenticatedNavigationBar from '../../components/AuthenticatedNavigationBar'
 import SearchForm from '../../components/SearchForm'
 import AddIcon from '@material-ui/icons/Add'
+import Tooltip from '@material-ui/core/Tooltip'
 
 /**
  * Utils
@@ -143,7 +144,7 @@ export default React.memo(
                       <SearchForm
                         isMulti
                         options={categoriesListOptions}
-                        onChange={values => setCategoriesFilter(values.map(({ value }) => value))}
+                        onChange={values => setCategoriesFilter(values.map(({ value }) => value.id))}
                       />
                     </Grid>
                   </Grid>
@@ -194,9 +195,17 @@ export default React.memo(
         </div>
 
         {hasWords ? (
-          <Button variant='fab' color='primary' aria-label='Add' className={classes.fab} onClick={toggleAddWordDialog}>
-            <AddIcon />
-          </Button>
+          <Tooltip title={<Trans>Add a new word</Trans>}>
+            <Button
+              variant='fab'
+              color='primary'
+              aria-label='Add'
+              className={classes.fab}
+              onClick={toggleAddWordDialog}
+            >
+              <AddIcon />
+            </Button>
+          </Tooltip>
         ) : null}
         {isAddWordDialogVisible ? (
           <AddWordDialogForm
