@@ -1,14 +1,14 @@
+// @flow
+
 import React, { useState, useEffect, Suspense } from 'react'
 import { Router } from '@reach/router'
 import { I18nProvider } from '@lingui/react'
-
 import catalogFr from './locales/fr/messages.js'
 import catalogEn from './locales/en/messages.js'
 import firebase from './services/firebase'
 
 import AuthenticatedRouter from './scenes/private/AuthenticatedRouter'
 import AnonymousRouter from './scenes/public/AnonymousRouter'
-
 import UserContext from './services/states/UserContext'
 
 export default () => {
@@ -24,7 +24,7 @@ export default () => {
   return (
     <I18nProvider language={'fr'} catalogs={{ fr: catalogFr, en: catalogEn }}>
       <UserContext.Provider value={{ user, setUser }}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div>Loading...</div>} maxDuration={2000}>
           <Router>
             <AnonymousRouter path='/*' />
             <AuthenticatedRouter path='/app/*' />

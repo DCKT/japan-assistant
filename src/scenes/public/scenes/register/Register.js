@@ -2,14 +2,22 @@
 
 import React, { useState } from 'react'
 
+/**
+ * Components
+ */
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
 import { Trans } from '@lingui/macro'
 import Grid from '@material-ui/core/Grid'
-import firebase from '../../../../services/firebase'
 import TextField from '@material-ui/core/TextField'
 import { Button } from '@material-ui/core'
+import { Link } from '@reach/router'
+
+/**
+ * Utils
+ */
+import { withStyles } from '@material-ui/core/styles'
+import firebase from '../../../../services/firebase'
 import { useInput } from '../../../../services/utils/hooks'
 
 const styles = theme => ({
@@ -104,6 +112,9 @@ export default React.memo(
               </div>
             </form>
           </Paper>
+          <Typography component={Link} to='/login' style={{ marginTop: 15 }}>
+            <Trans>Already registered ? Login</Trans>
+          </Typography>
         </Grid>
       </Grid>
     )

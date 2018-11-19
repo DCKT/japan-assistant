@@ -4,6 +4,7 @@ import { Router, Redirect } from '@reach/router'
 import UserContext from '../../services/states/UserContext'
 import NotFound from './scenes/not-found'
 
+const Home = React.lazy(() => import('./scenes/home'))
 const Login = React.lazy(() => import('./scenes/login'))
 const Register = React.lazy(() => import('./scenes/register'))
 
@@ -18,7 +19,8 @@ export default () => {
 
   return (
     <Router>
-      <Login path='/' />
+      <Home path='/' />
+      <Login path='/login' />
       <Register path='/register' />
       <NotFound default />
     </Router>

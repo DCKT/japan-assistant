@@ -21,11 +21,12 @@ import Tooltip from '@material-ui/core/Tooltip'
  * Utils
  */
 import { withStyles } from '@material-ui/core/styles'
-import firebase, {
+import {
   onFirebaseValue,
   removeFirebaseValue,
   addFirebaseValue,
-  updateFirebaseValue
+  updateFirebaseValue,
+  firebaseLogout
 } from '../../../../services/firebase'
 import emptyListSvg from '../../assets/empty-list.svg'
 
@@ -128,7 +129,7 @@ export default React.memo(
 
     return (
       <div className={classes.pageContainer}>
-        <AuthenticatedNavigationBar onLogout={() => firebase.auth().signOut()} />
+        <AuthenticatedNavigationBar onLogout={firebaseLogout} />
         {hasWords ? (
           <React.Fragment>
             <div style={{ margin: 10 }}>

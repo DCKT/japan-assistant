@@ -43,4 +43,6 @@ export const updateFirebaseValue = (path: string, value: any): Promise<FirebaseV
   })
 }
 
+export const firebaseLogout = () => firebase.auth().signOut()
+
 export default firebase
