@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
+import Tooltip from '@material-ui/core/Tooltip'
+import { Trans } from '@lingui/macro'
 
 /**
  * Utils
@@ -61,12 +63,16 @@ function Word ({ classes, word, onDeleteButtonClick, onEditionButtonClick }: Wor
         <Typography component='p'>{word.note}</Typography>
       </CardContent>
       <CardActions>
-        <IconButton aria-label='Edit' onClick={onEditionButtonClick}>
-          <EditIcon />
-        </IconButton>
-        <IconButton aria-label='Remove' onClick={onDeleteButtonClick}>
-          <DeleteIcon />
-        </IconButton>
+        <Tooltip title={<Trans>Edit</Trans>}>
+          <IconButton aria-label={<Trans>Edit</Trans>} onClick={onEditionButtonClick}>
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title={<Trans>Remove</Trans>}>
+          <IconButton aria-label={<Trans>Edit</Trans>} onClick={onDeleteButtonClick}>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
       </CardActions>
     </Card>
   )

@@ -12,3 +12,7 @@
 - `@reach/router` as router system
 - `firebase` as login & db system
 - `@lingui` as i18n provider
+
+### Structure pattern
+
+`scenes` / `services`
