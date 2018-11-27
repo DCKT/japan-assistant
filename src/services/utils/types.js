@@ -7,7 +7,7 @@ export type FirebaseCategory = {|
 
 export type FirebaseWord = {
   id: string,
-  traduction: string,
+  name: string,
   kana: string,
   category: ?FirebaseCategory,
   kanji: ?string,

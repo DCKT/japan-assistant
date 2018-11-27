@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react'
+import React, { useState } from 'react'
 
 /**
  * Components
@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import Tooltip from '@material-ui/core/Tooltip'
+import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye'
 import { Trans } from '@lingui/macro'
 
 /**
@@ -42,13 +43,16 @@ type WordProps = {|
   classes: Object,
   word: FirebaseWord,
   onDeleteButtonClick: Function,
-  onEditionButtonClick: Function
+  onEditionButtonClick: Function,
+  onShowTraductionButtonClick: Function
 |}
 
-function Word ({ classes, word, onDeleteButtonClick, onEditionButtonClick }: WordProps) {
+function Word ({ classes, word, onDeleteButtonClick, onEditionButtonClick, onShowTraductionButtonClick }: WordProps) {
+  const [isTraductionVisible, setTraductionVisbility] = useState(false)
+
   return (
     <Card className={classes.card}>
-      <CardContent>
+      <CardContent style={{ minHeight: 150 }}>
         <Typography className={classes.title} color='textSecondary' gutterBottom>
           {word.category ? word.category.name : null}
         </Typography>
@@ -60,9 +64,18 @@ function Word ({ classes, word, onDeleteButtonClick, onEditionButtonClick }: Wor
             {word.kana}
           </Typography>
         ) : null}
+        {isTraductionVisible ? <Typography component='em'>{word.name}</Typography> : null}
         <Typography component='p'>{word.note}</Typography>
       </CardContent>
       <CardActions>
+        <Tooltip title={<Trans>Show traduction</Trans>}>
+          <IconButton
+            aria-label={<Trans>Show traduction</Trans>}
+            onClick={() => setTraductionVisbility(!isTraductionVisible)}
+          >
+            <RemoveRedEyeIcon />
+          </IconButton>
+        </Tooltip>
         <Tooltip title={<Trans>Edit</Trans>}>
           <IconButton aria-label={<Trans>Edit</Trans>} onClick={onEditionButtonClick}>
             <EditIcon />

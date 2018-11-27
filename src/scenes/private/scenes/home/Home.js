@@ -35,7 +35,7 @@ const styles = theme => ({
     height: '100%'
   },
   fab: {
-    position: 'absolute',
+    position: 'fixed',
     right: 30,
     bottom: 30
   },
@@ -163,7 +163,7 @@ export default React.memo(
           {words === undefined ? null : wordsList ? (
             <Grid container wrap='wrap' spacing={16} style={{ flexGrow: 1 }}>
               {wordsList.map((word, i) => (
-                <Grid item xs={12} sm={10} md={4} lg={2} key={i}>
+                <Grid item xs={6} sm={6} md={3} lg={2} key={i}>
                   <Word
                     word={word}
                     onDeleteButtonClick={() => removeWord(word.id)}
