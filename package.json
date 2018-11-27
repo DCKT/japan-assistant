@@ -23,7 +23,7 @@
     "add-locale": "lingui add-locale",
     "extract": "lingui extract",
     "compile": "lingui compile",
-    "deploy": "firebase deploy"
+    "deploy": "netlify deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
