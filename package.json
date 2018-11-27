@@ -22,7 +22,8 @@
     "eject": "react-scripts eject",
     "add-locale": "lingui add-locale",
     "extract": "lingui extract",
-    "compile": "lingui compile"
+    "compile": "lingui compile",
+    "deploy": "firebase deploy"
   },
   "eslintConfig": {
     "extends": "react-app"
