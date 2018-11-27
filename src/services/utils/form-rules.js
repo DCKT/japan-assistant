@@ -15,12 +15,8 @@ const romaji = 'abcdefghijklmnopqrstuvwxyz'
 
 export const japaneseCharacterOnly = (value: ?string) => {
   if (value) {
-    return value.split('').some(char => romaji.indexOf(char) !== -1) ? (
-      <Trans>Japanese character only</Trans>
-    ) : (
-      undefined
-    )
+    return value.split('').some(char => romaji.indexOf(char) !== -1) ? <Trans>Japanese character only</Trans> : ''
   } else {
-    return undefined
+    return ''
   }
 }
