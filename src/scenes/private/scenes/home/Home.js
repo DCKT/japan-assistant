@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import Word from '../../components/Word'
 import AddWordDialogForm from '../../components/AddWordDialogForm'
 import AddCategoryDialogForm from '../../components/AddCategoryDialogForm'
-import AuthenticatedNavigationBar from '../../components/AuthenticatedNavigationBar'
+
 import SearchForm from '../../components/SearchForm'
 import AddIcon from '@material-ui/icons/Add'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -25,8 +25,7 @@ import {
   onFirebaseValue,
   removeFirebaseValue,
   addFirebaseValue,
-  updateFirebaseValue,
-  firebaseLogout
+  updateFirebaseValue
 } from '../../../../services/firebase'
 import emptyListSvg from '../../assets/empty-list.svg'
 
@@ -129,7 +128,6 @@ export default React.memo(
 
     return (
       <div className={classes.pageContainer}>
-        <AuthenticatedNavigationBar onLogout={firebaseLogout} />
         {hasWords ? (
           <React.Fragment>
             <div style={{ margin: 10 }}>
@@ -163,7 +161,7 @@ export default React.memo(
           {words === undefined ? null : wordsList ? (
             <Grid container wrap='wrap' spacing={16} style={{ flexGrow: 1 }}>
               {wordsList.map((word, i) => (
-                <Grid item xs={6} sm={6} md={3} lg={2} key={i}>
+                <Grid item xs={6} md={3} key={i}>
                   <Word
                     word={word}
                     onDeleteButtonClick={() => removeWord(word.id)}

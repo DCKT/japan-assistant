@@ -14,12 +14,21 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import { Trans } from '@lingui/macro'
+import Drawer from '@material-ui/core/Drawer'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Divider from '@material-ui/core/Divider'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import CategoryIcon from '@material-ui/icons/Category'
+import { Link } from '@reach/router'
 
 /**
  * Utils
  */
 import { withStyles } from '@material-ui/core/styles'
 
+const drawerWidth = 240
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -34,6 +43,23 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar,
   grow: {
     flexGrow: 1
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0
+  },
+  drawerPaper: {
+    width: drawerWidth
+  },
+  appBar: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth
+  },
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing.unit * 3,
+    paddingTop: theme.spacing.unit * 10
   }
 })
 
@@ -48,7 +74,7 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
 
   return (
     <div className={classes.root}>
-      <AppBar position='static' className={classes.appBar}>
+      <AppBar position='fixed' className={classes.appBar}>
         <Toolbar>
           <IconButton
             color='inherit'
@@ -93,6 +119,27 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
           <Trans>Logout</Trans>
         </MenuItem>
       </Menu>
+      <Drawer
+        variant='permanent'
+        anchor='left'
+        className={classes.drawer}
+        classes={{
+          paper: classes.drawerPaper
+        }}
+      >
+        <div className={classes.toolbar} />
+        <Divider />
+        <List>
+          <ListItem button component={Link} to='categories'>
+            <ListItemIcon>
+              <CategoryIcon />
+            </ListItemIcon>
+            <ListItemText primary={<Trans>Manage categories</Trans>} />
+          </ListItem>
+        </List>
+      </Drawer>
+
+      <main className={classes.content}>{children}</main>
     </div>
   )
 })
