@@ -7,17 +7,12 @@ import React from 'react'
  */
 import Typography from '@material-ui/core/Typography'
 import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import IconButton from '@material-ui/core/IconButton'
-import DeleteIcon from '@material-ui/icons/Delete'
-import EditIcon from '@material-ui/icons/Edit'
 import Paper from '@material-ui/core/Paper'
-import Tooltip from '@material-ui/core/Tooltip'
 import { Trans } from '@lingui/macro'
+import CategoryListItem from './components/CategoryListItem'
 
-export default () => {
+export default ({ categories }) => {
+  console.log(categories)
   return (
     <div>
       <Typography component='h1' variant='h3' gutterBottom>
@@ -25,21 +20,9 @@ export default () => {
       </Typography>
       <Paper>
         <List>
-          <ListItem>
-            <ListItemText primary='test' />
-            <ListItemSecondaryAction>
-              <Tooltip title={<Trans>Edit</Trans>}>
-                <IconButton aria-label={<Trans>Edit</Trans>}>
-                  <EditIcon />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title={<Trans>Delete</Trans>}>
-                <IconButton aria-label={<Trans>Delete</Trans>}>
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
-            </ListItemSecondaryAction>
-          </ListItem>
+          {categories.map((category, i) => (
+            <CategoryListItem key={i} categories={categories} value={category} />
+          ))}
         </List>
       </Paper>
     </div>

@@ -56,12 +56,10 @@ const styles = theme => ({
 })
 
 export default React.memo(
-  withStyles(styles)(({ classes, viewer }) => {
+  withStyles(styles)(({ classes, viewer, categories, words }) => {
     const [isAddWordDialogVisible, setIsAddWordDialogVisible] = useState(false)
     const [isAddCategoryDialogVisible, setIsAddCategoryDialogVisible] = useState(false)
     const [editedWord, setEditedWord] = useState(null)
-    const [words, setWords] = useState(undefined)
-    const [categories, setCategories] = useState(undefined)
     const [categoriesFilter, setCategoriesFilter] = useState([])
     const hasWords = words !== undefined && words !== null
 
@@ -78,8 +76,7 @@ export default React.memo(
         .map(wordKey => words[wordKey])
       : null
 
-    const categoriesList = categories ? Object.keys(categories).map(categoryKey => categories[categoryKey]) : []
-    const categoriesListOptions = categoriesList.map(category => ({
+    const categoriesListOptions = categories.map(category => ({
       label: category.name,
       value: category
     }))
@@ -120,11 +117,6 @@ export default React.memo(
         category: values.category.value
       })
     }
-
-    useEffect(() => {
-      onFirebaseValue(`users/${viewer.uid}/words`, setWords)
-      onFirebaseValue(`users/${viewer.uid}/categories`, setCategories)
-    }, [])
 
     return (
       <div className={classes.pageContainer}>
