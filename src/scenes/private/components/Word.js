@@ -82,7 +82,7 @@ function Word ({ classes, word, onDeleteButtonClick, onEditionButtonClick, onSho
           </IconButton>
         </Tooltip>
         <Tooltip title={<Trans>Remove</Trans>}>
-          <IconButton aria-label={<Trans>Edit</Trans>} onClick={onDeleteButtonClick}>
+          <IconButton aria-label={<Trans>Delete</Trans>} onClick={onDeleteButtonClick}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>

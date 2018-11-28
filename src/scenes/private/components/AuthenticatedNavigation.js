@@ -22,7 +22,7 @@ import Divider from '@material-ui/core/Divider'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import CategoryIcon from '@material-ui/icons/Category'
 import { Link } from '@reach/router'
-
+import Media from 'react-media'
 /**
  * Utils
  */
@@ -52,8 +52,10 @@ const styles = theme => ({
     width: drawerWidth
   },
   appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth
+    }
   },
   content: {
     flexGrow: 1,
@@ -119,25 +121,31 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
           <Trans>Logout</Trans>
         </MenuItem>
       </Menu>
-      <Drawer
-        variant='permanent'
-        anchor='left'
-        className={classes.drawer}
-        classes={{
-          paper: classes.drawerPaper
-        }}
-      >
-        <div className={classes.toolbar} />
-        <Divider />
-        <List>
-          <ListItem button component={Link} to='categories'>
-            <ListItemIcon>
-              <CategoryIcon />
-            </ListItemIcon>
-            <ListItemText primary={<Trans>Manage categories</Trans>} />
-          </ListItem>
-        </List>
-      </Drawer>
+      <Media query='(max-width: 599px)'>
+        {matches => (
+          <Drawer
+            variant={matches ? 'temporary' : 'permanent'}
+            anchor='left'
+            className={classes.drawer}
+            open={isMobileOpen}
+            onClose={() => setMobileOpen(false)}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+          >
+            <div className={classes.toolbar} />
+            <Divider />
+            <List>
+              <ListItem button component={Link} to='categories'>
+                <ListItemIcon>
+                  <CategoryIcon />
+                </ListItemIcon>
+                <ListItemText primary={<Trans>Manage categories</Trans>} />
+              </ListItem>
+            </List>
+          </Drawer>
+        )}
+      </Media>
 
       <main className={classes.content}>{children}</main>
     </div>
