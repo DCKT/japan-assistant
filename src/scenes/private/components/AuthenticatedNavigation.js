@@ -136,6 +136,10 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
             <div className={classes.toolbar} />
             <Divider />
             <List>
+              <ListItem button component={Link} to='/app'>
+                <ListItemText primary={<Trans>Home</Trans>} />
+              </ListItem>
+
               <ListItem button component={Link} to='categories'>
                 <ListItemIcon>
                   <CategoryIcon />

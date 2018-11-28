@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, Suspense } from 'react'
 
 /**
  * Components
@@ -29,7 +29,7 @@ export default () => {
   }
 
   useEffect(() => {
-    onFirebaseValue(`users/${userContext.uid}/words`, setWords)
+    onFirebaseValue(`users/${userContext.user.uid}/words`, setWords)
     onFirebaseValue(`users/${userContext.user.uid}/categories`, setCategories)
   }, [])
 
@@ -41,11 +41,13 @@ export default () => {
 
   return (
     <AuthenticatedNavigation onLogout={firebaseLogout}>
-      <Router>
-        <Home path='/' {...commonProps} />
-        <ManageCategories path='/categories' {...commonProps} />
-        <NotFound default />
-      </Router>
+      <Suspense fallback={<div>Loading...</div>} maxDuration={2000}>
+        <Router>
+          <Home path='/' {...commonProps} />
+          <ManageCategories path='/categories' {...commonProps} />
+          <NotFound default />
+        </Router>
+      </Suspense>
     </AuthenticatedNavigation>
   )
 }

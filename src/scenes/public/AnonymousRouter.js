@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext } from 'react'
+import React, { useContext, Suspense } from 'react'
 import { Router, Redirect } from '@reach/router'
 import UserContext from '../../services/states/UserContext'
 import NotFound from './scenes/not-found'
@@ -18,11 +18,13 @@ export default () => {
   }
 
   return (
-    <Router>
-      <Home path='/' />
-      <Login path='/login' />
-      <Register path='/register' />
-      <NotFound default />
-    </Router>
+    <Suspense fallback={<div>Loading...</div>} maxDuration={2000}>
+      <Router>
+        <Home path='/' />
+        <Login path='/login' />
+        <Register path='/register' />
+        <NotFound default />
+      </Router>
+    </Suspense>
   )
 }
