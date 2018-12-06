@@ -2,4 +2,10 @@
 
 import React from 'react'
 
-export default () => <h1>Support</h1>
+export default () => {
+  return (
+    <div>
+      <h1>Support</h1>
+    </div>
+  )
+}

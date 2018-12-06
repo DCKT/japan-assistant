@@ -24,6 +24,9 @@ import CategoryIcon from '@material-ui/icons/Category'
 import HelpIcon from '@material-ui/icons/Help'
 import { Link, Match } from '@reach/router'
 import Media from 'react-media'
+import SnackbarContext from '../../../services/states/SnackbarContext'
+import Snackbar from '@material-ui/core/Snackbar'
+
 /**
  * Utils
  */
@@ -60,15 +63,24 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
+    height: '100%',
+    position: 'relative',
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
     paddingTop: theme.spacing.unit * 10
+  },
+  snackbar: {
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth
+    }
   }
 })
 
 export default withStyles(styles, { withTheme: true })(({ classes, theme, children, onLogout }) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [isMobileOpen, setMobileOpen] = useState(false)
+  const [snackbarStatus, setSnackbarStatus] = useState({ visible: false })
   const isMenuOpen = Boolean(anchorEl)
 
   const handleMenuClose = () => {
@@ -177,7 +189,24 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
         )}
       </Media>
 
-      <main className={classes.content}>{children}</main>
+      <main className={classes.content}>
+        <SnackbarContext.Provider
+          value={{
+            isVisible: snackbarStatus.visible,
+            displaySnackbar: ({ message, action }) => {
+              setSnackbarStatus({ visible: true, message, action })
+            }
+          }}
+        >
+          {children}
+          <Snackbar
+            open={snackbarStatus.visible}
+            autoHideDuration={4000}
+            onClose={() => setSnackbarStatus({ visible: false, message: '' })}
+            message={snackbarStatus.message}
+          />
+        </SnackbarContext.Provider>
+      </main>
     </div>
   )
 })
