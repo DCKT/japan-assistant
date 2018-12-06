@@ -22,6 +22,7 @@ REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
 - `@reach/router` as router system
 - `firebase` as login & db system
 - `@lingui` as i18n provider
+- `@material-ui` as UI framework
 
 ### Structure pattern
 

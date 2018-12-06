@@ -127,22 +127,15 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
         <React.Fragment>
           <div style={{ margin: 10 }}>
             {lists === undefined ? null : lists ? (
-              <React.Fragment>
-                <Grid container spacing={16}>
-                  <Grid item xs='auto'>
-                    <Button color='primary' onClick={toggleListDialog} variant='contained'>
-                      <Trans>Add a list</Trans>
-                    </Button>
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <SearchForm
-                      isMulti
-                      options={listsOptions}
-                      onChange={values => setListsFilter(values.map(({ value }) => value.id))}
-                    />
-                  </Grid>
+              <Grid container spacing={16}>
+                <Grid item xs={12} md={6}>
+                  <SearchForm
+                    isMulti
+                    options={listsOptions}
+                    onChange={values => setListsFilter(values.map(({ value }) => value.id))}
+                  />
                 </Grid>
-              </React.Fragment>
+              </Grid>
             ) : (
               <Button color='primary' onClick={toggleListDialog} variant='contained'>
                 <Trans>Add a list</Trans>

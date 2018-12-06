@@ -11,6 +11,7 @@ import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import { Trans } from '@lingui/macro'
 import ListItem from './components/ListItem'
+import Grid from '@material-ui/core/Grid'
 import AddListDialogForm from '../../components/AddListDialogForm'
 
 /**
@@ -50,9 +51,20 @@ export default ({ lists, viewer }: ManageListsProps) => {
 
   return (
     <div>
-      <Typography component='h1' variant='h3' gutterBottom>
-        <Trans>Manage lists</Trans>
-      </Typography>
+      <Grid container alignItems='center' style={{ marginBottom: 15 }}>
+        <Grid item xs='auto'>
+          <Typography component='h1' variant='h3'>
+            <Trans>Manage lists</Trans>
+          </Typography>
+        </Grid>
+        <Grid item style={{ marginLeft: 15 }}>
+          {lists.length ? (
+            <Button variant='contained' color='primary' onClick={toggleListDialog}>
+              <Trans>Create a list</Trans>
+            </Button>
+          ) : null}
+        </Grid>
+      </Grid>
 
       {lists.length ? (
         <Paper>
@@ -68,7 +80,7 @@ export default ({ lists, viewer }: ManageListsProps) => {
             <Trans>No list yet</Trans>
           </Typography>
           <Button variant='contained' color='primary' onClick={toggleListDialog}>
-            Create a list
+            <Trans>Create a list</Trans>
           </Button>
         </React.Fragment>
       )}
