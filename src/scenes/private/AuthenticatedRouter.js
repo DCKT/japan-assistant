@@ -15,11 +15,11 @@ import AuthenticatedNavigation from './components/AuthenticatedNavigation'
  */
 import { firebaseLogout, onFirebaseValue } from '../../services/firebase'
 const Home = React.lazy(() => import('./scenes/home'))
-const ManageCategories = React.lazy(() => import('./scenes/manage-categories'))
+const ManageLists = React.lazy(() => import('./scenes/manage-lists'))
 
 export default () => {
   const userContext = useContext(UserContext)
-  const [categories, setCategories] = useState(undefined)
+  const [lists, setLists] = useState(undefined)
   const [words, setWords] = useState(undefined)
 
   if (typeof userContext.user === 'undefined') {
@@ -30,11 +30,11 @@ export default () => {
 
   useEffect(() => {
     onFirebaseValue(`users/${userContext.user.uid}/words`, setWords)
-    onFirebaseValue(`users/${userContext.user.uid}/categories`, setCategories)
+    onFirebaseValue(`users/${userContext.user.uid}/lists`, setLists)
   }, [])
 
   const commonProps = {
-    categories: categories ? Object.keys(categories).map(categoryKey => categories[categoryKey]) : [],
+    lists: lists ? Object.keys(lists).map(listKey => lists[listKey]) : [],
     viewer: userContext.viewer,
     words
   }
@@ -44,7 +44,7 @@ export default () => {
       <Suspense fallback={<div>Loading...</div>} maxDuration={2000}>
         <Router>
           <Home path='/' {...commonProps} />
-          <ManageCategories path='/categories' {...commonProps} />
+          <ManageLists path='/lists' {...commonProps} />
           <NotFound default />
         </Router>
       </Suspense>

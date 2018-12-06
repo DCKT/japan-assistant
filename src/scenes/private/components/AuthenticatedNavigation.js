@@ -74,6 +74,10 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
     setAnchorEl(null)
   }
 
+  function closeMobileMenu () {
+    setMobileOpen(false)
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position='fixed' className={classes.appBar}>
@@ -136,15 +140,15 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
             <div className={classes.toolbar} />
             <Divider />
             <List>
-              <ListItem button component={Link} to='/app'>
+              <ListItem button component={Link} to='/app' onClick={closeMobileMenu}>
                 <ListItemText primary={<Trans>Home</Trans>} />
               </ListItem>
 
-              <ListItem button component={Link} to='categories'>
+              <ListItem button component={Link} to='lists' onClick={closeMobileMenu}>
                 <ListItemIcon>
                   <CategoryIcon />
                 </ListItemIcon>
-                <ListItemText primary={<Trans>Manage categories</Trans>} />
+                <ListItemText primary={<Trans>Manage lists</Trans>} />
               </ListItem>
             </List>
           </Drawer>

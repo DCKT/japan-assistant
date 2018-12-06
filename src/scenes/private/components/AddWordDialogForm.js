@@ -25,19 +25,19 @@ type AddWordDialogProps = {|
   onClose: Function,
   viewer: Object,
   editedWord: ?Object,
-  categories: Array<ReactSelectOption>,
+  lists: Array<ReactSelectOption>,
   onCreate: Function,
   onEdit: Function
 |}
 
-function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories, onCreate, onEdit }: AddWordDialogProps) {
+function AddWordDialog ({ isVisible, onClose, viewer, editedWord, lists, onCreate, onEdit }: AddWordDialogProps) {
   const initialValues = editedWord
     ? {
       ...editedWord,
-      category: editedWord.category
+      list: editedWord.list
         ? {
-          label: editedWord.category.name,
-          value: editedWord.category
+          label: editedWord.list.name,
+          value: editedWord.list
         }
         : null
     }
@@ -127,15 +127,11 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord, categories, on
                 <Grid item xs={12}>
                   <Grid container spacing={16}>
                     <Grid item xs={12}>
-                      {categories.length ? (
-                        <Field name='category'>
+                      {lists.length ? (
+                        <Field name='list'>
                           {({ input, meta }) => (
                             <FormControl error={meta.error && meta.touched} fullWidth>
-                              <SearchForm
-                                placeholder={<Trans>Select a category</Trans>}
-                                options={categories}
-                                {...input}
-                              />
+                              <SearchForm placeholder={<Trans>Select a list</Trans>} options={lists} {...input} />
                               {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
                             </FormControl>
                           )}

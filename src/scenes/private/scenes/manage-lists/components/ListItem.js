@@ -25,7 +25,7 @@ import FormHelperText from '@material-ui/core/FormHelperText'
  */
 import * as formRules from '../../../../../services/utils/form-rules'
 
-export default ({ categories, value }) => {
+export default ({ lists, value }) => {
   const [isEditingMode, setEditingMode] = useState(false)
 
   function enableEditingMode () {
@@ -51,7 +51,7 @@ export default ({ categories, value }) => {
                 name='name'
                 validate={formRules.composeValidators(
                   formRules.required,
-                  formRules.isNotDuplicate(categories.map(c => c.name))
+                  formRules.isNotDuplicate(lists.map(c => c.name))
                 )}
               >
                 {({ input, meta }) => (
@@ -59,7 +59,7 @@ export default ({ categories, value }) => {
                     <TextField
                       autoFocus
                       margin='dense'
-                      id='category'
+                      id='list'
                       label={<Trans>Name</Trans>}
                       type='text'
                       fullWidth

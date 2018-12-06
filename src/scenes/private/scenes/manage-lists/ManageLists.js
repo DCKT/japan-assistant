@@ -9,19 +9,24 @@ import Typography from '@material-ui/core/Typography'
 import List from '@material-ui/core/List'
 import Paper from '@material-ui/core/Paper'
 import { Trans } from '@lingui/macro'
-import CategoryListItem from './components/CategoryListItem'
+import ListItem from './components/ListItem'
 
-export default ({ categories }) => {
-  console.log(categories)
+import type { FirebaseList } from '../../../../services/utils/types'
+
+type ManageListsProps = {|
+  lists: Array<FirebaseList>
+|}
+
+export default ({ lists }: ManageListsProps) => {
   return (
     <div>
       <Typography component='h1' variant='h3' gutterBottom>
-        <Trans>Manage categories</Trans>
+        <Trans>Manage lists</Trans>
       </Typography>
       <Paper>
         <List>
-          {categories.map((category, i) => (
-            <CategoryListItem key={i} categories={categories} value={category} />
+          {lists.map((list, i) => (
+            <ListItem key={i} lists={lists} value={list} />
           ))}
         </List>
       </Paper>

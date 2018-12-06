@@ -1,6 +1,6 @@
 // @flow
 
-export type FirebaseCategory = {|
+export type FirebaseList = {|
   id: string,
   name: string
 |}
@@ -9,7 +9,7 @@ export type FirebaseWord = {
   id: string,
   name: string,
   kana: string,
-  category: ?FirebaseCategory,
+  list: ?FirebaseList,
   kanji: ?string,
   note: ?string,
   type: ?string

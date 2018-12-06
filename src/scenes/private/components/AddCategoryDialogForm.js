@@ -16,20 +16,20 @@ import { Form, Field } from 'react-final-form'
  * Utils
  */
 import * as formRules from '../../../services/utils/form-rules'
-import type { FirebaseCategory } from '../../../services/utils/types'
+import type { FirebaseList } from '../../../services/utils/types'
 
 type AddCategoryDialogProps = {|
   isVisible: boolean,
   onClose: Function,
   onSubmit: Function,
-  categories: Array<FirebaseCategory>
+  lists: Array<FirebaseList>
 |}
 
 type AddCategoryDialogFormValues = {|
   name: string
 |}
 
-function AddCategoryDialogForm ({ isVisible, onClose, onSubmit, categories }: AddCategoryDialogProps) {
+function AddCategoryDialogForm ({ isVisible, onClose, onSubmit, lists }: AddCategoryDialogProps) {
   async function onFormSubmit (values: AddCategoryDialogFormValues) {
     onSubmit(values)
     onClose()
@@ -41,14 +41,14 @@ function AddCategoryDialogForm ({ isVisible, onClose, onSubmit, categories }: Ad
         {({ handleSubmit, pristine, invalid, submitting }) => (
           <form onSubmit={handleSubmit}>
             <DialogTitle id='form-dialog-title'>
-              <Trans>Add a new category</Trans>
+              <Trans>Add a new list</Trans>
             </DialogTitle>
             <DialogContent>
               <Field
                 name='name'
                 validate={formRules.composeValidators(
                   formRules.required,
-                  formRules.isNotDuplicate(categories.map(c => c.name))
+                  formRules.isNotDuplicate(lists.map(c => c.name))
                 )}
               >
                 {({ input, meta }) => (
@@ -56,7 +56,7 @@ function AddCategoryDialogForm ({ isVisible, onClose, onSubmit, categories }: Ad
                     <TextField
                       autoFocus
                       margin='dense'
-                      id='category'
+                      id='list'
                       label={<Trans>Name</Trans>}
                       type='text'
                       fullWidth

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 /**
  * Components
@@ -21,12 +21,7 @@ import Tooltip from '@material-ui/core/Tooltip'
  * Utils
  */
 import { withStyles } from '@material-ui/core/styles'
-import {
-  onFirebaseValue,
-  removeFirebaseValue,
-  addFirebaseValue,
-  updateFirebaseValue
-} from '../../../../services/firebase'
+import { removeFirebaseValue, addFirebaseValue, updateFirebaseValue } from '../../../../services/firebase'
 import emptyListSvg from '../../assets/empty-list.svg'
 
 const styles = theme => ({
@@ -55,19 +50,19 @@ const styles = theme => ({
   }
 })
 
-export default withStyles(styles)(({ classes, viewer, categories, words }) => {
+export default withStyles(styles)(({ classes, viewer, lists, words }) => {
   const [isAddWordDialogVisible, setIsAddWordDialogVisible] = useState(false)
   const [isAddCategoryDialogVisible, setIsAddCategoryDialogVisible] = useState(false)
   const [editedWord, setEditedWord] = useState(null)
-  const [categoriesFilter, setCategoriesFilter] = useState([])
+  const [listsFilter, setListsFilter] = useState([])
   const hasWords = words !== undefined && words !== null
 
   const wordsList = words
     ? Object.keys(words)
       .filter(wordKeyId => {
-        if (categoriesFilter.length) {
-          const wordCategory = words[wordKeyId].category ? words[wordKeyId].category.id : ''
-          return categoriesFilter.includes(wordCategory)
+        if (listsFilter.length) {
+          const wordCategory = words[wordKeyId].list ? words[wordKeyId].list.id : ''
+          return listsFilter.includes(wordCategory)
         } else {
           return true
         }
@@ -75,9 +70,9 @@ export default withStyles(styles)(({ classes, viewer, categories, words }) => {
       .map(wordKey => words[wordKey])
     : null
 
-  const categoriesListOptions = categories.map(category => ({
-    label: category.name,
-    value: category
+  const listsOptions = lists.map(list => ({
+    label: list.name,
+    value: list
   }))
 
   function toggleCategoryDialog () {
@@ -94,7 +89,7 @@ export default withStyles(styles)(({ classes, viewer, categories, words }) => {
 
   function addCategoryOnSubmit (values) {
     const id = Date.now()
-    addFirebaseValue(`users/${viewer.uid}/categories/${id}`, {
+    addFirebaseValue(`users/${viewer.uid}/lists/${id}`, {
       id,
       name: values.name
     })
@@ -106,14 +101,14 @@ export default withStyles(styles)(({ classes, viewer, categories, words }) => {
     addFirebaseValue(`users/${viewer.uid}/words/${id}`, {
       ...values,
       id,
-      category: values.category.value
+      list: values.list.value
     })
   }
 
   function onWordEdition (values) {
     updateFirebaseValue(`users/${viewer.uid}/words/${editedWord.id}`, {
       ...values,
-      category: values.category.value
+      list: values.list.value
     })
   }
 
@@ -122,26 +117,26 @@ export default withStyles(styles)(({ classes, viewer, categories, words }) => {
       {hasWords ? (
         <React.Fragment>
           <div style={{ margin: 10 }}>
-            {categories === undefined ? null : categories ? (
+            {lists === undefined ? null : lists ? (
               <React.Fragment>
                 <Grid container spacing={16}>
                   <Grid item xs='auto'>
                     <Button color='primary' onClick={toggleCategoryDialog} variant='contained'>
-                      <Trans>Add a category</Trans>
+                      <Trans>Add a list</Trans>
                     </Button>
                   </Grid>
                   <Grid item xs={12} md={6}>
                     <SearchForm
                       isMulti
-                      options={categoriesListOptions}
-                      onChange={values => setCategoriesFilter(values.map(({ value }) => value.id))}
+                      options={listsOptions}
+                      onChange={values => setListsFilter(values.map(({ value }) => value.id))}
                     />
                   </Grid>
                 </Grid>
               </React.Fragment>
             ) : (
               <Button color='primary' onClick={toggleCategoryDialog} variant='contained'>
-                <Trans>Add a category</Trans>
+                <Trans>Add a list</Trans>
               </Button>
             )}
           </div>
@@ -177,7 +172,7 @@ export default withStyles(styles)(({ classes, viewer, categories, words }) => {
               </Button>
               &nbsp;
               <Button color='primary' onClick={toggleCategoryDialog}>
-                <Trans>Add a category</Trans>
+                <Trans>Add a list</Trans>
               </Button>
             </Grid>
           </Grid>
@@ -200,17 +195,17 @@ export default withStyles(styles)(({ classes, viewer, categories, words }) => {
             setEditedWord(null)
           }}
           editedWord={editedWord}
-          categories={categoriesListOptions}
+          lists={listsOptions}
           onCreate={onWordCreation}
           onEdit={onWordEdition}
         />
       ) : null}
-      {isAddCategoryDialogVisible && typeof categories !== 'undefined' ? (
+      {isAddCategoryDialogVisible && typeof lists !== 'undefined' ? (
         <AddCategoryDialogForm
           isVisible={isAddCategoryDialogVisible}
           onClose={toggleCategoryDialog}
           onSubmit={addCategoryOnSubmit}
-          categories={Object.keys(categories).map(c => categories[c])}
+          lists={Object.keys(lists).map(c => lists[c])}
         />
       ) : null}
     </div>
