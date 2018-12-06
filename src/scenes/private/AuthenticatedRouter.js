@@ -16,6 +16,7 @@ import AuthenticatedNavigation from './components/AuthenticatedNavigation'
 import { firebaseLogout, onFirebaseValue } from '../../services/firebase'
 const Home = React.lazy(() => import('./scenes/home'))
 const ManageLists = React.lazy(() => import('./scenes/manage-lists'))
+const Support = React.lazy(() => import('./scenes/support'))
 
 export default () => {
   const userContext = useContext(UserContext)
@@ -45,6 +46,7 @@ export default () => {
         <Router>
           <Home path='/' {...commonProps} />
           <ManageLists path='/lists' {...commonProps} />
+          <Support path='/support' {...commonProps} />
           <NotFound default />
         </Router>
       </Suspense>

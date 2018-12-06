@@ -21,6 +21,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import CategoryIcon from '@material-ui/icons/Category'
+import HelpIcon from '@material-ui/icons/Help'
 import { Link, Match } from '@reach/router'
 import Media from 'react-media'
 /**
@@ -155,6 +156,19 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
                       <CategoryIcon />
                     </ListItemIcon>
                     <ListItemText primary={<Trans>Manage lists</Trans>} />
+                  </ListItem>
+                )}
+              </Match>
+
+              <Divider />
+
+              <Match path='support'>
+                {({ match }) => (
+                  <ListItem button component={Link} to='support' onClick={closeMobileMenu} selected={!!match}>
+                    <ListItemIcon>
+                      <HelpIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={<Trans>Support memori</Trans>} />
                   </ListItem>
                 )}
               </Match>
