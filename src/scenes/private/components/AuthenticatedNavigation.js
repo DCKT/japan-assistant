@@ -21,7 +21,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import CategoryIcon from '@material-ui/icons/Category'
-import { Link } from '@reach/router'
+import { Link, Match } from '@reach/router'
 import Media from 'react-media'
 /**
  * Utils
@@ -140,16 +140,24 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
             <div className={classes.toolbar} />
             <Divider />
             <List>
-              <ListItem button component={Link} to='/app' onClick={closeMobileMenu}>
-                <ListItemText primary={<Trans>Home</Trans>} />
-              </ListItem>
+              <Match path='/app'>
+                {({ match }) => (
+                  <ListItem button component={Link} to='/app' onClick={closeMobileMenu} selected={!!match}>
+                    <ListItemText primary={<Trans>Home</Trans>} />
+                  </ListItem>
+                )}
+              </Match>
 
-              <ListItem button component={Link} to='lists' onClick={closeMobileMenu}>
-                <ListItemIcon>
-                  <CategoryIcon />
-                </ListItemIcon>
-                <ListItemText primary={<Trans>Manage lists</Trans>} />
-              </ListItem>
+              <Match path='lists'>
+                {({ match }) => (
+                  <ListItem button component={Link} to='lists' onClick={closeMobileMenu} selected={!!match}>
+                    <ListItemIcon>
+                      <CategoryIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={<Trans>Manage lists</Trans>} />
+                  </ListItem>
+                )}
+              </Match>
             </List>
           </Drawer>
         )}

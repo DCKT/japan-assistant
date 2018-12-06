@@ -1,6 +1,10 @@
 // @flow
 
 import React from 'react'
+
+/**
+ * Components
+ */
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
@@ -18,21 +22,25 @@ import { Form, Field } from 'react-final-form'
 import * as formRules from '../../../services/utils/form-rules'
 import type { FirebaseList } from '../../../services/utils/types'
 
-type AddCategoryDialogProps = {|
+type AddListDialogProps = {|
   isVisible: boolean,
   onClose: Function,
   onSubmit: Function,
   lists: Array<FirebaseList>
 |}
 
-type AddCategoryDialogFormValues = {|
+type AddListDialogFormValues = {|
   name: string
 |}
 
-function AddCategoryDialogForm ({ isVisible, onClose, onSubmit, lists }: AddCategoryDialogProps) {
-  async function onFormSubmit (values: AddCategoryDialogFormValues) {
-    onSubmit(values)
-    onClose()
+export default ({ isVisible, onClose, onSubmit, lists }: AddListDialogProps) => {
+  async function onFormSubmit (values: AddListDialogFormValues) {
+    try {
+      onSubmit(values)
+      onClose()
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -41,7 +49,7 @@ function AddCategoryDialogForm ({ isVisible, onClose, onSubmit, lists }: AddCate
         {({ handleSubmit, pristine, invalid, submitting }) => (
           <form onSubmit={handleSubmit}>
             <DialogTitle id='form-dialog-title'>
-              <Trans>Add a new list</Trans>
+              <Trans>Create a new list</Trans>
             </DialogTitle>
             <DialogContent>
               <Field
@@ -75,7 +83,7 @@ function AddCategoryDialogForm ({ isVisible, onClose, onSubmit, lists }: AddCate
                 <Trans>Cancel</Trans>
               </Button>
               <Button type='submit' variant='contained' color='primary' disabled={submitting || pristine}>
-                <Trans>Add</Trans>
+                <Trans>Create</Trans>
               </Button>
             </DialogActions>
           </form>
@@ -84,5 +92,3 @@ function AddCategoryDialogForm ({ isVisible, onClose, onSubmit, lists }: AddCate
     </Dialog>
   )
 }
-
-export default AddCategoryDialogForm

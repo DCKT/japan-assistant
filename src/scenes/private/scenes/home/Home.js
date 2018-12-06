@@ -11,7 +11,7 @@ import { Trans } from '@lingui/macro'
 import Typography from '@material-ui/core/Typography'
 import Word from '../../components/Word'
 import AddWordDialogForm from '../../components/AddWordDialogForm'
-import AddCategoryDialogForm from '../../components/AddCategoryDialogForm'
+import AddListDialogForm from '../../components/AddListDialogForm'
 
 import SearchForm from '../../components/SearchForm'
 import AddIcon from '@material-ui/icons/Add'
@@ -23,6 +23,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import { withStyles } from '@material-ui/core/styles'
 import { removeFirebaseValue, addFirebaseValue, updateFirebaseValue } from '../../../../services/firebase'
 import emptyListSvg from '../../assets/empty-list.svg'
+import type { FirebaseViewer } from '../../../../services/utils/types'
 
 const styles = theme => ({
   pageContainer: {
@@ -50,9 +51,16 @@ const styles = theme => ({
   }
 })
 
-export default withStyles(styles)(({ classes, viewer, lists, words }) => {
+type HomeProps = {|
+  classes: Object,
+  viewer: FirebaseViewer,
+  lists: Object,
+  words: Object
+|}
+
+export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps) => {
   const [isAddWordDialogVisible, setIsAddWordDialogVisible] = useState(false)
-  const [isAddCategoryDialogVisible, setIsAddCategoryDialogVisible] = useState(false)
+  const [isAddListDialogVisible, setIsAddListDialogVisible] = useState(false)
   const [editedWord, setEditedWord] = useState(null)
   const [listsFilter, setListsFilter] = useState([])
   const hasWords = words !== undefined && words !== null
@@ -61,8 +69,8 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
     ? Object.keys(words)
       .filter(wordKeyId => {
         if (listsFilter.length) {
-          const wordCategory = words[wordKeyId].list ? words[wordKeyId].list.id : ''
-          return listsFilter.includes(wordCategory)
+          const wordList = words[wordKeyId].list ? words[wordKeyId].list.id : ''
+          return listsFilter.includes(wordList)
         } else {
           return true
         }
@@ -75,8 +83,8 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
     value: list
   }))
 
-  function toggleCategoryDialog () {
-    setIsAddCategoryDialogVisible(!isAddCategoryDialogVisible)
+  function toggleListDialog () {
+    setIsAddListDialogVisible(!isAddListDialogVisible)
   }
 
   function toggleAddWordDialog () {
@@ -87,8 +95,9 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
     removeFirebaseValue(`users/${viewer.uid}/words/${id}`)
   }
 
-  function addCategoryOnSubmit (values) {
+  function addListOnSubmit (values) {
     const id = Date.now()
+
     addFirebaseValue(`users/${viewer.uid}/lists/${id}`, {
       id,
       name: values.name
@@ -121,7 +130,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
               <React.Fragment>
                 <Grid container spacing={16}>
                   <Grid item xs='auto'>
-                    <Button color='primary' onClick={toggleCategoryDialog} variant='contained'>
+                    <Button color='primary' onClick={toggleListDialog} variant='contained'>
                       <Trans>Add a list</Trans>
                     </Button>
                   </Grid>
@@ -135,7 +144,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
                 </Grid>
               </React.Fragment>
             ) : (
-              <Button color='primary' onClick={toggleCategoryDialog} variant='contained'>
+              <Button color='primary' onClick={toggleListDialog} variant='contained'>
                 <Trans>Add a list</Trans>
               </Button>
             )}
@@ -171,7 +180,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
                 <Trans>Add my first word</Trans>
               </Button>
               &nbsp;
-              <Button color='primary' onClick={toggleCategoryDialog}>
+              <Button color='primary' onClick={toggleListDialog}>
                 <Trans>Add a list</Trans>
               </Button>
             </Grid>
@@ -200,11 +209,11 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
           onEdit={onWordEdition}
         />
       ) : null}
-      {isAddCategoryDialogVisible && typeof lists !== 'undefined' ? (
-        <AddCategoryDialogForm
-          isVisible={isAddCategoryDialogVisible}
-          onClose={toggleCategoryDialog}
-          onSubmit={addCategoryOnSubmit}
+      {isAddListDialogVisible && typeof lists !== 'undefined' ? (
+        <AddListDialogForm
+          isVisible={isAddListDialogVisible}
+          onClose={toggleListDialog}
+          onSubmit={addListOnSubmit}
           lists={Object.keys(lists).map(c => lists[c])}
         />
       ) : null}

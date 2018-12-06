@@ -24,8 +24,16 @@ import FormHelperText from '@material-ui/core/FormHelperText'
  * Utils
  */
 import * as formRules from '../../../../../services/utils/form-rules'
+import type { FirebaseList } from '../../../../../services/utils/types'
 
-export default ({ lists, value }) => {
+type ListItemProps = {|
+  lists: Array<FirebaseList>,
+  value: FirebaseList,
+  onRemove: Function,
+  onUpdate: Function
+|}
+
+export default ({ lists, value, onRemove, onUpdate }: ListItemProps) => {
   const [isEditingMode, setEditingMode] = useState(false)
 
   function enableEditingMode () {
@@ -36,9 +44,9 @@ export default ({ lists, value }) => {
     setEditingMode(false)
   }
 
-  function onFormSubmit () {
-    console.log('submit')
+  function onFormSubmit (newValues) {
     disabledEditingMode()
+    onUpdate(value, newValues)
   }
 
   return (
@@ -99,7 +107,7 @@ export default ({ lists, value }) => {
                     </IconButton>
                   </Tooltip>
                   <Tooltip title={<Trans>Delete</Trans>}>
-                    <IconButton aria-label={<Trans>Delete</Trans>}>
+                    <IconButton aria-label={<Trans>Delete</Trans>} onClick={() => onRemove(value)}>
                       <DeleteIcon />
                     </IconButton>
                   </Tooltip>

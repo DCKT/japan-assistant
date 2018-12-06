@@ -15,8 +15,9 @@ export type FirebaseWord = {
   type: ?string
 }
 
-export type Viewer = {
-  email: string
+export type FirebaseViewer = {
+  email: string,
+  uid: string
 }
 
 export type ReactSelectOption = {|
