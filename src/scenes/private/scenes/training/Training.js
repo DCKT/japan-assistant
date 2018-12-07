@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState } from 'react'
+import React, { useReducer } from 'react'
 
 /**
  * Components
@@ -8,19 +8,14 @@ import React, { useState } from 'react'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import { Trans } from '@lingui/macro'
-import SearchListsForm from '../../components/SearchListsForm'
 import Button from '@material-ui/core/Button'
-import Select from '@material-ui/core/Select'
-import MenuItem from '@material-ui/core/MenuItem'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormControl from '@material-ui/core/FormControl'
+import SelectTrainingConfig from './components/select-training-config'
 
 /**
  * Utils
  */
-import containerPicture from './assets/container.svg'
 import { withStyles } from '@material-ui/core/styles'
-import { map } from 'lodash'
+import { map, filter } from 'lodash'
 
 const styles = theme => ({
   paperContainer: {
@@ -49,56 +44,51 @@ const styles = theme => ({
   }
 })
 
+const initialState = { selectedWords: null, trainingType: null, currentWord: null }
+
+function reducer (state, action) {
+  switch (action.type) {
+    case 'START_TRAINING':
+      return { ...state, selectedWords: action.payload.words, trainingType: action.payload.trainingType }
+    case 'next':
+      return state
+
+    default:
+      return state
+  }
+}
+
 export default withStyles(styles)(({ classes, viewer, lists, words }) => {
-  const [selectedLists, setSelectedLists] = useState([])
-  const [trainingType, setTrainingType] = useState('')
+  const [state, dispatch] = useReducer(reducer, initialState)
 
   return (
     <div>
       <Typography component='h1' variant='h1' gutterBottom>
         <Trans>Training</Trans>
       </Typography>
-
-      <Paper className={classes.paperContainer}>
-        <img src={containerPicture} className={classes.containerPicture} />
-        <Typography component='h2' variant='title'>
-          <Trans>Pickup the lists you want to train</Trans>
-        </Typography>
-
-        <div className={classes.formContainer}>
-          <FormControl className={classes.formControl} fullWidth>
-            <SearchListsForm
-              isMulti
-              options={map(lists, list => ({
-                label: list.name,
-                value: list
-              }))}
-              onChange={values => setSelectedLists(values)}
-            />
-          </FormControl>
-          <FormControl className={classes.formControl} fullWidth>
-            <Select value={trainingType} onChange={event => setTrainingType(event.target.value)} displayEmpty>
-              <MenuItem value='' disabled>
-                <em>
-                  <Trans>Select the training type</Trans>
-                </em>
-              </MenuItem>
-              <MenuItem value='translate'>
-                <Trans>Read Kanji</Trans>
-              </MenuItem>
-              <MenuItem value='write'>
-                <Trans>Write kanji</Trans>
-              </MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-
-        {selectedLists.length && trainingType ? (
-          <Button variant='contained' color='primary'>
-            <Trans>Start training !</Trans>
-          </Button>
-        ) : null}
-      </Paper>
+      {state.selectedWords ? (
+        <div>GO</div>
+      ) : (
+        <SelectTrainingConfig
+          lists={lists}
+          onSubmit={({ selectedLists, trainingType }) =>
+            dispatch({
+              type: 'START_TRAINING',
+              payload: {
+                words: filter(words, word => {
+                  if (selectedLists.length) {
+                    const wordList = word.list ? word.list.id : ''
+                    return selectedLists.includes(wordList)
+                  } else {
+                    return true
+                  }
+                }),
+                trainingType
+              }
+            })
+          }
+        />
+      )}
     </div>
   )
 })
