@@ -117,10 +117,12 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
   }
 
   function onWordEdition (values) {
-    updateFirebaseValue(`users/${viewer.uid}/words/${editedWord.id}`, {
-      ...values,
-      list: values.list.value
-    })
+    if (editedWord) {
+      updateFirebaseValue(`users/${viewer.uid}/words/${editedWord.id}`, {
+        ...values,
+        list: values.list.value
+      })
+    }
   }
 
   return (

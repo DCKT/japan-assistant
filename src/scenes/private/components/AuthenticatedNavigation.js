@@ -81,7 +81,7 @@ const styles = theme => ({
 export default withStyles(styles, { withTheme: true })(({ classes, theme, children, onLogout }) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const [isMobileOpen, setMobileOpen] = useState(false)
-  const [snackbarStatus, setSnackbarStatus] = useState({ visible: false })
+  const [snackbarStatus, setSnackbarStatus] = useState({ visible: false, message: null })
   const isMenuOpen = Boolean(anchorEl)
 
   const handleMenuClose = () => {
@@ -157,7 +157,7 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
               <Match path='/app'>
                 {({ match }) => (
                   <ListItem button component={Link} to='/app' onClick={closeMobileMenu} selected={!!match}>
-                  <ListItemIcon>
+                    <ListItemIcon>
                       <HomeIcon />
                     </ListItemIcon>
                     <ListItemText primary={<Trans>Home</Trans>} />
