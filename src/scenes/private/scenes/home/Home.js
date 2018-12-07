@@ -47,7 +47,7 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 4
   },
   listContainer: {
-    padding: theme.spacing.unit * 2
+    paddingTop: theme.spacing.unit
   }
 })
 
@@ -125,7 +125,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
     <div className={classes.pageContainer}>
       {hasWords ? (
         <React.Fragment>
-          <div style={{ margin: 10 }}>
+          <div>
             {lists === undefined ? null : lists ? (
               <Grid container spacing={16}>
                 <Grid item xs={12} md={6}>
