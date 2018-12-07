@@ -19,14 +19,14 @@ import { Form, Field } from 'react-final-form'
 /**
  * Utils
  */
+import { map } from 'lodash'
 import * as formRules from '../../../services/utils/form-rules'
-import type { FirebaseList } from '../../../services/utils/types'
 
 type AddListDialogProps = {|
   isVisible: boolean,
   onClose: Function,
   onSubmit: Function,
-  lists: Array<FirebaseList>
+  lists: Object
 |}
 
 type AddListDialogFormValues = {|
@@ -56,7 +56,7 @@ export default ({ isVisible, onClose, onSubmit, lists }: AddListDialogProps) => 
                 name='name'
                 validate={formRules.composeValidators(
                   formRules.required,
-                  formRules.isNotDuplicate(lists.map(c => c.name))
+                  formRules.isNotDuplicate(map(lists, c => c.name))
                 )}
               >
                 {({ input, meta }) => (

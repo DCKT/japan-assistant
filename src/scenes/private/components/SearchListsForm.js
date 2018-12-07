@@ -77,7 +77,7 @@ export default withStyles(styles)(({ classes, options, onChange, isMulti, ...res
             zIndex: 100000
           })
         }}
-        placeholder={<Trans>Search by list</Trans>}
+        placeholder={<Trans>Search lists</Trans>}
         onChange={onChange}
         {...rest}
       />

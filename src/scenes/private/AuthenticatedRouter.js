@@ -35,9 +35,9 @@ export default () => {
   }, [])
 
   const commonProps = {
-    lists: lists ? Object.keys(lists).map(listKey => lists[listKey]) : [],
-    viewer: userContext.user,
-    words
+    lists,
+    words,
+    viewer: userContext.user
   }
 
   return (

@@ -13,13 +13,14 @@ import Word from '../../components/Word'
 import AddWordDialogForm from '../../components/AddWordDialogForm'
 import AddListDialogForm from '../../components/AddListDialogForm'
 
-import SearchForm from '../../components/SearchForm'
+import SearchListsForm from '../../components/SearchListsForm'
 import AddIcon from '@material-ui/icons/Add'
 import Tooltip from '@material-ui/core/Tooltip'
 
 /**
  * Utils
  */
+import { map, filter } from 'lodash'
 import { withStyles } from '@material-ui/core/styles'
 import { removeFirebaseValue, addFirebaseValue, updateFirebaseValue } from '../../../../services/firebase'
 import emptyListSvg from '../../assets/empty-list.svg'
@@ -48,6 +49,9 @@ const styles = theme => ({
   },
   listContainer: {
     paddingTop: theme.spacing.unit
+  },
+  filtersContainer: {
+    marginBottom: theme.spacing.unit * 2
   }
 })
 
@@ -66,19 +70,17 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
   const hasWords = words !== undefined && words !== null
 
   const wordsList = words
-    ? Object.keys(words)
-      .filter(wordKeyId => {
-        if (listsFilter.length) {
-          const wordList = words[wordKeyId].list ? words[wordKeyId].list.id : ''
-          return listsFilter.includes(wordList)
-        } else {
-          return true
-        }
-      })
-      .map(wordKey => words[wordKey])
+    ? filter(words, word => {
+      if (listsFilter.length) {
+        const wordList = word.list ? word.list.id : ''
+        return listsFilter.includes(wordList)
+      } else {
+        return true
+      }
+    })
     : null
 
-  const listsOptions = lists.map(list => ({
+  const listsOptions = map(lists, list => ({
     label: list.name,
     value: list
   }))
@@ -124,25 +126,23 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
   return (
     <div className={classes.pageContainer}>
       {hasWords ? (
-        <React.Fragment>
-          <div>
-            {lists === undefined ? null : lists ? (
-              <Grid container spacing={16}>
-                <Grid item xs={12} md={6}>
-                  <SearchForm
-                    isMulti
-                    options={listsOptions}
-                    onChange={values => setListsFilter(values.map(({ value }) => value.id))}
-                  />
-                </Grid>
+        <div className={classes.filtersContainer}>
+          {lists === undefined ? null : lists ? (
+            <Grid container spacing={16}>
+              <Grid item xs={12} md={6}>
+                <SearchListsForm
+                  isMulti
+                  options={listsOptions}
+                  onChange={values => setListsFilter(values.map(({ value }) => value.id))}
+                />
               </Grid>
-            ) : (
-              <Button color='primary' onClick={toggleListDialog} variant='contained'>
-                <Trans>Add a list</Trans>
-              </Button>
-            )}
-          </div>
-        </React.Fragment>
+            </Grid>
+          ) : (
+            <Button color='primary' onClick={toggleListDialog} variant='contained'>
+              <Trans>Add a list</Trans>
+            </Button>
+          )}
+        </div>
       ) : null}
 
       <div className={classes.listContainer}>
@@ -207,7 +207,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
           isVisible={isAddListDialogVisible}
           onClose={toggleListDialog}
           onSubmit={addListOnSubmit}
-          lists={Object.keys(lists).map(c => lists[c])}
+          lists={lists}
         />
       ) : null}
     </div>

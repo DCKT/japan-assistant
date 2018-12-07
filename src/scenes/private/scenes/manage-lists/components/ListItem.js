@@ -23,11 +23,12 @@ import FormHelperText from '@material-ui/core/FormHelperText'
 /**
  * Utils
  */
+import { map } from 'lodash'
 import * as formRules from '../../../../../services/utils/form-rules'
 import type { FirebaseList } from '../../../../../services/utils/types'
 
 type ListItemProps = {|
-  lists: Array<FirebaseList>,
+  lists: Object,
   value: FirebaseList,
   onRemove: Function,
   onUpdate: Function
@@ -59,7 +60,7 @@ export default ({ lists, value, onRemove, onUpdate }: ListItemProps) => {
                 name='name'
                 validate={formRules.composeValidators(
                   formRules.required,
-                  formRules.isNotDuplicate(lists.map(c => c.name))
+                  formRules.isNotDuplicate(map(lists, c => c.name))
                 )}
               >
                 {({ input, meta }) => (

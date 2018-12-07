@@ -1211,13 +1211,12 @@
     hoist-non-react-statics "3.0.1"
     prop-types "^15.6.2"
 
-"@material-ui/core@3.6.1":
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-3.6.1.tgz#6f8259c64eaa34c9f977165f6b8d175d9eb1858a"
-  integrity sha512-jmDtLQVXYHzvv6TljspaoHazGXkgmgnLUosFateBdB3Vva6WVJZ7WY5LaAGOqtuTEUW6KUKDumaGoOQs4xuJWA==
+"@material-ui/core@3.3.2":
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-3.3.2.tgz#ca9ce331ac5a31ef8acc732305967f3e5cfe4934"
+  integrity sha512-3yYGrWBzML7OhzmgwBvWpQnFq9ROWj+so+ULADB+lXjpOuxbUf8IUWbR4/S4chh+8/DTNMjTGIUdpj//XeubLQ==
   dependencies:
     "@babel/runtime" "7.1.2"
-    "@material-ui/utils" "^3.0.0-alpha.0"
     "@types/jss" "^9.5.6"
     "@types/react-transition-group" "^2.0.8"
     brcast "^3.0.1"
@@ -1226,7 +1225,7 @@
     debounce "^1.1.0"
     deepmerge "^2.0.1"
     dom-helpers "^3.2.1"
-    hoist-non-react-statics "^3.0.0"
+    hoist-non-react-statics "^2.5.0"
     is-plain-object "^2.0.4"
     jss "^9.3.3"
     jss-camel-case "^6.0.0"
@@ -1251,13 +1250,6 @@
   dependencies:
     "@babel/runtime" "7.0.0"
     recompose "^0.29.0"
-
-"@material-ui/utils@^3.0.0-alpha.0":
-  version "3.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-3.0.0-alpha.0.tgz#506fcaf531a9a8f58a73ff2d3dfaa36c0f238506"
-  integrity sha512-HwC/pBcPG81UP4Jh0BaH2i4wAY9aDOrvL5+B/7J6cyFlG/Wip5Li+qI+GDlk9MR3kpG8v0sxfpWA0IlQYcHK6g==
-  dependencies:
-    "@babel/runtime" "7.1.2"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -5222,17 +5214,10 @@ hoist-non-react-statics@3.0.1:
   dependencies:
     react-is "^16.3.2"
 
-hoist-non-react-statics@^2.3.1:
+hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
-
-hoist-non-react-statics@^3.0.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.2.1.tgz#c09c0555c84b38a7ede6912b61efddafd6e75e1e"
-  integrity sha512-TFsu3TV3YLY+zFTZDrN8L2DTFanObwmBLpWvJs1qfUuEQ5bTAdFcwfx2T/bsCXfM9QHSLvjfP+nihEl0yvozxw==
-  dependencies:
-    react-is "^16.3.2"
 
 home-or-tmp@^2.0.0:
   version "2.0.0"
@@ -6879,7 +6864,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0:
+lodash@4.17.11, "lodash@>=3.5 <5", lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==

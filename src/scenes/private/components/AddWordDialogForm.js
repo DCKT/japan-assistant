@@ -12,7 +12,7 @@ import Grid from '@material-ui/core/Grid'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import { Form, Field } from 'react-final-form'
-import SearchForm from './SearchForm'
+import SearchListsForm from './SearchListsForm'
 
 /**
  * Utils
@@ -131,7 +131,7 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord, lists, onCreat
                         <Field name='list'>
                           {({ input, meta }) => (
                             <FormControl error={meta.error && meta.touched} fullWidth>
-                              <SearchForm placeholder={<Trans>Select a list</Trans>} options={lists} {...input} />
+                              <SearchListsForm placeholder={<Trans>Select a list</Trans>} options={lists} {...input} />
                               {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
                             </FormControl>
                           )}

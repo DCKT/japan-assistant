@@ -17,11 +17,12 @@ import AddListDialogForm from '../../components/AddListDialogForm'
 /**
  * Utils
  */
+import { map } from 'lodash'
 import { removeFirebaseValue, addFirebaseValue, updateFirebaseValue } from '../../../../services/firebase'
 import type { FirebaseList, FirebaseViewer } from '../../../../services/utils/types'
 
 type ManageListsProps = {|
-  lists: Array<FirebaseList>,
+  lists: Object,
   viewer: FirebaseViewer
 |}
 
@@ -58,7 +59,7 @@ export default ({ lists, viewer }: ManageListsProps) => {
           </Typography>
         </Grid>
         <Grid item style={{ marginLeft: 15 }}>
-          {lists.length ? (
+          {lists ? (
             <Button variant='contained' color='primary' onClick={toggleListDialog}>
               <Trans>Create a list</Trans>
             </Button>
@@ -66,10 +67,10 @@ export default ({ lists, viewer }: ManageListsProps) => {
         </Grid>
       </Grid>
 
-      {lists.length ? (
+      {lists ? (
         <Paper>
           <List>
-            {lists.map((list, i) => (
+            {map(lists, (list, i) => (
               <ListItem key={i} lists={lists} value={list} onRemove={removeList} onUpdate={updateList} />
             ))}
           </List>
