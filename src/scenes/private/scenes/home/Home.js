@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography'
 import Word from '../../components/Word'
 import AddWordDialogForm from '../../components/AddWordDialogForm'
 import AddListDialogForm from '../../components/AddListDialogForm'
-
 import SearchListsForm from '../../components/SearchListsForm'
 import AddIcon from '@material-ui/icons/Add'
 import Tooltip from '@material-ui/core/Tooltip'

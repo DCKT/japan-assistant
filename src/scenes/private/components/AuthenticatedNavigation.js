@@ -21,6 +21,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import CategoryIcon from '@material-ui/icons/Category'
+import SpellCheckIcon from '@material-ui/icons/Spellcheck'
 import HomeIcon from '@material-ui/icons/Home'
 import HelpIcon from '@material-ui/icons/Help'
 import { Link, Match } from '@reach/router'
@@ -172,6 +173,17 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
                       <CategoryIcon />
                     </ListItemIcon>
                     <ListItemText primary={<Trans>Manage lists</Trans>} />
+                  </ListItem>
+                )}
+              </Match>
+
+              <Match path='training'>
+                {({ match }) => (
+                  <ListItem button component={Link} to='training' onClick={closeMobileMenu} selected={!!match}>
+                    <ListItemIcon>
+                      <SpellCheckIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={<Trans>Training</Trans>} />
                   </ListItem>
                 )}
               </Match>

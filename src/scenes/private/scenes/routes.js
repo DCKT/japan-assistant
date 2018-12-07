@@ -9,6 +9,7 @@ export default {
   authenticated: {
     home: '/app',
     manageList: '/app/lists',
-    support: '/app/support'
+    support: '/app/support',
+    training: '/app/training'
   }
 }
