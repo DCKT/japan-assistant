@@ -84,11 +84,14 @@ export default withStyles(styles)(({ classes, lists, onSubmit }) => {
                 <Trans>Select the training type</Trans>
               </em>
             </MenuItem>
-            <MenuItem value='translate'>
-              <Trans>Read Kanji</Trans>
+            <MenuItem value='kanji_to_kana'>
+              <Trans>Kanji -> Kana</Trans>
             </MenuItem>
-            <MenuItem value='write'>
-              <Trans>Write kanji</Trans>
+            <MenuItem value='kanji_to_traduction'>
+              <Trans>Kanji -> Traduction</Trans>
+            </MenuItem>
+            <MenuItem value='traduction_to_kanji'>
+              <Trans>Traduction -> Kanji</Trans>
             </MenuItem>
           </Select>
         </FormControl>

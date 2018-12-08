@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper'
 import { Trans } from '@lingui/macro'
 import Button from '@material-ui/core/Button'
 import SelectTrainingConfig from './components/select-training-config'
+import Quizz from './components/quizz'
 
 /**
  * Utils
@@ -49,7 +50,12 @@ const initialState = { selectedWords: null, trainingType: null, currentWord: nul
 function reducer (state, action) {
   switch (action.type) {
     case 'START_TRAINING':
-      return { ...state, selectedWords: action.payload.words, trainingType: action.payload.trainingType }
+      return {
+        ...state,
+        selectedWords: action.payload.words,
+        trainingType: action.payload.trainingType,
+        currentWord: action.payload.words[0]
+      }
     case 'next':
       return state
 
@@ -66,27 +72,28 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
       <Typography component='h1' variant='h1' gutterBottom>
         <Trans>Training</Trans>
       </Typography>
-      {state.selectedWords ? (
-        <div>GO</div>
+      {state.selectedWords || true ? (
+        <Quizz
+          currentWord={{ id: 1542482066509, kana: 'あお', kanji: '青', name: 'bleu' }}
+          trainingType={'kanji_to_kana'}
+        />
       ) : (
         <SelectTrainingConfig
           lists={lists}
-          onSubmit={({ selectedLists, trainingType }) =>
+          onSubmit={({ selectedLists, trainingType }) => {
+            const selectedListsIds = selectedLists.map(({ value }) => value.id)
+            const filteredWords = filter(words, word => {
+              return selectedListsIds.includes(word.list.id)
+            })
+
             dispatch({
               type: 'START_TRAINING',
               payload: {
-                words: filter(words, word => {
-                  if (selectedLists.length) {
-                    const wordList = word.list ? word.list.id : ''
-                    return selectedLists.includes(wordList)
-                  } else {
-                    return true
-                  }
-                }),
+                words: filteredWords,
                 trainingType
               }
             })
-          }
+          }}
         />
       )}
     </div>
