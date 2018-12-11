@@ -12,7 +12,6 @@ import SearchListsForm from '../../../../components/SearchListsForm'
 import Button from '@material-ui/core/Button'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
-import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 
 /**
@@ -55,13 +54,13 @@ type SelectTrainingConfigProps = {|
   onSubmit: Function
 |}
 
-export default withStyles(styles)(({ classes, lists, onSubmit }) => {
+export default withStyles(styles)(({ classes, lists, onSubmit }: SelectTrainingConfigProps) => {
   const [selectedLists, setSelectedLists] = useState([])
   const [trainingType, setTrainingType] = useState('')
 
   return (
     <Paper className={classes.paperContainer}>
-      <img src={containerPicture} className={classes.containerPicture} />
+      <img src={containerPicture} alt='Configure your training' className={classes.containerPicture} />
       <Typography component='h2' variant='title'>
         <Trans>Pickup the lists you want to train</Trans>
       </Typography>
