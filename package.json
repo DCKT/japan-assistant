@@ -8,12 +8,12 @@
     "@material-ui/icons": "3.0.1",
     "@reach/router": "1.2.1",
     "final-form": "4.11.0",
-    "firebase": "5.6.0",
+    "firebase": "^5.6.0",
     "lodash": "4.17.11",
     "react": "16.7.0-alpha.0",
     "react-dom": "16.7.0-alpha.0",
     "react-final-form": "4.0.2",
-    "react-media": "1.8.0",
+    "react-media": "^1.9.2",
     "react-scripts": "2.1.1",
     "react-select": "2.1.2"
   },
@@ -42,6 +42,6 @@
     "@lingui/macro": "2.7.2",
     "babel-core": "7.0.0-bridge.0",
     "eslint-config-dck": "1.0.4",
-    "flow-bin": "0.87.0"
+    "flow-bin": "^0.88.0"
   }
 }

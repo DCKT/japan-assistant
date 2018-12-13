@@ -80,7 +80,7 @@ type QuizzProps = {|
 |}
 
 export default withStyles(styles)(({ classes, currentWord, trainingType, progress, onWordValidation }: QuizzProps) => {
-  function onFormSubmit ({ guess }) {
+  async function onFormSubmit ({ guess }, reset) {
     onWordValidation(guess === getAnswer({ trainingType, currentWord }), currentWord)
   }
 
@@ -98,8 +98,8 @@ export default withStyles(styles)(({ classes, currentWord, trainingType, progres
       </Typography>
 
       <FormProvider onSubmit={onFormSubmit}>
-        {({ handleSubmit }) => (
-          <form onSubmit={handleSubmit}>
+        {({ handleSubmit, form }) => (
+          <form onSubmit={event => handleSubmit(event).then(form.reset)}>
             <Field name='guess' validate={formRules.required}>
               {({ input, meta }) => (
                 <FormControl error={meta.error && meta.touched}>
@@ -108,6 +108,7 @@ export default withStyles(styles)(({ classes, currentWord, trainingType, progres
                     label={<Trans>Your answer</Trans>}
                     margin='normal'
                     variant='outlined'
+                    autoComplete='off'
                     error={meta.error && meta.touched}
                     {...input}
                   />

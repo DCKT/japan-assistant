@@ -15,7 +15,6 @@ import Quizz from './components/quizz'
  */
 import { withStyles } from '@material-ui/core/styles'
 import { filter, shuffle, random } from 'lodash'
-import { isSwitchStatement } from 'typescript'
 
 const styles = theme => ({
   paperContainer: {
@@ -44,32 +43,29 @@ const styles = theme => ({
   }
 })
 
-const initialState = { step: 2, remainingWords: [], trainingType: null, currentWord: null, guessWords: [] }
+const initialState = { step: 1, remainingWords: [], trainingType: null, currentWord: null, guessWords: [] }
 
 function reducer (state, action) {
   switch (action.type) {
     case 'START_TRAINING':
-      const words = shuffle(action.payload.words)
       return {
         ...state,
-        step: 2,
-        remainingWords: words,
+        remainingWords: action.payload.remainingWords,
         trainingType: action.payload.trainingType,
-        currentWord: words[0]
+        currentWord: action.payload.currentWord
       }
     case 'GUESS':
-      const remainingWords = state.remainingWords.filter(({ id }) => id !== action.payload.word.id)
-
       return {
         ...state,
-        guessWords: [action.payload, ...state.guessWords],
-        remainingWords,
-        currentWord: remainingWords[random(0, remainingWords.length - 1)],
-        step: remainingWords.length ? 2 : 3
+        guessWords: [action.payload.guessWord, ...state.guessWords],
+        remainingWords: action.payload.remainingWords,
+        currentWord: action.payload.currentWord
       }
-    case 'next':
-      return state
-
+    case 'CHANGE_STEP':
+      return {
+        ...state,
+        step: action.payload.step
+      }
     default:
       return state
   }
@@ -79,11 +75,49 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   function onWordValidation (isValid, word) {
+    const remainingWords = state.remainingWords.filter(({ id }) => id !== word.id)
+
     dispatch({
       type: 'GUESS',
       payload: {
-        isValid,
-        word
+        remainingWords,
+        guessWord: {
+          isValid,
+          word
+        },
+        currentWord: remainingWords[random(0, remainingWords.length - 1)]
+      }
+    })
+
+    dispatch({
+      type: 'CHANGE_STEP',
+      payload: {
+        step: remainingWords.length ? 2 : 3
+      }
+    })
+  }
+
+  function startTraining ({ selectedLists, trainingType }) {
+    const selectedListsIds = selectedLists.map(({ value }) => value.id)
+    const filteredWords = shuffle(
+      filter(words, word => {
+        return selectedListsIds.includes(word.list.id)
+      })
+    )
+
+    dispatch({
+      type: 'START_TRAINING',
+      payload: {
+        remainingWords: filteredWords,
+        trainingType,
+        currentWord: filteredWords[0]
+      }
+    })
+
+    dispatch({
+      type: 'CHANGE_STEP',
+      payload: {
+        step: 2
       }
     })
   }
@@ -94,23 +128,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
         <Typography component='h1' variant='h1' gutterBottom>
           <Trans>Training</Trans>
         </Typography>
-        <SelectTrainingConfig
-          lists={lists}
-          onSubmit={({ selectedLists, trainingType }) => {
-            const selectedListsIds = selectedLists.map(({ value }) => value.id)
-            const filteredWords = filter(words, word => {
-              return selectedListsIds.includes(word.list.id)
-            })
-
-            dispatch({
-              type: 'START_TRAINING',
-              payload: {
-                words: filteredWords,
-                trainingType
-              }
-            })
-          }}
-        />
+        <SelectTrainingConfig lists={lists} onSubmit={startTraining} />
       </React.Fragment>
     )
   }
@@ -122,12 +140,26 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
           <Trans>Training</Trans>
         </Typography>
         <Quizz
-          currentWord={{ id: 1542482066509, kana: 'あおい', kanji: '青', name: 'bleu' }}
-          trainingType={'kanji_to_kana'}
-          progress={{ current: 2, total: 42 }}
+          currentWord={state.currentWord}
+          trainingType={state.trainingType}
+          progress={{
+            current: state.guessWords.length + 1,
+            total: state.remainingWords.length + state.guessWords.length
+          }}
           onWordValidation={onWordValidation}
         />
       </React.Fragment>
+    )
+  }
+
+  if (state.step === 3) {
+    return (
+      <div>
+        <Typography component='h1' variant='h1' gutterBottom>
+          <Trans>Training</Trans>
+        </Typography>
+        End !
+      </div>
     )
   }
 })
