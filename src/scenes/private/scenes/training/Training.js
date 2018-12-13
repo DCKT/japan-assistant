@@ -9,39 +9,13 @@ import Typography from '@material-ui/core/Typography'
 import { Trans } from '@lingui/macro'
 import SelectTrainingConfig from './components/select-training-config'
 import Quizz from './components/quizz'
+import Results from './components/results'
 
 /**
  * Utils
  */
-import { withStyles } from '@material-ui/core/styles'
 import { filter, shuffle, random } from 'lodash'
-
-const styles = theme => ({
-  paperContainer: {
-    maxWidth: 500,
-    margin: 'auto',
-    textAlign: 'center',
-    paddingTop: theme.spacing.unit * 4,
-    paddingBottom: theme.spacing.unit * 4
-  },
-  containerPicture: {
-    maxWidth: 350,
-    marginBottom: theme.spacing.unit * 2
-  },
-  formContainer: {
-    maxWidth: 350,
-    margin: 'auto',
-    textAlign: 'left',
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2,
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  formControl: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit
-  }
-})
+import type { FirebaseViewer, FirebaseList } from '../../../../services/utils/types'
 
 const initialState = { step: 1, remainingWords: [], trainingType: null, currentWord: null, guessWords: [] }
 
@@ -71,19 +45,44 @@ function reducer (state, action) {
   }
 }
 
-export default withStyles(styles)(({ classes, viewer, lists, words }) => {
+function getAnswer ({ trainingType, currentWord }) {
+  switch (trainingType) {
+    case 'kanji_to_kana':
+      return currentWord.kana
+    case 'kanji_to_traduction':
+      return currentWord.name
+    case 'traduction_to_kanji':
+      return currentWord.kanji
+    case 'traduction_to_kana':
+      return currentWord.kana
+    default:
+      return ''
+  }
+}
+
+type TrainingProps = {|
+  viewer: FirebaseViewer,
+  lists: {
+    [id: string]: FirebaseList
+  },
+  words: Object
+|}
+
+export default ({ viewer, lists, words }: TrainingProps) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  function onWordValidation (isValid, word) {
-    const remainingWords = state.remainingWords.filter(({ id }) => id !== word.id)
+  function onWordValidation (guess) {
+    const answer = getAnswer({ trainingType: state.trainingType, currentWord: state.currentWord })
+    const remainingWords = state.remainingWords.filter(({ id }) => id !== state.currentWord.id)
 
     dispatch({
       type: 'GUESS',
       payload: {
         remainingWords,
         guessWord: {
-          isValid,
-          word
+          guess,
+          isValid: answer === guess,
+          word: state.currentWord
         },
         currentWord: remainingWords[random(0, remainingWords.length - 1)]
       }
@@ -125,9 +124,6 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
   if (state.step === 1) {
     return (
       <React.Fragment>
-        <Typography component='h1' variant='h1' gutterBottom>
-          <Trans>Training</Trans>
-        </Typography>
         <SelectTrainingConfig lists={lists} onSubmit={startTraining} />
       </React.Fragment>
     )
@@ -155,11 +151,11 @@ export default withStyles(styles)(({ classes, viewer, lists, words }) => {
   if (state.step === 3) {
     return (
       <div>
-        <Typography component='h1' variant='h1' gutterBottom>
-          <Trans>Training</Trans>
+        <Typography component='h1' variant='h2' gutterBottom>
+          <Trans>Training results</Trans>
         </Typography>
-        End !
+        <Results trainingType={state.trainingType} guessWords={state.guessWords} />
       </div>
     )
   }
-})
+}

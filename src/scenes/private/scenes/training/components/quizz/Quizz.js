@@ -53,21 +53,6 @@ function displayCurrentWord ({ trainingType, currentWord }) {
   }
 }
 
-function getAnswer ({ trainingType, currentWord }) {
-  switch (trainingType) {
-    case 'kanji_to_kana':
-      return currentWord.kana
-    case 'kanji_to_traduction':
-      return currentWord.name
-    case 'traduction_to_kanji':
-      return currentWord.kanji
-    case 'traduction_to_kana':
-      return currentWord.kana
-    default:
-      return ''
-  }
-}
-
 type QuizzProps = {|
   classes: Object,
   currentWord: FirebaseWord,
@@ -76,12 +61,12 @@ type QuizzProps = {|
     current: number,
     total: number
   },
-  onWordValidation: (boolean, FirebaseWord) => void
+  onWordValidation: string => void
 |}
 
 export default withStyles(styles)(({ classes, currentWord, trainingType, progress, onWordValidation }: QuizzProps) => {
   async function onFormSubmit ({ guess }, reset) {
-    onWordValidation(guess === getAnswer({ trainingType, currentWord }), currentWord)
+    onWordValidation(guess)
   }
 
   return (
