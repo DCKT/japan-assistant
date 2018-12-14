@@ -22,11 +22,20 @@ import ErrorIcon from '@material-ui/icons/Error'
 import { withStyles } from '@material-ui/core/styles'
 import type { FirebaseWord } from '../../../../../../services/utils/types'
 
+const AnswerTableCell = withStyles(theme => ({
+  body: {
+    fontSize: 24
+  }
+}))(TableCell)
+
 const styles = theme => ({
   root: {
     maxWidth: '100%',
     marginTop: theme.spacing.unit * 2,
     overflowX: 'auto'
+  },
+  noteContainer: {
+    padding: theme.spacing.unit * 3
   },
   table: {
     minWidth: 700
@@ -49,9 +58,9 @@ const countValidWord = (guessWords: GuessWords) => guessWords.reduce((counter, w
 export default withStyles(styles)(({ classes, trainingType, guessWords }: ResultsProps) => {
   return (
     <React.Fragment>
-      <Paper className={classes.root}>
-        <Typography component='h2' variant='display2'>
-          {countValidWord(guessWords)} / {guessWords.length - 1}
+      <Paper className={classes.noteContainer}>
+        <Typography component='h2' variant='title'>
+          {countValidWord(guessWords)} / {guessWords.length}
         </Typography>
       </Paper>
 
@@ -74,10 +83,12 @@ export default withStyles(styles)(({ classes, trainingType, guessWords }: Result
           <TableBody>
             {guessWords.map((guessWord, i) => (
               <TableRow key={i}>
-                <TableCell className={classes.biggerFontSize}>{guessWord.word.kanji}</TableCell>
-                <TableCell className={classes.biggerFontSize}>{guessWord.guess}</TableCell>
-                <TableCell className={classes.biggerFontSize}>{guessWord.word.kana}</TableCell>
-                <TableCell>{guessWord.isValid ? <CheckCircleIcon /> : <ErrorIcon />}</TableCell>
+                <AnswerTableCell className={classes.biggerFontSize}>{guessWord.word.kanji}</AnswerTableCell>
+                <AnswerTableCell className={classes.biggerFontSize}>{guessWord.guess}</AnswerTableCell>
+                <AnswerTableCell className={classes.biggerFontSize}>{guessWord.word.kana}</AnswerTableCell>
+                <AnswerTableCell>
+                  {guessWord.isValid ? <CheckCircleIcon color='primary' /> : <ErrorIcon color='error' />}
+                </AnswerTableCell>
               </TableRow>
             ))}
           </TableBody>

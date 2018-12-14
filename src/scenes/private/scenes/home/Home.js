@@ -9,12 +9,13 @@ import Grid from '@material-ui/core/Grid'
 import { Button } from '@material-ui/core'
 import { Trans } from '@lingui/macro'
 import Typography from '@material-ui/core/Typography'
-import Word from '../../components/Word'
+
 import AddWordDialogForm from '../../components/AddWordDialogForm'
 import AddListDialogForm from '../../components/AddListDialogForm'
 import SearchListsForm from '../../components/SearchListsForm'
 import AddIcon from '@material-ui/icons/Add'
 import Tooltip from '@material-ui/core/Tooltip'
+import WordsList from './components/WordsList'
 
 /**
  * Utils
@@ -148,20 +149,14 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
 
       <div className={classes.listContainer}>
         {words === undefined ? null : wordsList ? (
-          <Grid container wrap='wrap' spacing={16} style={{ flexGrow: 1 }}>
-            {wordsList.map((word, i) => (
-              <Grid item xs={6} md={3} key={i}>
-                <Word
-                  word={word}
-                  onDeleteButtonClick={() => removeWord(word.id)}
-                  onEditionButtonClick={() => {
-                    setEditedWord(word)
-                    toggleAddWordDialog()
-                  }}
-                />
-              </Grid>
-            ))}
-          </Grid>
+          <WordsList
+            words={wordsList}
+            onWordDelete={word => removeWord(word.id)}
+            onWordEdit={word => {
+              setEditedWord(word)
+              toggleAddWordDialog()
+            }}
+          />
         ) : (
           <Grid container alignItems='center' justify='center' className={classes.emptyContainer}>
             <Grid item xs={5}>
