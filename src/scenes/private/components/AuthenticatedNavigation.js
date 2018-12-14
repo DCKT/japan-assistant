@@ -68,8 +68,11 @@ const styles = theme => ({
     height: '100%',
     position: 'relative',
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
-    paddingTop: theme.spacing.unit * 10
+    padding: theme.spacing.unit,
+    paddingTop: theme.spacing.unit * 10,
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing.unit * 3
+    }
   },
   snackbar: {
     [theme.breakpoints.up('sm')]: {
