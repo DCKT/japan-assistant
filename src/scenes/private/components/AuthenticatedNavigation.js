@@ -18,12 +18,17 @@ import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import Collapse from '@material-ui/core/Collapse'
 import Divider from '@material-ui/core/Divider'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import CategoryIcon from '@material-ui/icons/Category'
-import SpellCheckIcon from '@material-ui/icons/Spellcheck'
+import LibraryBooksIcons from '@material-ui/icons/LibraryBooks'
 import HomeIcon from '@material-ui/icons/Home'
 import HelpIcon from '@material-ui/icons/Help'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
+import TranslateIcon from '@material-ui/icons/Translate'
+import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver'
 import { Link, Match } from '@reach/router'
 import Media from 'react-media'
 import SnackbarContext from '../../../services/states/SnackbarContext'
@@ -71,7 +76,8 @@ const styles = theme => ({
     padding: theme.spacing.unit,
     paddingTop: theme.spacing.unit * 10,
     [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing.unit * 3
+      padding: theme.spacing.unit * 3,
+      paddingTop: theme.spacing.unit * 10
     }
   },
   snackbar: {
@@ -79,6 +85,9 @@ const styles = theme => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth
     }
+  },
+  nested: {
+    paddingLeft: theme.spacing.unit * 4
   }
 })
 
@@ -86,6 +95,7 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
   const [anchorEl, setAnchorEl] = useState(null)
   const [isMobileOpen, setMobileOpen] = useState(false)
   const [snackbarStatus, setSnackbarStatus] = useState({ visible: false, message: null })
+  const [isTrainingMenuVisible, setTrainingMenuVisibility] = useState(false)
   const isMenuOpen = Boolean(anchorEl)
 
   const handleMenuClose = () => {
@@ -94,6 +104,10 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
 
   function closeMobileMenu () {
     setMobileOpen(false)
+  }
+
+  function toggleMenuTraining () {
+    setTrainingMenuVisibility(!isTrainingMenuVisible)
   }
 
   return (
@@ -180,16 +194,53 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
                 )}
               </Match>
 
-              <Match path='training'>
-                {({ match }) => (
-                  <ListItem button component={Link} to='training' onClick={closeMobileMenu} selected={!!match}>
-                    <ListItemIcon>
-                      <SpellCheckIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={<Trans>Training</Trans>} />
-                  </ListItem>
-                )}
-              </Match>
+              <ListItem button onClick={toggleMenuTraining}>
+                <ListItemIcon>
+                  <LibraryBooksIcons />
+                </ListItemIcon>
+                <ListItemText inset primary={<Trans>Training</Trans>} />
+                {isTrainingMenuVisible ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+
+              <Collapse in={isTrainingMenuVisible} timeout='auto' unmountOnExit>
+                <List component='div' disablePadding>
+                  <Match path='training'>
+                    {({ match }) => (
+                      <ListItem
+                        button
+                        component={Link}
+                        to='training'
+                        onClick={closeMobileMenu}
+                        selected={!!match}
+                        className={classes.nested}
+                      >
+                        <ListItemIcon>
+                          <TranslateIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={<Trans>Vocabulary</Trans>} />
+                      </ListItem>
+                    )}
+                  </Match>
+
+                  <Match path='oral-training'>
+                    {({ match }) => (
+                      <ListItem
+                        button
+                        component={Link}
+                        to='oral-training'
+                        onClick={closeMobileMenu}
+                        selected={!!match}
+                        className={classes.nested}
+                      >
+                        <ListItemIcon>
+                          <RecordVoiceOverIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={<Trans>Oral</Trans>} />
+                      </ListItem>
+                    )}
+                  </Match>
+                </List>
+              </Collapse>
 
               <Divider />
 

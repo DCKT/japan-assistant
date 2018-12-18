@@ -16,9 +16,10 @@ import { Form as FormProvider, Field } from 'react-final-form'
 /**
  * Utild
  */
-import type { FirebaseWord } from '../../../../../../services/utils/types'
+import type { FirebaseWord, TrainingType } from '../../../../../../services/utils/types'
 import * as formRules from '../../../../../../services/utils/form-rules'
 import { withStyles } from '@material-ui/core/styles'
+import { displayCurrentWord } from '../../services/utils/quizz'
 
 const styles = theme => ({
   container: {
@@ -39,24 +40,10 @@ const styles = theme => ({
   }
 })
 
-function displayCurrentWord ({ trainingType, currentWord }) {
-  switch (trainingType) {
-    case 'kanji_to_kana':
-      return currentWord.kanji
-    case 'kanji_to_traduction':
-      return currentWord.kanji || currentWord.kana
-    case 'traduction_to_kanji':
-    case 'traduction_to_kana':
-      return currentWord.name
-    default:
-      return ''
-  }
-}
-
 type QuizzProps = {|
   classes: Object,
   currentWord: FirebaseWord,
-  trainingType: 'kanji_to_kana' | 'kanji_to_traduction' | 'traduction_to_kanji' | 'traduction_to_kana',
+  trainingType: TrainingType,
   progress: {
     current: number,
     total: number
@@ -84,7 +71,7 @@ export default withStyles(styles)(({ classes, currentWord, trainingType, progres
 
       <FormProvider onSubmit={onFormSubmit}>
         {({ handleSubmit, form }) => (
-          <form onSubmit={event => handleSubmit(event).then(form.reset)}>
+          <form onSubmit={handleSubmit}>
             <Field name='guess' validate={formRules.required}>
               {({ input, meta }) => (
                 <FormControl error={meta.error && meta.touched}>

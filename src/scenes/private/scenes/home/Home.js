@@ -15,6 +15,7 @@ import AddListDialogForm from '../../components/AddListDialogForm'
 import SearchListsForm from '../../components/SearchListsForm'
 import AddIcon from '@material-ui/icons/Add'
 import Tooltip from '@material-ui/core/Tooltip'
+import SearchWordForm from './components/SearchWordForm'
 import WordsList from './components/WordsList'
 
 /**
@@ -67,13 +68,19 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
   const [isAddListDialogVisible, setIsAddListDialogVisible] = useState(false)
   const [editedWord, setEditedWord] = useState(null)
   const [listsFilter, setListsFilter] = useState([])
+  const [wordFilter, setWordFilter] = useState('')
   const hasWords = words !== undefined && words !== null
 
   const wordsList = words
-    ? filter(words, word => {
+    ? filter(words, ({ list }) => {
       if (listsFilter.length) {
-        const wordList = word.list ? word.list.id : ''
-        return listsFilter.includes(wordList)
+        return listsFilter.includes(list ? list.id : '')
+      } else {
+        return true
+      }
+    }).filter(({ kana, kanji, name }) => {
+      if (wordFilter) {
+        return [kana, kanji, name.toLowerCase()].includes(wordFilter.toLowerCase())
       } else {
         return true
       }
@@ -129,8 +136,12 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
     <div className={classes.pageContainer}>
       {hasWords ? (
         <div className={classes.filtersContainer}>
-          {lists === undefined ? null : lists ? (
-            <Grid container spacing={16}>
+          <Grid container spacing={16}>
+            <Grid item xs={12} md={4}>
+              <SearchWordForm onSearch={({ search }) => setWordFilter(search)} />
+            </Grid>
+
+            {lists === undefined ? null : lists ? (
               <Grid item xs={12} md={6}>
                 <SearchListsForm
                   isMulti
@@ -138,12 +149,12 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
                   onChange={values => setListsFilter(values.map(({ value }) => value.id))}
                 />
               </Grid>
-            </Grid>
-          ) : (
-            <Button color='primary' onClick={toggleListDialog} variant='contained'>
-              <Trans>Add a list</Trans>
-            </Button>
-          )}
+            ) : (
+              <Button color='primary' onClick={toggleListDialog} variant='contained'>
+                <Trans>Add a list</Trans>
+              </Button>
+            )}
+          </Grid>
         </div>
       ) : null}
 

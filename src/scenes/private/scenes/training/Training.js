@@ -10,12 +10,14 @@ import { Trans } from '@lingui/macro'
 import SelectTrainingConfig from './components/select-training-config'
 import Quizz from './components/quizz'
 import Results from './components/results'
+import Button from '@material-ui/core/Button'
 
 /**
  * Utils
  */
 import { filter, shuffle, random } from 'lodash'
 import type { FirebaseViewer, FirebaseList } from '../../../../services/utils/types'
+import { getAnswer } from './services/utils/quizz'
 
 const initialState = { step: 1, remainingWords: [], trainingType: null, currentWord: null, guessWords: [] }
 
@@ -40,23 +42,10 @@ function reducer (state, action) {
         ...state,
         step: action.payload.step
       }
+    case 'STOP_TRAINING':
+      return initialState
     default:
       return state
-  }
-}
-
-function getAnswer ({ trainingType, currentWord }) {
-  switch (trainingType) {
-    case 'kanji_to_kana':
-      return currentWord.kana
-    case 'kanji_to_traduction':
-      return currentWord.name
-    case 'traduction_to_kanji':
-      return currentWord.kanji
-    case 'traduction_to_kana':
-      return currentWord.kana
-    default:
-      return ''
   }
 }
 
@@ -81,7 +70,7 @@ export default ({ viewer, lists, words }: TrainingProps) => {
         remainingWords,
         guessWord: {
           guess,
-          isValid: answer === guess,
+          isValid: answer.toLowerCase() === guess.toLowerCase(),
           word: state.currentWord
         },
         currentWord: remainingWords[random(0, remainingWords.length - 1)]
@@ -121,6 +110,12 @@ export default ({ viewer, lists, words }: TrainingProps) => {
     })
   }
 
+  function stopTraining () {
+    dispatch({
+      type: 'STOP_TRAINING'
+    })
+  }
+
   if (state.step === 1) {
     return (
       <React.Fragment>
@@ -132,9 +127,9 @@ export default ({ viewer, lists, words }: TrainingProps) => {
   if (state.step === 2) {
     return (
       <React.Fragment>
-        <Typography component='h1' variant='h1' gutterBottom>
-          <Trans>Training</Trans>
-        </Typography>
+        <Button variant='contained' onClick={stopTraining}>
+          <Trans>Stop training</Trans>
+        </Button>
         <Quizz
           currentWord={state.currentWord}
           trainingType={state.trainingType}
