@@ -7,17 +7,15 @@ import React, { useState } from 'react'
  */
 import Button from '@material-ui/core/Button'
 import { Trans } from '@lingui/macro'
-import Typography from '@material-ui/core/Typography'
 import Tooltip from '@material-ui/core/Tooltip'
 import AddIcon from '@material-ui/icons/Add'
 import AddVocalRecordDialog from './components/AddVocalRecordDialog'
-import Player from 'react-plyr'
 
 /**
  * Utils
  */
 import { withStyles } from '@material-ui/core/styles'
-import { getMediaRecorder, createAudioFromChunks, createAudioUrl } from '../../../../services/utils/media-recorder'
+import { getMediaRecorder, createAudioUrl } from '../../../../services/utils/media-recorder'
 
 const styles = theme => ({
   fab: {
@@ -54,10 +52,10 @@ export default withStyles(styles)(({ classes }) => {
     }
   }
 
-  function play () {
-    const audio = createAudioFromChunks(audioChunks)
-    audio.play()
-  }
+  // function play () {
+  //   const audio = createAudioFromChunks(audioChunks)
+  //   audio.play()
+  // }
 
   return (
     <div>

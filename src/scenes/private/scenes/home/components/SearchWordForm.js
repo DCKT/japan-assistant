@@ -9,6 +9,8 @@ import { Form, Field } from 'react-final-form'
 import { Trans } from '@lingui/macro'
 import TextField from '@material-ui/core/TextField'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import SearchIcon from '@material-ui/icons/Search'
+import InputAdornment from '@material-ui/core/InputAdornment'
 
 /**
  * Utils
@@ -40,10 +42,18 @@ export default withStyles(styles)(({ onSearch, classes }: SearchWordFormProps) =
             {({ input, meta }) => (
               <React.Fragment>
                 <TextField
+                  autoComplete='off'
                   className={classes.input}
                   variant='outlined'
                   fullWidth
                   label={<Trans>Search word</Trans>}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <SearchIcon />
+                      </InputAdornment>
+                    )
+                  }}
                   {...input}
                 />
                 {meta.error && meta.touched && <FormHelperText id='component-error-text'>{meta.error}</FormHelperText>}

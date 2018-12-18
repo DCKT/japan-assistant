@@ -9,7 +9,6 @@ import Grid from '@material-ui/core/Grid'
 import { Button } from '@material-ui/core'
 import { Trans } from '@lingui/macro'
 import Typography from '@material-ui/core/Typography'
-
 import AddWordDialogForm from '../../components/AddWordDialogForm'
 import AddListDialogForm from '../../components/AddListDialogForm'
 import SearchListsForm from '../../components/SearchListsForm'
@@ -142,7 +141,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
             </Grid>
 
             {lists === undefined ? null : lists ? (
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={5}>
                 <SearchListsForm
                   isMulti
                   options={listsOptions}
