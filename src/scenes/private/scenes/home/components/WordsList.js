@@ -19,7 +19,7 @@ type WordsListProps = {|
   onWordEdit: FirebaseWord => void
 |}
 
-export default React.memo(function WordsList ({ words, onWordDelete, onWordEdit }: WordsListProps) {
+export default React.memo(({ words, onWordDelete, onWordEdit }: WordsListProps) => {
   return (
     <Grid container wrap='wrap' spacing={16}>
       {words.map((word, i) => (
