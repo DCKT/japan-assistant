@@ -11,11 +11,11 @@ import { Trans } from '@lingui/macro'
 import Typography from '@material-ui/core/Typography'
 import AddWordDialogForm from '../../components/AddWordDialogForm'
 import AddListDialogForm from '../../components/AddListDialogForm'
-import SearchListsForm from '../../components/SearchListsForm'
 import AddIcon from '@material-ui/icons/Add'
 import Tooltip from '@material-ui/core/Tooltip'
 import SearchWordForm from './components/SearchWordForm'
 import WordsList from './components/WordsList'
+import Select from 'react-select'
 
 /**
  * Utils
@@ -142,9 +142,20 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
 
             {lists === undefined ? null : lists ? (
               <Grid item xs={12} md={5}>
-                <SearchListsForm
+                <Select
                   isMulti
                   options={listsOptions}
+                  styles={{
+                    menu: provided => ({
+                      ...provided,
+                      zIndex: 100000
+                    }),
+                    input: () => ({
+                      height: 50,
+                      lineHeight: '50px'
+                    })
+                  }}
+                  placeholder={<Trans>Search lists</Trans>}
                   onChange={values => setListsFilter(values.map(({ value }) => value.id))}
                 />
               </Grid>

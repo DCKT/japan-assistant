@@ -8,9 +8,9 @@ import React, { useState } from 'react'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import { Trans } from '@lingui/macro'
-import SearchListsForm from '../../../../components/SearchListsForm'
 import Button from '@material-ui/core/Button'
 import Select from '@material-ui/core/Select'
+import ReactSelect from 'react-select'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 
@@ -67,12 +67,13 @@ export default withStyles(styles)(({ classes, lists, onSubmit }: SelectTrainingC
 
       <div className={classes.formContainer}>
         <FormControl className={classes.formControl} fullWidth>
-          <SearchListsForm
+          <ReactSelect
             isMulti
             options={map(lists, list => ({
               label: list.name,
               value: list
             }))}
+            placeholder={<Trans>Search lists</Trans>}
             onChange={values => setSelectedLists(values)}
           />
         </FormControl>

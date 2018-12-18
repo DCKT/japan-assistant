@@ -1,6 +1,11 @@
 // @flow
 
 import React from 'react'
+
+/**
+ * Components
+ */
+import Select from 'react-select'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
@@ -12,7 +17,6 @@ import Grid from '@material-ui/core/Grid'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import { Form, Field } from 'react-final-form'
-import SearchListsForm from './SearchListsForm'
 
 /**
  * Utils
@@ -131,7 +135,17 @@ function AddWordDialog ({ isVisible, onClose, viewer, editedWord, lists, onCreat
                         <Field name='list'>
                           {({ input, meta }) => (
                             <FormControl error={meta.error && meta.touched} fullWidth>
-                              <SearchListsForm placeholder={<Trans>Select a list</Trans>} options={lists} {...input} />
+                              <Select
+                                options={lists}
+                                styles={{
+                                  menu: provided => ({
+                                    ...provided,
+                                    zIndex: 100000
+                                  })
+                                }}
+                                placeholder={<Trans>Select a list</Trans>}
+                                {...input}
+                              />
                               {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
                             </FormControl>
                           )}

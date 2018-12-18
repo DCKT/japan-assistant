@@ -52,13 +52,13 @@ export default ({ lists, viewer }: ManageListsProps) => {
 
   return (
     <div>
-      <Grid container alignItems='center' style={{ marginBottom: 15 }}>
+      <Grid container alignItems='center' spacing={16} style={{ marginBottom: 15 }}>
         <Grid item xs='auto'>
           <Typography component='h1' variant='h3'>
             <Trans>Manage lists</Trans>
           </Typography>
         </Grid>
-        <Grid item style={{ marginLeft: 15 }}>
+        <Grid item xs={12} sm='auto'>
           {lists ? (
             <Button variant='contained' color='primary' onClick={toggleListDialog}>
               <Trans>Create a list</Trans>
