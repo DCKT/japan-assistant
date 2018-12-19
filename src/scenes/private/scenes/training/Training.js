@@ -61,28 +61,30 @@ export default ({ viewer, lists, words }: TrainingProps) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
   function onWordValidation (guess) {
-    const answer = getAnswer({ trainingType: state.trainingType, currentWord: state.currentWord })
-    const remainingWords = state.remainingWords.filter(({ id }) => id !== state.currentWord.id)
+    if (state.trainingType && state.currentWord) {
+      const answer = getAnswer({ trainingType: state.trainingType, currentWord: state.currentWord })
+      const remainingWords = state.remainingWords.filter(({ id }) => id !== state.currentWord.id)
 
-    dispatch({
-      type: 'GUESS',
-      payload: {
-        remainingWords,
-        guessWord: {
-          guess,
-          isValid: answer.toLowerCase() === guess.toLowerCase(),
-          word: state.currentWord
-        },
-        currentWord: remainingWords[random(0, remainingWords.length - 1)]
-      }
-    })
+      dispatch({
+        type: 'GUESS',
+        payload: {
+          remainingWords,
+          guessWord: {
+            guess,
+            isValid: answer.toLowerCase() === guess.toLowerCase(),
+            word: state.currentWord
+          },
+          currentWord: remainingWords[random(0, remainingWords.length - 1)]
+        }
+      })
 
-    dispatch({
-      type: 'CHANGE_STEP',
-      payload: {
-        step: remainingWords.length ? 2 : 3
-      }
-    })
+      dispatch({
+        type: 'CHANGE_STEP',
+        payload: {
+          step: remainingWords.length ? 2 : 3
+        }
+      })
+    }
   }
 
   function startTraining ({ selectedLists, trainingType }) {

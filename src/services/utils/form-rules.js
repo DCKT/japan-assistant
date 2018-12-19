@@ -3,7 +3,7 @@
 import React from 'react'
 import { Trans } from '@lingui/macro'
 
-export const composeValidators = (...validators) => (value: ?string) =>
+export const composeValidators = (...validators: any) => (value: ?string) =>
   validators.reduce((error, validator) => error || validator(value), undefined)
 
 export const required = (value: ?string) => (value ? undefined : <Trans>Required</Trans>)

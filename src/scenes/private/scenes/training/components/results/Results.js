@@ -20,7 +20,7 @@ import ErrorIcon from '@material-ui/icons/Error'
  * Utils
  */
 import { withStyles } from '@material-ui/core/styles'
-import type { GuessWords } from '../../../../../../services/utils/types'
+import type { GuessWords, TrainingType } from '../../../../../../services/utils/types'
 import { countValidWords, getAnswer } from '../../services/utils/quizz'
 
 const AnswerTableCell = withStyles(theme => ({
@@ -48,7 +48,7 @@ const styles = theme => ({
 
 type ResultsProps = {|
   classes: Object,
-  trainingType: string,
+  trainingType: TrainingType,
   guessWords: GuessWords
 |}
 
