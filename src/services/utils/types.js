@@ -2,19 +2,31 @@
 
 export type TrainingType = 'kanji_to_kana' | 'kanji_to_traduction' | 'traduction_to_kanji' | 'traduction_to_kana'
 
-export type FirebaseList = {|
-  id: string,
+export type FirebaseListID = string
+
+export type FirebaseListItem = {|
+  id: FirebaseListID,
   name: string
 |}
 
-export type FirebaseWord = {
-  id: string,
+export type FirebaseLists = {
+  [id: FirebaseListID]: FirebaseListItem
+}
+
+export type FirebaseWordID = string
+
+export type FirebaseWord = {|
+  id: FirebaseWordID,
   name: string,
   kana: string,
-  list: ?FirebaseList,
+  list: ?FirebaseListItem,
   kanji: ?string,
   note: ?string,
   type: ?string
+|}
+
+export type FirebaseWordsList = {
+  [id: FirebaseWordID]: FirebaseWord
 }
 
 export type FirebaseViewer = {

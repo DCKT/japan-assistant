@@ -19,7 +19,7 @@ import AddListDialogForm from '../../components/AddListDialogForm'
  */
 import { map } from 'lodash'
 import { removeFirebaseValue, addFirebaseValue, updateFirebaseValue } from '../../../../services/firebase'
-import type { FirebaseList, FirebaseViewer } from '../../../../services/utils/types'
+import type { FirebaseListItem, FirebaseViewer } from '../../../../services/utils/types'
 
 type ManageListsProps = {|
   lists: Object,
@@ -42,11 +42,11 @@ export default ({ lists, viewer }: ManageListsProps) => {
     })
   }
 
-  function updateList (listValue: FirebaseList, value) {
+  function updateList (listValue: FirebaseListItem, value) {
     updateFirebaseValue(`users/${viewer.uid}/lists/${listValue.id}`, value)
   }
 
-  function removeList (listValue: FirebaseList) {
+  function removeList (listValue: FirebaseListItem) {
     removeFirebaseValue(`users/${viewer.uid}/lists/${listValue.id}`)
   }
 

@@ -25,11 +25,11 @@ import FormHelperText from '@material-ui/core/FormHelperText'
  */
 import { map } from 'lodash'
 import * as formRules from '../../../../../services/utils/form-rules'
-import type { FirebaseList } from '../../../../../services/utils/types'
+import type { FirebaseListItem } from '../../../../../services/utils/types'
 
 type ListItemProps = {|
   lists: Object,
-  value: FirebaseList,
+  value: FirebaseListItem,
   onRemove: Function,
   onUpdate: Function
 |}

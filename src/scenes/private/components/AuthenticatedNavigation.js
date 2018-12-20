@@ -28,6 +28,7 @@ import HelpIcon from '@material-ui/icons/Help'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import TranslateIcon from '@material-ui/icons/Translate'
+import NoteIcon from '@material-ui/icons/Create'
 import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver'
 import { Link, Match } from '@reach/router'
 import Media from 'react-media'
@@ -190,6 +191,17 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
                       <CategoryIcon />
                     </ListItemIcon>
                     <ListItemText primary={<Trans>Manage lists</Trans>} />
+                  </ListItem>
+                )}
+              </Match>
+
+              <Match path='notes'>
+                {({ match }) => (
+                  <ListItem button component={Link} to='notes' onClick={closeMobileMenu} selected={!!match}>
+                    <ListItemIcon>
+                      <NoteIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={<Trans>Notes</Trans>} />
                   </ListItem>
                 )}
               </Match>

@@ -19,6 +19,7 @@ const ManageLists = React.lazy(() => import('./scenes/manage-lists'))
 const Support = React.lazy(() => import('./scenes/support'))
 const Training = React.lazy(() => import('./scenes/training'))
 const OralTraining = React.lazy(() => import('./scenes/oral-training'))
+const Notes = React.lazy(() => import('./scenes/notes'))
 
 export default () => {
   const userContext = useContext(UserContext)
@@ -51,6 +52,7 @@ export default () => {
           <Support path='/support' {...commonProps} />
           <Training path='/training' {...commonProps} />
           <OralTraining path='/oral-training' {...commonProps} />
+          <Notes path='/notes/*' {...commonProps} />
           <NotFound default />
         </Router>
       </Suspense>

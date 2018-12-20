@@ -16,7 +16,7 @@ import Button from '@material-ui/core/Button'
  * Utils
  */
 import { filter, shuffle, random } from 'lodash'
-import type { FirebaseViewer, FirebaseList } from '../../../../services/utils/types'
+import type { FirebaseViewer, FirebaseListItem } from '../../../../services/utils/types'
 import { getAnswer } from './services/utils/quizz'
 
 const initialState = { step: 1, remainingWords: [], trainingType: null, currentWord: null, guessWords: [] }
@@ -52,7 +52,7 @@ function reducer (state, action) {
 type TrainingProps = {|
   viewer: FirebaseViewer,
   lists: {
-    [id: string]: FirebaseList
+    [id: string]: FirebaseListItem
   },
   words: Object
 |}
