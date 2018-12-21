@@ -27,14 +27,13 @@ import type { ReactSelectOption } from '../../../services/utils/types'
 type AddWordDialogProps = {|
   isVisible: boolean,
   onClose: Function,
-  viewer: Object,
   editedWord: ?Object,
   lists: Array<ReactSelectOption>,
   onCreate: Function,
   onEdit: Function
 |}
 
-function AddWordDialog ({ isVisible, onClose, viewer, editedWord, lists, onCreate, onEdit }: AddWordDialogProps) {
+function AddWordDialog ({ isVisible, onClose, editedWord, lists, onCreate, onEdit }: AddWordDialogProps) {
   const initialValues = editedWord
     ? {
       ...editedWord,

@@ -40,3 +40,15 @@ export type ReactSelectOption = {|
 |}
 
 export type GuessWords = Array<{ isValid: boolean, guess: string, word: FirebaseWord }>
+
+export type FirebaseNoteID = string
+
+export type FirebaseNote = {|
+  id: FirebaseNoteID,
+  title: string,
+  content: string
+|}
+
+export type FirebaseNotesList = {|
+  [id: FirebaseNoteID]: FirebaseNote
+|}

@@ -34,7 +34,7 @@ export default ({ lists, viewer }: ManageListsProps) => {
   }
 
   function addListOnSubmit (values) {
-    const id = Date.now()
+    const id = Date.now().toString()
 
     addFirebaseValue(`users/${viewer.uid}/lists/${id}`, {
       id,

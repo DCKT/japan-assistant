@@ -104,7 +104,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
   }
 
   function addListOnSubmit (values) {
-    const id = Date.now()
+    const id = Date.now().toString()
 
     addFirebaseValue(`users/${viewer.uid}/lists/${id}`, {
       id,
@@ -113,7 +113,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
   }
 
   function onWordCreation (values) {
-    const id = Date.now()
+    const id = Date.now().toString()
 
     addFirebaseValue(`users/${viewer.uid}/words/${id}`, {
       ...values,
@@ -207,7 +207,6 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
       ) : null}
       {isAddWordDialogVisible ? (
         <AddWordDialogForm
-          viewer={viewer}
           isVisible={isAddWordDialogVisible}
           onClose={() => {
             toggleAddWordDialog()
