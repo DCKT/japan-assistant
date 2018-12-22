@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 /**
  * Components
@@ -17,7 +17,8 @@ import NotesList from './components/notes-list'
  * Utils
  */
 import { withStyles } from '@material-ui/core/styles'
-import { addFirebaseValue, onFirebaseValue } from '../../../../../../services/firebase'
+import { addFirebaseValue } from '../../../../../../services/firebase'
+import type { FirebaseNotesList, FirebaseViewer } from '../../../../../../services/utils/types'
 
 /**
  * Assets
@@ -42,9 +43,14 @@ const styles = theme => ({
   }
 })
 
-export default withStyles(styles)(({ classes, viewer }) => {
+type NotesHomeProps = {|
+  classes: Object,
+  viewer: FirebaseViewer,
+  notes: ?FirebaseNotesList
+|}
+
+export default withStyles(styles)(({ classes, viewer, notes }: NotesHomeProps) => {
   const [isAddNoteDialogVisible, setAddNoteDialogVisibility] = useState(false)
-  const [notesList, setNotesList] = useState(undefined)
 
   function toggleAddNoteDialog () {
     setAddNoteDialogVisibility(!isAddNoteDialogVisible)
@@ -59,15 +65,14 @@ export default withStyles(styles)(({ classes, viewer }) => {
     })
   }
 
-  useEffect(() => {
-    onFirebaseValue(`users/${viewer.uid}/notes`, setNotesList)
-  }, [])
-
   return (
     <div className={classes.pageContainer}>
-      {notesList === undefined ? null : notesList ? (
+      {notes === undefined ? null : notes ? (
         <React.Fragment>
-          <NotesList notes={notesList} />
+          <Typography component='h1' variant='h2' gutterBottom>
+            <Trans>Notes</Trans>
+          </Typography>
+          <NotesList notes={notes} />
           <Tooltip title={<Trans>Add a new note</Trans>}>
             <Button
               variant='fab'
