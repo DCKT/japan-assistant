@@ -43,6 +43,15 @@ export const updateFirebaseValue = (path: string, value: any): Promise<FirebaseV
   })
 }
 
+export const setFirebaseValue = (path: string, value: any): Promise<FirebaseValue> => {
+  return new Promise(resolve => {
+    firebase
+      .database()
+      .ref(path)
+      .set(value)
+  })
+}
+
 export const firebaseLogout = () => firebase.auth().signOut()
 
 export default firebase

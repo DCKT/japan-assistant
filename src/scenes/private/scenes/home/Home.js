@@ -88,7 +88,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
 
   const listsOptions = map(lists, list => ({
     label: list.name,
-    value: list
+    value: list.id
   }))
 
   function toggleListDialog () {
@@ -118,7 +118,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
     addFirebaseValue(`users/${viewer.uid}/words/${id}`, {
       ...values,
       id,
-      list: values.list.value
+      list: values.list ? values.list.map(option => option.value) : null
     })
   }
 
@@ -126,7 +126,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
     if (editedWord) {
       updateFirebaseValue(`users/${viewer.uid}/words/${editedWord.id}`, {
         ...values,
-        list: values.list.value
+        list: values.list ? values.list.map(option => option.value) : null
       })
     }
   }
@@ -171,6 +171,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
       <div className={classes.listContainer}>
         {words === undefined ? null : wordsList ? (
           <WordsList
+            lists={lists}
             words={wordsList}
             onWordDelete={word => removeWord(word.id)}
             onWordEdit={word => {
@@ -212,7 +213,19 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
             toggleAddWordDialog()
             setEditedWord(null)
           }}
-          editedWord={editedWord}
+          initialValues={
+            editedWord
+              ? {
+                ...editedWord,
+                list: editedWord.list
+                  ? editedWord.list.map(listId => ({
+                    label: lists[listId].name,
+                    value: lists[listId].id
+                  }))
+                  : null
+              }
+              : null
+          }
           lists={listsOptions}
           onCreate={onWordCreation}
           onEdit={onWordEdition}

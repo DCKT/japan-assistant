@@ -19,7 +19,7 @@ export type FirebaseWord = {|
   id: FirebaseWordID,
   name: string,
   kana: string,
-  list: ?FirebaseListItem,
+  list: ?Array<FirebaseListID>,
   kanji: ?string,
   note: ?string,
   type: ?string

@@ -17,16 +17,27 @@ import AddListDialogForm from '../../components/AddListDialogForm'
 /**
  * Utils
  */
-import { map } from 'lodash'
-import { removeFirebaseValue, addFirebaseValue, updateFirebaseValue } from '../../../../services/firebase'
-import type { FirebaseListItem, FirebaseViewer } from '../../../../services/utils/types'
+import { map, filter } from 'lodash'
+import {
+  removeFirebaseValue,
+  addFirebaseValue,
+  updateFirebaseValue,
+  setFirebaseValue
+} from '../../../../services/firebase'
+import type {
+  FirebaseLists,
+  FirebaseListItem,
+  FirebaseViewer,
+  FirebaseWordsList
+} from '../../../../services/utils/types'
 
 type ManageListsProps = {|
-  lists: Object,
-  viewer: FirebaseViewer
+  lists: FirebaseLists,
+  viewer: FirebaseViewer,
+  words: FirebaseWordsList
 |}
 
-export default ({ lists, viewer }: ManageListsProps) => {
+export default ({ lists, viewer, words }: ManageListsProps) => {
   const [isAddListDialogVisible, setIsAddListDialogVisible] = useState(false)
 
   function toggleListDialog () {
@@ -47,6 +58,9 @@ export default ({ lists, viewer }: ManageListsProps) => {
   }
 
   function removeList (listValue: FirebaseListItem) {
+    filter(words, word => word.list && word.list.includes(listValue.id)).forEach(word => {
+      setFirebaseValue(`users/${viewer.uid}/words/${word.id}/list`, word.list.filter(listId => listId !== listValue.id))
+    })
     removeFirebaseValue(`users/${viewer.uid}/lists/${listValue.id}`)
   }
 

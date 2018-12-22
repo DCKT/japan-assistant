@@ -19,13 +19,14 @@ type WordsListProps = {|
   onWordEdit: FirebaseWord => void
 |}
 
-export default React.memo(({ words, onWordDelete, onWordEdit }: WordsListProps) => {
+export default React.memo(({ words, onWordDelete, lists, onWordEdit }: WordsListProps) => {
   return (
     <Grid container wrap='wrap' spacing={16}>
       {words.map((word, i) => (
         <Grid item xs={6} md={3} key={i}>
           <Word
             word={word}
+            lists={lists}
             onDeleteButtonClick={() => onWordDelete(word)}
             onEditionButtonClick={() => onWordEdit(word)}
           />

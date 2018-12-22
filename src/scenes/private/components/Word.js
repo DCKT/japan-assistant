@@ -20,7 +20,7 @@ import { Trans } from '@lingui/macro'
  * Utils
  */
 import { withStyles } from '@material-ui/core/styles'
-import type { FirebaseWord } from '../../../services/utils/types.js'
+import type { FirebaseWord, FirebaseLists } from '../../../services/utils/types.js'
 
 const styles = {
   card: {
@@ -44,18 +44,34 @@ type WordProps = {|
   word: FirebaseWord,
   onDeleteButtonClick: Function,
   onEditionButtonClick: Function,
-  onShowTraductionButtonClick: Function
+  onShowTraductionButtonClick: Function,
+  lists: FirebaseLists
 |}
 
-function Word ({ classes, word, onDeleteButtonClick, onEditionButtonClick, onShowTraductionButtonClick }: WordProps) {
+function Word ({
+  classes,
+  word,
+  lists,
+  onDeleteButtonClick,
+  onEditionButtonClick,
+  onShowTraductionButtonClick
+}: WordProps) {
   const [isTraductionVisible, setTraductionVisbility] = useState(false)
 
   return (
     <Card className={classes.card}>
       <CardContent style={{ minHeight: 150 }}>
-        <Typography className={classes.title} color='textSecondary' gutterBottom>
-          {word.list ? word.list.name : null}
-        </Typography>
+        {lists && word.list
+          ? word.list.map(
+            (id, index) =>
+              lists[id] ? (
+                <Typography key={index} className={classes.title} color='textSecondary' gutterBottom>
+                  {lists[id].name}
+                </Typography>
+              ) : null
+          )
+          : null}
+
         <Typography variant='h4' component='h2'>
           {word.kanji || word.kana}
         </Typography>

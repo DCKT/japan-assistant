@@ -22,32 +22,23 @@ import { Form, Field } from 'react-final-form'
  * Utils
  */
 import * as formRules from '../../../services/utils/form-rules'
-import type { ReactSelectOption } from '../../../services/utils/types'
+import type { ReactSelectOption, FirebaseWord } from '../../../services/utils/types'
 
 type AddWordDialogProps = {|
   isVisible: boolean,
   onClose: Function,
-  editedWord: ?Object,
   lists: Array<ReactSelectOption>,
   onCreate: Function,
-  onEdit: Function
+  onEdit: Function,
+  initialValues: ?{
+    ...FirebaseWord,
+    list: ReactSelectOption
+  }
 |}
 
-function AddWordDialog ({ isVisible, onClose, editedWord, lists, onCreate, onEdit }: AddWordDialogProps) {
-  const initialValues = editedWord
-    ? {
-      ...editedWord,
-      list: editedWord.list
-        ? {
-          label: editedWord.list.name,
-          value: editedWord.list
-        }
-        : null
-    }
-    : {}
-
+function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, onEdit }: AddWordDialogProps) {
   async function onFormSubmit (values) {
-    if (editedWord) {
+    if (initialValues) {
       onEdit(values)
     } else {
       onCreate(values)
@@ -62,7 +53,7 @@ function AddWordDialog ({ isVisible, onClose, editedWord, lists, onCreate, onEdi
         {({ handleSubmit, pristine, invalid, submitting }) => (
           <form onSubmit={handleSubmit}>
             <DialogTitle id='form-dialog-title'>
-              {editedWord ? <Trans>Update {editedWord.name}</Trans> : <Trans>Add a new word</Trans>}
+              {initialValues ? <Trans>Update {initialValues.name}</Trans> : <Trans>Add a new word</Trans>}
             </DialogTitle>
             <DialogContent>
               <Grid container spacing={16}>
@@ -135,6 +126,7 @@ function AddWordDialog ({ isVisible, onClose, editedWord, lists, onCreate, onEdi
                           {({ input, meta }) => (
                             <FormControl error={meta.error && meta.touched} fullWidth>
                               <Select
+                                isMulti
                                 options={lists}
                                 styles={{
                                   menu: provided => ({
@@ -181,7 +173,7 @@ function AddWordDialog ({ isVisible, onClose, editedWord, lists, onCreate, onEdi
                 <Trans>Cancel</Trans>
               </Button>
               <Button type='submit' variant='contained' color='primary'>
-                {editedWord ? <Trans>Update</Trans> : <Trans>Add</Trans>}
+                {initialValues ? <Trans>Update</Trans> : <Trans>Add</Trans>}
               </Button>
             </DialogActions>
           </form>

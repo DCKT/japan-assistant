@@ -69,7 +69,7 @@ export default withStyles(styles)(({ classes, viewer, notes }: NotesHomeProps) =
     <div className={classes.pageContainer}>
       {notes === undefined ? null : notes ? (
         <React.Fragment>
-          <Typography component='h1' variant='h2' gutterBottom>
+          <Typography component='h1' variant='h3' gutterBottom>
             <Trans>Notes</Trans>
           </Typography>
           <NotesList notes={notes} />
