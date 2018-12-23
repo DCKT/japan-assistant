@@ -1,6 +1,6 @@
-# Japan assistant
+# Japan Assistant
 
-<img src="https://raw.githubusercontent.com/DCKT/japan-assistant/develop/medias/logo.svg" alt="Media assistant" style="max-width: 300px" />
+![Japan Assistant](./medias/logo.svg)
 
 ## Setup dev env
 
