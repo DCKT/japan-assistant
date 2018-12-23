@@ -1,6 +1,6 @@
 # Japan assistant
 
-## Setup your own site
+## Setup dev env
 
 * install dependencies `yarn`
 * run dev `yarn start`
