@@ -10,7 +10,7 @@ type DisplayCurrentWordArg = {|
 export const displayCurrentWord = ({ trainingType, currentWord }: DisplayCurrentWordArg): string => {
   switch (trainingType) {
     case 'kanji_to_kana':
-      return currentWord.kanji
+      return currentWord.kanji || ''
     case 'kanji_to_traduction':
       return currentWord.kanji || currentWord.kana
     case 'traduction_to_kanji':
@@ -36,7 +36,7 @@ export const getAnswer = ({ trainingType, currentWord }: GetAnswerArgs): string 
     case 'kanji_to_traduction':
       return currentWord.name
     case 'traduction_to_kanji':
-      return currentWord.kanji
+      return currentWord.kanji || ''
     case 'traduction_to_kana':
       return currentWord.kana
     default:

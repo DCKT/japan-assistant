@@ -72,8 +72,8 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
 
   const wordsList = words
     ? filter(words, ({ list }) => {
-      if (listsFilter.length) {
-        return listsFilter.includes(list ? list.id : '')
+      if (listsFilter.length && list) {
+        return list.some(listId => listsFilter.includes(listId))
       } else {
         return true
       }
@@ -156,7 +156,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
                     })
                   }}
                   placeholder={<Trans>Search lists</Trans>}
-                  onChange={values => setListsFilter(values.map(({ value }) => value.id))}
+                  onChange={values => setListsFilter(values.map(({ value }) => value))}
                 />
               </Grid>
             ) : (
