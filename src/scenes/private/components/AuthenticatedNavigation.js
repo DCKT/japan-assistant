@@ -124,7 +124,7 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
             <MenuIcon />
           </IconButton>
           <Typography variant='h6' color='inherit' noWrap>
-            Memori
+            Japan Assistant
           </Typography>
 
           <div className={classes.grow} />
@@ -262,7 +262,7 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
                     <ListItemIcon>
                       <HelpIcon />
                     </ListItemIcon>
-                    <ListItemText primary={<Trans>Support memori</Trans>} />
+                    <ListItemText primary={<Trans>Support J.A</Trans>} />
                   </ListItem>
                 )}
               </Match>

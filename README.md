@@ -1,10 +1,10 @@
-# Memori
+# Japan assistant
 
 ## Setup your own site
 
-- install dependencies `yarn`
-- run dev `yarn start`
-- create a `.env.development` with firebase config :
+* install dependencies `yarn`
+* run dev `yarn start`
+* create a `.env.development` with firebase config :
 
 ```
 REACT_APP_FIREBASE_API_KEY=
@@ -17,12 +17,12 @@ REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
 
 ### Technologies used
 
-- `react` (16.7.0-alpha.0) for hooks
-- `final-form` & `react-final-form` as form manager
-- `@reach/router` as router system
-- `firebase` as login & db system
-- `@lingui` as i18n provider
-- `@material-ui` as UI framework
+* `react` (16.7.0-alpha.0) for hooks
+* `final-form` & `react-final-form` as form manager
+* `@reach/router` as router system
+* `firebase` as login & db system
+* `@lingui` as i18n provider
+* `@material-ui` as UI framework
 
 ### Structure pattern
 

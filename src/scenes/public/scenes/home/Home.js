@@ -17,7 +17,7 @@ export default () => (
       <Grid item xs={10} md={6} lg={4}>
         <Paper elevation={1} style={{ padding: 20, textAlign: 'center' }}>
           <Typography component='h1' variant='h3' gutterBottom>
-            Kanji memori
+            Japan Assistant
           </Typography>
           <Typography component='p' variant='subheading' color='textSecondary'>
             Keep your japanese words everywhere
