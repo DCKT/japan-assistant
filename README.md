@@ -1,5 +1,7 @@
 # Japan assistant
 
+<img src="https://raw.githubusercontent.com/DCKT/japan-assistant/develop/medias/logo.svg" alt="Media assistant" style="max-width: 300px" />
+
 ## Setup dev env
 
 * install dependencies `yarn`
