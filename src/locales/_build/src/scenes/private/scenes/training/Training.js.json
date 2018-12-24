@@ -1,0 +1,18 @@
+{
+  "Stop training": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/Training.js",
+        133
+      ]
+    ]
+  },
+  "Training results": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/Training.js",
+        152
+      ]
+    ]
+  }
+}

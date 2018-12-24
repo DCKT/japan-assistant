@@ -1,0 +1,58 @@
+{
+  "Pickup the lists you want to train": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js",
+        65
+      ]
+    ]
+  },
+  "Search lists": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js",
+        76
+      ]
+    ]
+  },
+  "Select the training type": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js",
+        84
+      ]
+    ]
+  },
+  "Kanji -> Kana": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js",
+        88
+      ]
+    ]
+  },
+  "Kanji -> Traduction": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js",
+        91
+      ]
+    ]
+  },
+  "Traduction -> Kanji": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js",
+        94
+      ]
+    ]
+  },
+  "Start training !": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js",
+        102
+      ]
+    ]
+  }
+}

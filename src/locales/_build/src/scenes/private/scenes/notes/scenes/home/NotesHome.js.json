@@ -1,0 +1,42 @@
+{
+  "Notes": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/scenes/home/NotesHome.js",
+        73
+      ]
+    ]
+  },
+  "Add a new note": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/scenes/home/NotesHome.js",
+        76
+      ]
+    ]
+  },
+  "Write your first note": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/scenes/home/NotesHome.js",
+        90
+      ]
+    ]
+  },
+  "You have no notes yet": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/scenes/home/NotesHome.js",
+        92
+      ]
+    ]
+  },
+  "Write your first note !": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/scenes/home/NotesHome.js",
+        95
+      ]
+    ]
+  }
+}

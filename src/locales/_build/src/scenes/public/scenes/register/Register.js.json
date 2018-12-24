@@ -1,0 +1,62 @@
+{
+  "Password missmatch": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/register/Register.js",
+        49
+      ]
+    ]
+  },
+  "Register": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/register/Register.js",
+        65
+      ],
+      [
+        "src/scenes/public/scenes/register/Register.js",
+        116
+      ]
+    ]
+  },
+  "Email": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/register/Register.js",
+        80
+      ]
+    ]
+  },
+  "Password": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/register/Register.js",
+        93
+      ]
+    ]
+  },
+  "Confirm password": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/register/Register.js",
+        105
+      ]
+    ]
+  },
+  "Or use social login": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/register/Register.js",
+        124
+      ]
+    ]
+  },
+  "Already registered ? Login": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/register/Register.js",
+        139
+      ]
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "Connexion": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/login/Login.js",
+        70
+      ]
+    ]
+  },
+  "Email": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/login/Login.js",
+        83
+      ]
+    ]
+  },
+  "Password": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/login/Login.js",
+        96
+      ]
+    ]
+  },
+  "Login": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/login/Login.js",
+        107
+      ]
+    ]
+  },
+  "Or use social login": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/login/Login.js",
+        115
+      ]
+    ]
+  },
+  "New ? Create an account": {
+    "origin": [
+      [
+        "src/scenes/public/scenes/login/Login.js",
+        129
+      ]
+    ]
+  }
+}

@@ -27,8 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "add-locale": "lingui add-locale",
-    "extract": "lingui extract",
-    "compile": "lingui compile",
+    "lingui:extract": "lingui extract",
+    "lingui:compile": "lingui compile",
     "deploy": "netlify deploy"
   },
   "eslintConfig": {

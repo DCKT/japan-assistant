@@ -1,0 +1,26 @@
+{
+  "Required": {
+    "origin": [
+      [
+        "src/services/utils/form-rules.js",
+        9
+      ]
+    ]
+  },
+  "This value already exist": {
+    "origin": [
+      [
+        "src/services/utils/form-rules.js",
+        12
+      ]
+    ]
+  },
+  "Japanese character only": {
+    "origin": [
+      [
+        "src/services/utils/form-rules.js",
+        18
+      ]
+    ]
+  }
+}

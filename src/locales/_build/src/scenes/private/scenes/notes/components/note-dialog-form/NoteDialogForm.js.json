@@ -1,0 +1,42 @@
+{
+  "Edit note": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js",
+        95
+      ]
+    ]
+  },
+  "Add a new note": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js",
+        95
+      ]
+    ]
+  },
+  "Save": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js",
+        98
+      ]
+    ]
+  },
+  "Add": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js",
+        98
+      ]
+    ]
+  },
+  "Title": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js",
+        110
+      ]
+    ]
+  }
+}

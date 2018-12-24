@@ -1,0 +1,42 @@
+{
+  "Add a new vocal record": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/oral-training/components/AddVocalRecordDialog.js",
+        43
+      ]
+    ]
+  },
+  "Text": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/oral-training/components/AddVocalRecordDialog.js",
+        52
+      ]
+    ]
+  },
+  "Traduction": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/oral-training/components/AddVocalRecordDialog.js",
+        72
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/oral-training/components/AddVocalRecordDialog.js",
+        88
+      ]
+    ]
+  },
+  "Add": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/oral-training/components/AddVocalRecordDialog.js",
+        91
+      ]
+    ]
+  }
+}

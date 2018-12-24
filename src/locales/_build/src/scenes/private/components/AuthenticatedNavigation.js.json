@@ -1,0 +1,74 @@
+{
+  "Profile": {
+    "origin": [
+      [
+        "src/scenes/private/components/AuthenticatedNavigation.js",
+        150
+      ]
+    ]
+  },
+  "Logout": {
+    "origin": [
+      [
+        "src/scenes/private/components/AuthenticatedNavigation.js",
+        160
+      ]
+    ]
+  },
+  "Home": {
+    "origin": [
+      [
+        "src/scenes/private/components/AuthenticatedNavigation.js",
+        184
+      ]
+    ]
+  },
+  "Manage lists": {
+    "origin": [
+      [
+        "src/scenes/private/components/AuthenticatedNavigation.js",
+        195
+      ]
+    ]
+  },
+  "Notes": {
+    "origin": [
+      [
+        "src/scenes/private/components/AuthenticatedNavigation.js",
+        206
+      ]
+    ]
+  },
+  "Training": {
+    "origin": [
+      [
+        "src/scenes/private/components/AuthenticatedNavigation.js",
+        215
+      ]
+    ]
+  },
+  "Vocabulary": {
+    "origin": [
+      [
+        "src/scenes/private/components/AuthenticatedNavigation.js",
+        234
+      ]
+    ]
+  },
+  "Oral": {
+    "origin": [
+      [
+        "src/scenes/private/components/AuthenticatedNavigation.js",
+        252
+      ]
+    ]
+  },
+  "Support J.A": {
+    "origin": [
+      [
+        "src/scenes/private/components/AuthenticatedNavigation.js",
+        267
+      ]
+    ]
+  }
+}

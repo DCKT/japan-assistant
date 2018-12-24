@@ -1,0 +1,34 @@
+{
+  "Create a new list": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddListDialogForm.js",
+        52
+      ]
+    ]
+  },
+  "Name": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddListDialogForm.js",
+        68
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddListDialogForm.js",
+        83
+      ]
+    ]
+  },
+  "Create": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddListDialogForm.js",
+        86
+      ]
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "Show traduction": {
+    "origin": [
+      [
+        "src/scenes/private/components/Word.js",
+        87
+      ],
+      [
+        "src/scenes/private/components/Word.js",
+        89
+      ]
+    ]
+  },
+  "Edit": {
+    "origin": [
+      [
+        "src/scenes/private/components/Word.js",
+        95
+      ],
+      [
+        "src/scenes/private/components/Word.js",
+        96
+      ]
+    ]
+  },
+  "Remove": {
+    "origin": [
+      [
+        "src/scenes/private/components/Word.js",
+        100
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "src/scenes/private/components/Word.js",
+        101
+      ]
+    ]
+  }
+}

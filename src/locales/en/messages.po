@@ -13,18 +13,306 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/scenes/Login.js:45
+#: src/scenes/private/components/AddWordDialogForm.js:176
+#: src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js:98
+#: src/scenes/private/scenes/oral-training/components/AddVocalRecordDialog.js:91
+msgid "Add"
+msgstr ""
+
+#: src/scenes/private/scenes/home/Home.js:164
+#: src/scenes/private/scenes/home/Home.js:195
+msgid "Add a list"
+msgstr ""
+
+#: src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js:95
+#: src/scenes/private/scenes/notes/scenes/home/NotesHome.js:76
+msgid "Add a new note"
+msgstr ""
+
+#: src/scenes/private/scenes/oral-training/components/AddVocalRecordDialog.js:43
+msgid "Add a new vocal record"
+msgstr ""
+
+#: src/scenes/private/components/AddWordDialogForm.js:56
+#: src/scenes/private/scenes/home/Home.js:203
+#: src/scenes/private/scenes/oral-training/OralTraining.js:79
+msgid "Add a new word"
+msgstr ""
+
+#: src/scenes/private/scenes/home/Home.js:191
+msgid "Add my first word"
+msgstr ""
+
+#: src/scenes/public/scenes/register/Register.js:139
+msgid "Already registered ? Login"
+msgstr ""
+
+#: src/scenes/private/scenes/training/components/results/Results.js:76
+msgid "Answer"
+msgstr ""
+
+#: src/scenes/private/scenes/notes/scenes/details/NoteDetails.js:65
+msgid "Back to notes list"
+msgstr ""
+
+#: src/scenes/private/components/AddListDialogForm.js:83
+#: src/scenes/private/components/AddWordDialogForm.js:173
+#: src/scenes/private/scenes/manage-lists/components/ListItem.js:92
+#: src/scenes/private/scenes/manage-lists/components/ListItem.js:93
+#: src/scenes/private/scenes/oral-training/components/AddVocalRecordDialog.js:88
+msgid "Cancel"
+msgstr ""
+
+#: src/scenes/public/scenes/register/Register.js:105
+msgid "Confirm password"
+msgstr ""
+
+#: src/scenes/public/scenes/login/Login.js:70
 msgid "Connexion"
 msgstr "Login"
 
-#: src/scenes/Login.js:58
+#: src/scenes/private/components/AddListDialogForm.js:86
+msgid "Create"
+msgstr ""
+
+#: src/scenes/private/scenes/manage-lists/ManageLists.js:78
+#: src/scenes/private/scenes/manage-lists/ManageLists.js:98
+msgid "Create a list"
+msgstr ""
+
+#: src/scenes/private/components/AddListDialogForm.js:52
+msgid "Create a new list"
+msgstr ""
+
+#: src/scenes/private/components/Word.js:101
+#: src/scenes/private/scenes/manage-lists/components/ListItem.js:110
+#: src/scenes/private/scenes/manage-lists/components/ListItem.js:111
+msgid "Delete"
+msgstr ""
+
+#: src/scenes/private/components/Word.js:95
+#: src/scenes/private/components/Word.js:96
+#: src/scenes/private/scenes/manage-lists/components/ListItem.js:105
+#: src/scenes/private/scenes/manage-lists/components/ListItem.js:106
+#: src/scenes/private/scenes/notes/scenes/details/NoteDetails.js:78
+msgid "Edit"
+msgstr ""
+
+#: src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js:95
+msgid "Edit note"
+msgstr ""
+
+#: src/scenes/public/scenes/login/Login.js:83
+#: src/scenes/public/scenes/register/Register.js:80
 msgid "Email"
 msgstr "Email"
 
-#: src/scenes/Login.js:82
+#: src/scenes/private/scenes/training/components/results/Results.js:79
+msgid "Found"
+msgstr ""
+
+#: src/scenes/private/scenes/training/components/results/Results.js:73
+msgid "Guess"
+msgstr ""
+
+#: src/scenes/private/components/AuthenticatedNavigation.js:184
+msgid "Home"
+msgstr ""
+
+#: src/services/utils/form-rules.js:18
+msgid "Japanese character only"
+msgstr ""
+
+#: src/scenes/private/components/AddWordDialogForm.js:108
+msgid "Kana"
+msgstr ""
+
+#: src/scenes/private/components/AddWordDialogForm.js:87
+msgid "Kanji"
+msgstr ""
+
+#: src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js:88
+msgid "Kanji -> Kana"
+msgstr ""
+
+#: src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js:91
+msgid "Kanji -> Traduction"
+msgstr ""
+
+#: src/scenes/public/scenes/login/Login.js:107
 msgid "Login"
 msgstr "Signin"
 
-#: src/scenes/Login.js:71
+#: src/scenes/private/components/AuthenticatedNavigation.js:160
+msgid "Logout"
+msgstr ""
+
+#: src/scenes/private/components/AuthenticatedNavigation.js:195
+#: src/scenes/private/scenes/manage-lists/ManageLists.js:72
+msgid "Manage lists"
+msgstr ""
+
+#: src/scenes/private/components/AddListDialogForm.js:68
+#: src/scenes/private/components/AddWordDialogForm.js:69
+#: src/scenes/private/scenes/manage-lists/components/ListItem.js:72
+msgid "Name"
+msgstr ""
+
+#: src/scenes/public/scenes/login/Login.js:129
+msgid "New ? Create an account"
+msgstr ""
+
+#: src/scenes/private/scenes/manage-lists/ManageLists.js:95
+msgid "No list yet"
+msgstr ""
+
+#: src/scenes/private/scenes/home/Home.js:187
+msgid "No words yet"
+msgstr ""
+
+#: src/scenes/private/components/AddWordDialogForm.js:153
+msgid "Note"
+msgstr ""
+
+#: src/scenes/private/components/AuthenticatedNavigation.js:206
+#: src/scenes/private/scenes/notes/scenes/home/NotesHome.js:73
+msgid "Notes"
+msgstr ""
+
+#: src/scenes/public/scenes/login/Login.js:115
+#: src/scenes/public/scenes/register/Register.js:124
+msgid "Or use social login"
+msgstr ""
+
+#: src/scenes/private/components/AuthenticatedNavigation.js:252
+msgid "Oral"
+msgstr ""
+
+#: src/scenes/public/scenes/login/Login.js:96
+#: src/scenes/public/scenes/register/Register.js:93
 msgid "Password"
 msgstr "Password"
+
+#: src/scenes/public/scenes/register/Register.js:49
+msgid "Password missmatch"
+msgstr ""
+
+#: src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js:65
+msgid "Pickup the lists you want to train"
+msgstr ""
+
+#: src/scenes/private/components/AuthenticatedNavigation.js:150
+msgid "Profile"
+msgstr ""
+
+#: src/scenes/public/scenes/register/Register.js:65
+#: src/scenes/public/scenes/register/Register.js:116
+msgid "Register"
+msgstr ""
+
+#: src/scenes/private/components/Word.js:100
+msgid "Remove"
+msgstr ""
+
+#: src/services/utils/form-rules.js:9
+msgid "Required"
+msgstr ""
+
+#: src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js:98
+msgid "Save"
+msgstr ""
+
+#: src/scenes/private/scenes/home/Home.js:158
+#: src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js:76
+msgid "Search lists"
+msgstr ""
+
+#: src/scenes/private/scenes/home/components/SearchWordForm.js:49
+msgid "Search word"
+msgstr ""
+
+#: src/scenes/private/components/AddWordDialogForm.js:137
+msgid "Select a list"
+msgstr ""
+
+#: src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js:84
+msgid "Select the training type"
+msgstr ""
+
+#: src/scenes/private/components/Word.js:87
+#: src/scenes/private/components/Word.js:89
+msgid "Show traduction"
+msgstr ""
+
+#: src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js:102
+msgid "Start training !"
+msgstr ""
+
+#: src/scenes/private/scenes/training/Training.js:133
+msgid "Stop training"
+msgstr ""
+
+#: src/scenes/private/components/AuthenticatedNavigation.js:267
+msgid "Support J.A"
+msgstr ""
+
+#: src/scenes/private/scenes/oral-training/components/AddVocalRecordDialog.js:52
+msgid "Text"
+msgstr ""
+
+#: src/services/utils/form-rules.js:12
+msgid "This value already exist"
+msgstr ""
+
+#: src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js:110
+msgid "Title"
+msgstr ""
+
+#: src/scenes/private/scenes/oral-training/components/AddVocalRecordDialog.js:72
+msgid "Traduction"
+msgstr ""
+
+#: src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js:94
+msgid "Traduction -> Kanji"
+msgstr ""
+
+#: src/scenes/private/components/AuthenticatedNavigation.js:215
+msgid "Training"
+msgstr ""
+
+#: src/scenes/private/scenes/training/Training.js:152
+msgid "Training results"
+msgstr ""
+
+#: src/scenes/private/components/AddWordDialogForm.js:176
+msgid "Update"
+msgstr ""
+
+#: src/scenes/private/components/AddWordDialogForm.js:56
+msgid "Update {0}"
+msgstr ""
+
+#: src/scenes/private/scenes/manage-lists/components/ListItem.js:97
+#: src/scenes/private/scenes/manage-lists/components/ListItem.js:98
+msgid "Validate"
+msgstr ""
+
+#: src/scenes/private/components/AuthenticatedNavigation.js:234
+msgid "Vocabulary"
+msgstr ""
+
+#: src/scenes/private/scenes/notes/scenes/home/NotesHome.js:90
+msgid "Write your first note"
+msgstr ""
+
+#: src/scenes/private/scenes/notes/scenes/home/NotesHome.js:95
+msgid "Write your first note !"
+msgstr ""
+
+#: src/scenes/private/scenes/notes/scenes/home/NotesHome.js:92
+msgid "You have no notes yet"
+msgstr ""
+
+#: src/scenes/private/scenes/training/components/quizz/Quizz.js:80
+msgid "Your answer"
+msgstr ""

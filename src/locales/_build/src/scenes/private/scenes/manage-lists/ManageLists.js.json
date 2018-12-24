@@ -1,0 +1,30 @@
+{
+  "Manage lists": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/manage-lists/ManageLists.js",
+        72
+      ]
+    ]
+  },
+  "Create a list": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/manage-lists/ManageLists.js",
+        78
+      ],
+      [
+        "src/scenes/private/scenes/manage-lists/ManageLists.js",
+        98
+      ]
+    ]
+  },
+  "No list yet": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/manage-lists/ManageLists.js",
+        95
+      ]
+    ]
+  }
+}

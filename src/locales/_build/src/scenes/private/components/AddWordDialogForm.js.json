@@ -1,0 +1,82 @@
+{
+  "Update {0}": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddWordDialogForm.js",
+        56
+      ]
+    ]
+  },
+  "Add a new word": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddWordDialogForm.js",
+        56
+      ]
+    ]
+  },
+  "Name": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddWordDialogForm.js",
+        69
+      ]
+    ]
+  },
+  "Kanji": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddWordDialogForm.js",
+        87
+      ]
+    ]
+  },
+  "Kana": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddWordDialogForm.js",
+        108
+      ]
+    ]
+  },
+  "Select a list": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddWordDialogForm.js",
+        137
+      ]
+    ]
+  },
+  "Note": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddWordDialogForm.js",
+        153
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddWordDialogForm.js",
+        173
+      ]
+    ]
+  },
+  "Update": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddWordDialogForm.js",
+        176
+      ]
+    ]
+  },
+  "Add": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddWordDialogForm.js",
+        176
+      ]
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "Search lists": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/home/Home.js",
+        158
+      ]
+    ]
+  },
+  "Add a list": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/home/Home.js",
+        164
+      ],
+      [
+        "src/scenes/private/scenes/home/Home.js",
+        195
+      ]
+    ]
+  },
+  "No words yet": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/home/Home.js",
+        187
+      ]
+    ]
+  },
+  "Add my first word": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/home/Home.js",
+        191
+      ]
+    ]
+  },
+  "Add a new word": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/home/Home.js",
+        203
+      ]
+    ]
+  }
+}

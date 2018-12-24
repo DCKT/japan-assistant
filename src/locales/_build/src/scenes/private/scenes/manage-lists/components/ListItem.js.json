@@ -1,0 +1,58 @@
+{
+  "Name": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/manage-lists/components/ListItem.js",
+        72
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/manage-lists/components/ListItem.js",
+        92
+      ],
+      [
+        "src/scenes/private/scenes/manage-lists/components/ListItem.js",
+        93
+      ]
+    ]
+  },
+  "Validate": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/manage-lists/components/ListItem.js",
+        97
+      ],
+      [
+        "src/scenes/private/scenes/manage-lists/components/ListItem.js",
+        98
+      ]
+    ]
+  },
+  "Edit": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/manage-lists/components/ListItem.js",
+        105
+      ],
+      [
+        "src/scenes/private/scenes/manage-lists/components/ListItem.js",
+        106
+      ]
+    ]
+  },
+  "Delete": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/manage-lists/components/ListItem.js",
+        110
+      ],
+      [
+        "src/scenes/private/scenes/manage-lists/components/ListItem.js",
+        111
+      ]
+    ]
+  }
+}

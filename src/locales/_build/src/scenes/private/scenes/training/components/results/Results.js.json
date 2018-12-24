@@ -1,0 +1,26 @@
+{
+  "Guess": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/components/results/Results.js",
+        73
+      ]
+    ]
+  },
+  "Answer": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/components/results/Results.js",
+        76
+      ]
+    ]
+  },
+  "Found": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/training/components/results/Results.js",
+        79
+      ]
+    ]
+  }
+}

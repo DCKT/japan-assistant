@@ -1,0 +1,18 @@
+{
+  "Back to notes list": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/scenes/details/NoteDetails.js",
+        65
+      ]
+    ]
+  },
+  "Edit": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/scenes/details/NoteDetails.js",
+        78
+      ]
+    ]
+  }
+}
