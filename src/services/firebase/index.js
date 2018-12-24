@@ -1,3 +1,5 @@
+// @flow
+
 import firebase from 'firebase/app'
 import 'firebase/database'
 import 'firebase/auth'
@@ -5,9 +7,12 @@ import config from './config.js'
 
 firebase.initializeApp(config)
 
-type FirebaseValue = $FlowFixMe
+type FirebaseValue = any
 
-export const onFirebaseValue = (path: string, callback): void => {
+const googleProvider = new firebase.auth.GoogleAuthProvider()
+const twitterProvider = new firebase.auth.TwitterAuthProvider()
+
+export const onFirebaseValue = (path: string, callback: Function): void => {
   firebase
     .database()
     .ref(path)
@@ -53,5 +58,23 @@ export const setFirebaseValue = (path: string, value: any): Promise<FirebaseValu
 }
 
 export const firebaseLogout = () => firebase.auth().signOut()
+
+export const firebaseSignInWithPopup = (provider: Object) => {
+  return firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then(result => {
+      const token = result.credential.accessToken
+      const user = result.user
+
+      return { token, user }
+    })
+    .catch(error => {
+      console.log(error.message)
+    })
+}
+
+export const firebaseGoogleSignIn = () => firebaseSignInWithPopup(googleProvider)
+export const firebaseTwitterSignIn = () => firebaseSignInWithPopup(twitterProvider)
 
 export default firebase

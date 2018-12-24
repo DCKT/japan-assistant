@@ -150,6 +150,8 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
           <Trans>Profile</Trans>
         </MenuItem>
         <MenuItem
+          component={Link}
+          to='/'
           onClick={() => {
             handleMenuClose()
             onLogout()
