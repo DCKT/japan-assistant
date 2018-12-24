@@ -24,9 +24,6 @@ const styles = theme => ({
   root: {
     padding: theme.spacing.unit * 3
   },
-  textField: {
-    width: 280
-  },
   socialContainer: {
     borderLeft: '1px solid #ccc',
     marginLeft: theme.spacing.unit * 2,
@@ -69,7 +66,7 @@ export default withStyles(styles)(({ classes }) => {
           </Typography>
 
           <Grid container spacing={8}>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               {error ? (
                 <Typography component='p' gutterBottom>
                   {error.message}
@@ -121,16 +118,16 @@ export default withStyles(styles)(({ classes }) => {
                 </div>
               </form>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <div className={classes.socialContainer}>
                 <Typography component='p' variant='overline' style={{ textAlign: 'center' }}>
                   <Trans>Or use social login</Trans>
                 </Typography>
-                <Button variant='contained' fullWidth onClick={firebaseGoogleSignIn}>
+                <Button variant='contained' size='large' fullWidth onClick={firebaseGoogleSignIn}>
                   Google login
                 </Button>
                 <br />
-                <Button variant='contained' fullWidth onClick={firebaseTwitterSignIn}>
+                <Button variant='contained' size='large' fullWidth onClick={firebaseTwitterSignIn}>
                   Twitter login
                 </Button>
               </div>
