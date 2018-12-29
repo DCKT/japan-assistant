@@ -129,7 +129,7 @@ msgstr "Kana"
 
 #: src/scenes/private/components/AddWordDialogForm.js:87
 msgid "Kanji"
-msgstr "Kanjo"
+msgstr "Kanji"
 
 #: src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js:88
 msgid "Kanji -> Kana"
@@ -164,11 +164,11 @@ msgstr "Nouveau ? Créer un compte"
 
 #: src/scenes/private/scenes/manage-lists/ManageLists.js:95
 msgid "No list yet"
-msgstr "Pas encore de listes"
+msgstr "Vous n'avez créer aucune liste pour le moment."
 
 #: src/scenes/private/scenes/home/Home.js:187
 msgid "No words yet"
-msgstr "Pas encore de mots"
+msgstr "Vous n'avez pas encore ajouter de mots."
 
 #: src/scenes/private/components/AddWordDialogForm.js:153
 msgid "Note"

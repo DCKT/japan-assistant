@@ -134,6 +134,14 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
   return (
     <div className={classes.pageContainer}>
       {hasWords ? (
+        <Tooltip title={<Trans>Add a new word</Trans>}>
+          <Button variant='fab' color='primary' aria-label='Add' className={classes.fab} onClick={toggleAddWordDialog}>
+            <AddIcon />
+          </Button>
+        </Tooltip>
+      ) : null}
+
+      {hasWords ? (
         <div className={classes.filtersContainer}>
           <Grid container spacing={16}>
             <Grid item xs={12} md={4}>
@@ -199,13 +207,6 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
         )}
       </div>
 
-      {hasWords ? (
-        <Tooltip title={<Trans>Add a new word</Trans>}>
-          <Button variant='fab' color='primary' aria-label='Add' className={classes.fab} onClick={toggleAddWordDialog}>
-            <AddIcon />
-          </Button>
-        </Tooltip>
-      ) : null}
       {isAddWordDialogVisible ? (
         <AddWordDialogForm
           isVisible={isAddWordDialogVisible}

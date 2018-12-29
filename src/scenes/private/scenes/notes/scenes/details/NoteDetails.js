@@ -31,9 +31,6 @@ const styles = theme => ({
   },
   editIcon: {
     marginRight: theme.spacing.unit
-  },
-  actions: {
-    textAlign: 'right'
   }
 })
 
@@ -66,13 +63,20 @@ export default withStyles(styles)(({ classes, noteId, viewer }: NoteDetailsProps
       </Typography>
       {note ? (
         <Paper className={classes.container}>
-          <Grid container alignItems='center' spacing={16} className={classes.titleContainer}>
-            <Grid item xs={10}>
+          <Grid
+            container
+            justify='space-between'
+            wrap
+            alignItems='center'
+            spacing={16}
+            className={classes.titleContainer}
+          >
+            <Grid item xs='auto'>
               <Typography component='h1' variant='title'>
                 {note.title}
               </Typography>
             </Grid>
-            <Grid item xs={2} className={classes.actions}>
+            <Grid item xs='auto'>
               <Button variant='outlined' onClick={toggleDialogFormVisibility}>
                 <EditIcon className={classes.editIcon} />
                 <Trans>Edit</Trans>

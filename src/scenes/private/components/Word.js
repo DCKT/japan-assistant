@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import Tooltip from '@material-ui/core/Tooltip'
+import Grid from '@material-ui/core/Grid'
 import RemoveRedEyeIcon from '@material-ui/icons/RemoveRedEye'
 import { Trans } from '@lingui/macro'
 
@@ -22,7 +23,7 @@ import { Trans } from '@lingui/macro'
 import { withStyles } from '@material-ui/core/styles'
 import type { FirebaseWord, FirebaseLists } from '../../../services/utils/types.js'
 
-const styles = {
+const styles = theme => ({
   card: {
     position: 'relative'
   },
@@ -36,8 +37,11 @@ const styles = {
   },
   pos: {
     marginBottom: 12
+  },
+  list: {
+    marginBottom: theme.spacing.unit
   }
-}
+})
 
 type WordProps = {|
   classes: Object,
@@ -48,63 +52,60 @@ type WordProps = {|
   lists: FirebaseLists
 |}
 
-function Word ({
-  classes,
-  word,
-  lists,
-  onDeleteButtonClick,
-  onEditionButtonClick,
-  onShowTraductionButtonClick
-}: WordProps) {
-  const [isTraductionVisible, setTraductionVisbility] = useState(false)
+export default withStyles(styles)(
+  ({ classes, word, lists, onDeleteButtonClick, onEditionButtonClick, onShowTraductionButtonClick }: WordProps) => {
+    const [isTraductionVisible, setTraductionVisbility] = useState(false)
 
-  return (
-    <Card className={classes.card}>
-      <CardContent style={{ minHeight: 150 }}>
-        {lists && word.list
-          ? word.list.map(
-            (id, index) =>
-              lists[id] ? (
-                <Typography key={index} className={classes.title} color='textSecondary' gutterBottom>
-                  {lists[id].name}
-                </Typography>
-              ) : null
-          )
-          : null}
+    return (
+      <Card className={classes.card}>
+        <CardContent style={{ minHeight: 150 }}>
+          {lists && word.list ? (
+            <Grid container wrap spacing={8} className={classes.list}>
+              {word.list.map(
+                (id, index) =>
+                  lists[id] ? (
+                    <Grid item key={id} xs='auto'>
+                      <Typography className={classes.title} color='textSecondary'>
+                        {lists[id].name}
+                      </Typography>
+                    </Grid>
+                  ) : null
+              )}
+            </Grid>
+          ) : null}
 
-        <Typography variant='h4' component='h2'>
-          {word.kanji || word.kana}
-        </Typography>
-        {word.kanji ? (
-          <Typography className={classes.pos} color='textSecondary'>
-            {word.kana}
+          <Typography variant='h4' component='h2'>
+            {word.kanji || word.kana}
           </Typography>
-        ) : null}
-        {isTraductionVisible ? <Typography component='em'>{word.name}</Typography> : null}
-        <Typography component='p'>{word.note}</Typography>
-      </CardContent>
-      <CardActions>
-        <Tooltip title={<Trans>Show traduction</Trans>}>
-          <IconButton
-            aria-label={<Trans>Show traduction</Trans>}
-            onClick={() => setTraductionVisbility(!isTraductionVisible)}
-          >
-            <RemoveRedEyeIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title={<Trans>Edit</Trans>}>
-          <IconButton aria-label={<Trans>Edit</Trans>} onClick={onEditionButtonClick}>
-            <EditIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title={<Trans>Remove</Trans>}>
-          <IconButton aria-label={<Trans>Delete</Trans>} onClick={onDeleteButtonClick}>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      </CardActions>
-    </Card>
-  )
-}
-
-export default withStyles(styles)(Word)
+          {word.kanji ? (
+            <Typography className={classes.pos} color='textSecondary'>
+              {word.kana}
+            </Typography>
+          ) : null}
+          {isTraductionVisible ? <Typography component='em'>{word.name}</Typography> : null}
+          <Typography component='p'>{word.note}</Typography>
+        </CardContent>
+        <CardActions>
+          <Tooltip title={<Trans>Show traduction</Trans>}>
+            <IconButton
+              aria-label={<Trans>Show traduction</Trans>}
+              onClick={() => setTraductionVisbility(!isTraductionVisible)}
+            >
+              <RemoveRedEyeIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={<Trans>Edit</Trans>}>
+            <IconButton aria-label={<Trans>Edit</Trans>} onClick={onEditionButtonClick}>
+              <EditIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={<Trans>Remove</Trans>}>
+            <IconButton aria-label={<Trans>Delete</Trans>} onClick={onDeleteButtonClick}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+        </CardActions>
+      </Card>
+    )
+  }
+)
