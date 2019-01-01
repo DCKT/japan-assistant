@@ -17,12 +17,13 @@ export type FirebaseWordID = string
 
 export type FirebaseWord = {|
   id: FirebaseWordID,
-  name: string,
+  traduction: string,
   kana: string,
   list: ?Array<FirebaseListID>,
   kanji: ?string,
   note: ?string,
-  type: ?string
+  type: ?string,
+  secondaryTraduction?: string
 |}
 
 export type FirebaseWordsList = {

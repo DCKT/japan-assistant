@@ -15,7 +15,7 @@ export const displayCurrentWord = ({ trainingType, currentWord }: DisplayCurrent
       return currentWord.kanji || currentWord.kana
     case 'traduction_to_kanji':
     case 'traduction_to_kana':
-      return currentWord.name
+      return currentWord.traduction
     default:
       return ''
   }

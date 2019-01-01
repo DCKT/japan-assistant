@@ -6,7 +6,7 @@ import React from 'react'
  * Components
  */
 import Grid from '@material-ui/core/Grid'
-import Word from '../../../components/Word'
+import WordCard from '../../../components/WordCard'
 
 /**
  * Utils
@@ -23,12 +23,12 @@ export default React.memo(({ words, onWordDelete, lists, onWordEdit }: WordsList
   return (
     <Grid container wrap='wrap' spacing={16}>
       {words.map((word, i) => (
-        <Grid item xs={6} md={3} key={i}>
-          <Word
+        <Grid item xs={10} sm={6} md={4} lg={3} key={i} style={{ margin: 'auto' }}>
+          <WordCard
             word={word}
             lists={lists}
-            onDeleteButtonClick={() => onWordDelete(word)}
-            onEditionButtonClick={() => onWordEdit(word)}
+            onDeleteButtonClick={onWordDelete ? () => onWordDelete(word) : null}
+            onEditionButtonClick={onWordEdit ? () => onWordEdit(word) : null}
           />
         </Grid>
       ))}

@@ -18,7 +18,7 @@ import NotesList from './components/notes-list'
  */
 import { withStyles } from '@material-ui/core/styles'
 import { addFirebaseValue } from '../../../../../../services/firebase'
-import type { FirebaseNotesList, FirebaseViewer } from '../../../../../../services/utils/types'
+import type { FirebaseNotesList, FirebaseViewer, FirebaseLists } from '../../../../../../services/utils/types'
 
 /**
  * Assets
@@ -46,10 +46,11 @@ const styles = theme => ({
 type NotesHomeProps = {|
   classes: Object,
   viewer: FirebaseViewer,
-  notes: ?FirebaseNotesList
+  notes: ?FirebaseNotesList,
+  lists: FirebaseLists
 |}
 
-export default withStyles(styles)(({ classes, viewer, notes }: NotesHomeProps) => {
+export default withStyles(styles)(({ classes, viewer, notes, lists }: NotesHomeProps) => {
   const [isAddNoteDialogVisible, setAddNoteDialogVisibility] = useState(false)
 
   function toggleAddNoteDialog () {
@@ -61,7 +62,8 @@ export default withStyles(styles)(({ classes, viewer, notes }: NotesHomeProps) =
 
     addFirebaseValue(`users/${viewer.uid}/notes/${id}`, {
       id,
-      ...values
+      ...values,
+      list: values.list ? values.list.map(option => option.value) : null
     })
   }
 
@@ -98,6 +100,7 @@ export default withStyles(styles)(({ classes, viewer, notes }: NotesHomeProps) =
       )}
 
       <NoteDialogForm
+        lists={lists}
         isVisible={isAddNoteDialogVisible}
         onClose={toggleAddNoteDialog}
         onSubmit={onNoteDialogFormSubmit}

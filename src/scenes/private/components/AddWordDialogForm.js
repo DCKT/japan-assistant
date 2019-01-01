@@ -23,6 +23,13 @@ import { Form, Field } from 'react-final-form'
  */
 import * as formRules from '../../../services/utils/form-rules'
 import type { ReactSelectOption, FirebaseWord } from '../../../services/utils/types'
+import { withStyles } from '@material-ui/core/styles'
+
+const styles = {
+  root: {
+    overflowY: 'visible'
+  }
+}
 
 type AddWordDialogProps = {|
   isVisible: boolean,
@@ -36,7 +43,7 @@ type AddWordDialogProps = {|
   }
 |}
 
-function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, onEdit }: AddWordDialogProps) {
+function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, onEdit, classes }: AddWordDialogProps) {
   async function onFormSubmit (values) {
     if (initialValues) {
       onEdit(values)
@@ -48,31 +55,56 @@ function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, on
   }
 
   return (
-    <Dialog scroll='body' open={isVisible} onClose={onClose} aria-labelledby='form-dialog-title'>
+    <Dialog
+      scroll='body'
+      open={isVisible}
+      onClose={onClose}
+      aria-labelledby='add-word-dialog-form'
+      classes={{
+        paper: classes.root
+      }}
+    >
       <Form initialValues={initialValues} onSubmit={onFormSubmit}>
         {({ handleSubmit, pristine, invalid, submitting }) => (
           <form onSubmit={handleSubmit}>
             <DialogTitle id='form-dialog-title'>
-              {initialValues ? <Trans>Update {initialValues.name}</Trans> : <Trans>Add a new word</Trans>}
+              {initialValues ? <Trans>Update {initialValues.traduction}</Trans> : <Trans>Add a new word</Trans>}
             </DialogTitle>
-            <DialogContent>
+            <DialogContent style={{ overflowY: 'visible' }}>
               <Grid container spacing={16}>
                 <Grid item xs={12}>
                   <Grid container spacing={16}>
                     <Grid item xs={12}>
-                      <Field name='name' validate={formRules.required}>
+                      <Field name='traduction' validate={formRules.required}>
                         {({ input, meta }) => (
                           <FormControl error={meta.error && meta.touched} fullWidth>
                             <TextField
                               margin='dense'
-                              id='name'
-                              label={<Trans>Name</Trans>}
+                              id='traduction'
+                              label={<Trans>Traduction</Trans>}
                               type='text'
                               variant='outlined'
                               fullWidth
                               {...input}
                             />
                             {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
+                          </FormControl>
+                        )}
+                      </Field>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Field name='secondaryTraduction'>
+                        {({ input, meta }) => (
+                          <FormControl error={meta.error && meta.touched} fullWidth>
+                            <TextField
+                              margin='dense'
+                              id='secondaryTraduction'
+                              label={<Trans>Secondary traduction</Trans>}
+                              type='text'
+                              variant='outlined'
+                              fullWidth
+                              {...input}
+                            />
                           </FormControl>
                         )}
                       </Field>
@@ -183,4 +215,4 @@ function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, on
   )
 }
 
-export default AddWordDialog
+export default withStyles(styles)(AddWordDialog)

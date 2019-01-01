@@ -33,7 +33,8 @@ const styles = theme => ({
   fab: {
     position: 'fixed',
     right: 30,
-    bottom: 30
+    bottom: 30,
+    zIndex: 1
   },
   emptyListPicture: {
     width: '100%',
