@@ -62,7 +62,10 @@ export default withStyles(styles)(({ classes, noteId, viewer, words, lists }: No
   }
 
   function updateNoteOnSubmit (values) {
-    updateFirebaseValue(`users/${viewer.uid}/notes/${noteId}`, values)
+    updateFirebaseValue(`users/${viewer.uid}/notes/${noteId}`, {
+      ...values,
+      list: values.list ? values.list.map(option => option.value) : null
+    })
   }
 
   function removeNoteOnConfirm () {

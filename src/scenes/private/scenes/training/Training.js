@@ -15,7 +15,7 @@ import Button from '@material-ui/core/Button'
 /**
  * Utils
  */
-import { filter, shuffle, random } from 'lodash'
+import { filter, shuffle, random, intersection } from 'lodash'
 import type { FirebaseViewer, FirebaseListItem } from '../../../../services/utils/types'
 import { getAnswer } from './services/utils/quizz'
 
@@ -89,27 +89,30 @@ export default ({ viewer, lists, words }: TrainingProps) => {
 
   function startTraining ({ selectedLists, trainingType }) {
     const selectedListsIds = selectedLists.map(({ value }) => value.id)
+
     const filteredWords = shuffle(
-      filter(words, word => {
-        return selectedListsIds.includes(word.list.id)
-      })
+      filter(words, word => intersection(word.list, selectedListsIds).length === selectedListsIds.length)
     )
 
-    dispatch({
-      type: 'START_TRAINING',
-      payload: {
-        remainingWords: filteredWords,
-        trainingType,
-        currentWord: filteredWords[0]
-      }
-    })
+    if (filteredWords.length) {
+      dispatch({
+        type: 'START_TRAINING',
+        payload: {
+          remainingWords: filteredWords,
+          trainingType,
+          currentWord: filteredWords[0]
+        }
+      })
 
-    dispatch({
-      type: 'CHANGE_STEP',
-      payload: {
-        step: 2
-      }
-    })
+      dispatch({
+        type: 'CHANGE_STEP',
+        payload: {
+          step: 2
+        }
+      })
+    } else {
+      alert('No words found')
+    }
   }
 
   function stopTraining () {
