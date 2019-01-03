@@ -20,7 +20,7 @@ import Select from 'react-select'
 /**
  * Utils
  */
-import { map, filter } from 'lodash'
+import { map, filter, intersection } from 'lodash'
 import { withStyles } from '@material-ui/core/styles'
 import { removeFirebaseValue, addFirebaseValue, updateFirebaseValue } from '../../../../services/firebase'
 import emptyListSvg from '../../assets/empty-list.svg'
@@ -74,13 +74,13 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
   const wordsList = words
     ? filter(words, ({ list }) => {
       if (listsFilter.length && list) {
-        return list.some(listId => listsFilter.includes(listId))
+        return intersection(list, listsFilter).length === listsFilter.length
       } else {
         return true
       }
-    }).filter(({ kana, kanji, name }) => {
+    }).filter(({ kana, kanji, traduction }) => {
       if (wordFilter) {
-        return [kana, kanji, name.toLowerCase()].includes(wordFilter.toLowerCase())
+        return [kana, kanji, traduction.toLowerCase()].includes(wordFilter.toLowerCase())
       } else {
         return true
       }

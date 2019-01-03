@@ -130,7 +130,7 @@ export default withStyles(styles)(({ classes, word, lists, onDeleteButtonClick, 
 
       <div>
         {lists && word.list ? (
-          <Grid container wrap spacing={8}>
+          <Grid container justify='center' spacing={8}>
             {word.list.map(
               (id, index) =>
                 lists[id] ? (
