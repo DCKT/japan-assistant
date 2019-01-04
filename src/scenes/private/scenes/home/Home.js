@@ -78,9 +78,14 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
       } else {
         return true
       }
-    }).filter(({ kana, kanji, traduction }) => {
+    }).filter(({ kana, kanji, traduction, secondaryTraduction }) => {
       if (wordFilter) {
-        return [kana, kanji, traduction.toLowerCase()].includes(wordFilter.toLowerCase())
+        return [
+          kana,
+          kanji,
+          traduction.toLowerCase(),
+          secondaryTraduction ? secondaryTraduction.toLowerCase() : ''
+        ].includes(wordFilter.toLowerCase())
       } else {
         return true
       }
