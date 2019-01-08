@@ -39,6 +39,9 @@ const styles = theme => ({
   kanji: {
     fontSize: 60
   },
+  smallerKanji: {
+    fontSize: 44
+  },
   kana: {
     fontSize: 32
   },
@@ -113,7 +116,7 @@ export default withStyles(styles)(({ classes, word, lists, onDeleteButtonClick, 
         </React.Fragment>
       ) : null}
       <div>
-        <Typography component='p' className={word.kanji ? classes.kanji : classes.kana}>
+        <Typography component='p' className={word.kanji ? word.kanji.length > 3 ? classes.smallerKanji : classes.kanji : classes.kana}>
           {word.kanji || word.kana}
         </Typography>
         {word.kanji ? (
