@@ -51,6 +51,14 @@ const styles = theme => ({
   },
   paperDialog: {
     overflowX: 'hidden'
+  },
+  fixedToolbar: {
+    position: 'fixed',
+    background: 'white',
+    zIndex: 11,
+    top: 0,
+    boxShadow: '0px 2px 2px rgba(24,24,24,0.1)',
+    left: 0
   }
 })
 
@@ -71,6 +79,9 @@ export default withStyles(styles)(
     const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
     useEffect(() => {
+      // window.addEventListener('onscroll', throttle(() => {
+
+      // }))
       if (initialValues) {
         const blocksFromHtml = htmlToDraft(initialValues.content)
         const { contentBlocks, entityMap } = blocksFromHtml
@@ -133,12 +144,12 @@ export default withStyles(styles)(
                   </Field>
                 </Grid>
                 <Grid item xs={12}>
-                  <Field name='list' validate={formRules.required}>
-                    {({ input, meta }) => (
-                      <FormControl error={meta.error && meta.touched} fullWidth>
+                  <Field name='list'>
+                    {({ input }) => (
+                      <FormControl fullWidth>
                         <Select
                           isMulti
-                          options={map(lists, (list) => ({
+                          options={map(lists, list => ({
                             label: list.name,
                             value: list.id
                           }))}
@@ -151,7 +162,6 @@ export default withStyles(styles)(
                           placeholder={<Trans>Associate with lists</Trans>}
                           {...input}
                         />
-                        {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
                       </FormControl>
                     )}
                   </Field>

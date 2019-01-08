@@ -34,7 +34,7 @@ export const getAnswer = ({ trainingType, currentWord }: GetAnswerArgs): string 
     case 'kanji_to_kana':
       return currentWord.kana
     case 'kanji_to_traduction':
-      return currentWord.name
+      return currentWord.traduction
     case 'traduction_to_kanji':
       return currentWord.kanji || ''
     case 'traduction_to_kana':
