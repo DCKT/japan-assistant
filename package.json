@@ -10,16 +10,16 @@
     "draft-js": "^0.10.5",
     "draftjs-to-html": "^0.8.4",
     "final-form": "4.11.0",
-    "firebase": "^5.6.0",
+    "firebase": "5.7.3",
     "html-to-draftjs": "^1.4.0",
     "lodash": "4.17.11",
     "react": "16.7.0-alpha.0",
     "react-dom": "16.7.0-alpha.0",
-    "react-draft-wysiwyg": "^1.12.13",
+    "react-draft-wysiwyg": "1.12.20",
     "react-final-form": "4.0.2",
     "react-media": "^1.9.2",
-    "react-scripts": "2.1.1",
-    "react-select": "2.1.2"
+    "react-scripts": "2.1.3",
+    "react-select": "2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,6 +46,6 @@
     "@lingui/macro": "2.7.2",
     "babel-core": "7.0.0-bridge.0",
     "eslint-config-dck": "1.0.4",
-    "flow-bin": "^0.89.0"
+    "flow-bin": "0.90.0"
   }
 }
