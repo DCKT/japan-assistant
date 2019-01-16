@@ -12,8 +12,10 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import Tooltip from '@material-ui/core/Tooltip'
 import Grid from '@material-ui/core/Grid'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import InfoIcon from '@material-ui/icons/Info'
 import { Trans } from '@lingui/macro'
 import Chip from '@material-ui/core/Chip'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -49,6 +51,15 @@ const styles = theme => ({
   traduction: {
     fontSize: 18,
     marginTop: theme.spacing.unit * 2
+  },
+  noteTooltip: {
+    position: 'absolute',
+    left: theme.spacing.unit,
+    top: theme.spacing.unit,
+    color: 'rgba(24,24,24, 0.5)'
+  },
+  customNoteTooltip: {
+    fontSize: 16
   }
 })
 
@@ -71,6 +82,17 @@ export default withStyles(styles)(({ classes, word, lists, onDeleteButtonClick, 
     <Card className={classes.cardContent}>
       {onDeleteButtonClick || onEditionButtonClick ? (
         <React.Fragment>
+          {word.note && word.note.trim() ? (
+            <Tooltip
+              title={word.note}
+              className={classes.noteTooltip}
+              classes={{
+                tooltip: classes.customNoteTooltip
+              }}
+            >
+              <InfoIcon />
+            </Tooltip>
+          ) : null}
           <IconButton
             aria-label='More'
             aria-owns={menuAnchor ? 'simple-menu' : undefined}
@@ -116,7 +138,10 @@ export default withStyles(styles)(({ classes, word, lists, onDeleteButtonClick, 
         </React.Fragment>
       ) : null}
       <div>
-        <Typography component='p' className={word.kanji ? word.kanji.length > 3 ? classes.smallerKanji : classes.kanji : classes.kana}>
+        <Typography
+          component='p'
+          className={word.kanji ? (word.kanji.length > 3 ? classes.smallerKanji : classes.kanji) : classes.kana}
+        >
           {word.kanji || word.kana}
         </Typography>
         {word.kanji ? (
