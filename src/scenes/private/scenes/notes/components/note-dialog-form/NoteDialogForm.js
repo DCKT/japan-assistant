@@ -82,6 +82,11 @@ export default withStyles(styles)(
       // window.addEventListener('onscroll', throttle(() => {
 
       // }))
+      window.addEventListener('beforeunload', e => {
+        e.preventDefault()
+        e.returnValue = 'Sure ?'
+      })
+
       if (initialValues) {
         const blocksFromHtml = htmlToDraft(initialValues.content)
         const { contentBlocks, entityMap } = blocksFromHtml
