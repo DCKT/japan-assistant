@@ -19,7 +19,7 @@ REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
 
 ### Technologies used
 
-* `react` (16.7.0-alpha.0) for hooks
+* `react` (16.8.x)
 * `final-form` & `react-final-form` as form manager
 * `@reach/router` as router system
 * `firebase` as login & db system
@@ -29,3 +29,7 @@ REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
 ### Structure pattern
 
 `scenes` / `services`
+
+## How to contribute ?
+
+Todo

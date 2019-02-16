@@ -149,7 +149,7 @@ export default withStyles(styles)(({ classes }) => {
         </Grid>
       </Paper>
 
-      <Typography component={Link} to='/login' style={{ marginTop: 15 }}>
+      <Typography component={Link} to='/login' style={{ marginTop: 15, display: 'inline-block' }}>
         <Trans>Already registered ? Login</Trans>
       </Typography>
     </div>
