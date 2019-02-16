@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField'
 import { Button } from '@material-ui/core'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { Link } from '@reach/router'
+import logoSvg from '../../assets/logo.svg'
 
 /**
  * Utils
@@ -23,7 +24,16 @@ import { useInput } from '../../../../services/utils/hooks'
 
 const styles = theme => ({
   root: {
+    paddingTop: 50,
+    maxWidth: 700,
+    margin: 'auto'
+  },
+  paperRoot: {
     padding: theme.spacing.unit * 4
+  },
+  logoRoot: {
+    textAlign: 'center',
+    marginBottom: theme.spacing.unit * 3
   },
   socialContainer: {
     borderTop: '1px solid #ccc',
@@ -61,74 +71,77 @@ export default withStyles(styles)(({ classes }) => {
   }
 
   return (
-    <Grid container spacing={24} justify='center' alignItems='center' style={{ paddingTop: 50 }}>
-      <Grid item xs style={{ maxWidth: 700 }}>
-        <Paper className={classes.root} elevation={1}>
-          <Grid container spacing={8}>
-            <Grid item xs={12} sm={6}>
-              <Typography variant='h4' component='h1' gutterBottom style={{ textAlign: 'center' }}>
-                <Trans>Connexion</Trans>
+    <div className={classes.root}>
+      <div className={classes.logoRoot}>
+        <Link to='/'>
+          <img src={logoSvg} alt='Japan Assistant logo link to index' />
+        </Link>
+      </div>
+      <Paper className={classes.paperRoot} elevation={1}>
+        <Grid container spacing={8}>
+          <Grid item xs={12} sm={6}>
+            <Typography variant='h4' component='h1' gutterBottom style={{ textAlign: 'center' }}>
+              <Trans>Connexion</Trans>
+            </Typography>
+
+            {error ? (
+              <Typography component='p' gutterBottom>
+                {error.message}
               </Typography>
+            ) : null}
 
-              {error ? (
-                <Typography component='p' gutterBottom>
-                  {error.message}
-                </Typography>
-              ) : null}
-
-              <form onSubmit={onSubmit}>
-                <div>
-                  <TextField
-                    id='email'
-                    label={<Trans>Email</Trans>}
-                    margin='normal'
-                    variant='outlined'
-                    type='email'
-                    name='email'
-                    fullWidth
-                    required
-                    {...emailInput}
-                  />
-                </div>
-                <div>
-                  <TextField
-                    id='password'
-                    label={<Trans>Password</Trans>}
-                    type='password'
-                    margin='normal'
-                    variant='outlined'
-                    required
-                    fullWidth
-                    {...passwordInput}
-                  />
-                </div>
-                <div style={{ marginTop: 20 }}>
-                  <Button type='submit' variant='contained' color='primary' size='large' fullWidth disabled={isLoading}>
-                    {isLoading ? <CircularProgress size={28} className={classes.fabProgress} /> : <Trans>Login</Trans>}
-                  </Button>
-                </div>
-              </form>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <div className={classes.socialContainer}>
-                <Typography component='p' variant='overline' style={{ textAlign: 'center' }}>
-                  <Trans>Or use social login</Trans>
-                </Typography>
-                <Button variant='contained' size='large' fullWidth onClick={firebaseGoogleSignIn}>
-                  Google login
-                </Button>
-                <br />
-                <Button variant='contained' size='large' fullWidth onClick={firebaseTwitterSignIn}>
-                  Twitter login
+            <form onSubmit={onSubmit}>
+              <div>
+                <TextField
+                  id='email'
+                  label={<Trans>Email</Trans>}
+                  margin='normal'
+                  variant='outlined'
+                  type='email'
+                  name='email'
+                  fullWidth
+                  required
+                  {...emailInput}
+                />
+              </div>
+              <div>
+                <TextField
+                  id='password'
+                  label={<Trans>Password</Trans>}
+                  type='password'
+                  margin='normal'
+                  variant='outlined'
+                  required
+                  fullWidth
+                  {...passwordInput}
+                />
+              </div>
+              <div style={{ marginTop: 20 }}>
+                <Button type='submit' variant='contained' color='primary' size='large' fullWidth disabled={isLoading}>
+                  {isLoading ? <CircularProgress size={28} className={classes.fabProgress} /> : <Trans>Login</Trans>}
                 </Button>
               </div>
-            </Grid>
+            </form>
           </Grid>
-        </Paper>
-        <Typography component={Link} to='/register' style={{ marginTop: 15 }}>
-          <Trans>New ? Create an account</Trans>
-        </Typography>
-      </Grid>
-    </Grid>
+          <Grid item xs={12} sm={6}>
+            <div className={classes.socialContainer}>
+              <Typography component='p' variant='overline' style={{ textAlign: 'center' }}>
+                <Trans>Or use social login</Trans>
+              </Typography>
+              <Button variant='contained' size='large' fullWidth onClick={firebaseGoogleSignIn}>
+                Google login
+              </Button>
+              <br />
+              <Button variant='contained' size='large' fullWidth onClick={firebaseTwitterSignIn}>
+                Twitter login
+              </Button>
+            </div>
+          </Grid>
+        </Grid>
+      </Paper>
+      <Typography component={Link} to='/register' style={{ marginTop: 15 }}>
+        <Trans>New ? Create an account</Trans>
+      </Typography>
+    </div>
   )
 })
