@@ -79,13 +79,12 @@ export default withStyles(styles)(
     const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
     useEffect(() => {
-      // window.addEventListener('onscroll', throttle(() => {
-
-      // }))
-      window.addEventListener('beforeunload', e => {
+      const onBeforeUnload = e => {
         e.preventDefault()
         e.returnValue = 'Sure ?'
-      })
+      }
+
+      window.addEventListener('beforeunload', onBeforeUnload)
 
       if (initialValues) {
         const blocksFromHtml = htmlToDraft(initialValues.content)
@@ -93,6 +92,10 @@ export default withStyles(styles)(
         const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap)
         const editorStateWithContent = EditorState.createWithContent(contentState)
         setEditorState(editorStateWithContent)
+      }
+
+      return () => {
+        window.removeEventListener('beforeunload', onBeforeUnload)
       }
     }, [])
 

@@ -13,6 +13,7 @@ import { Trans } from '@lingui/macro'
 import ListItem from './components/ListItem'
 import Grid from '@material-ui/core/Grid'
 import AddListDialogForm from '../../components/AddListDialogForm'
+import emptyListSvg from '../../assets/empty-list.svg'
 
 /**
  * Utils
@@ -90,14 +91,15 @@ export default ({ lists, viewer, words }: ManageListsProps) => {
           </List>
         </Paper>
       ) : (
-        <React.Fragment>
-          <Typography component='p'>
+        <div style={{ maxWidth: 600, margin: 'auto', textAlign: 'center' }}>
+          <img src={emptyListSvg} alt='Blank paper' style={{ maxWidth: 300 }} />
+          <Typography component='p' gutterBottom>
             <Trans>No list yet</Trans>
           </Typography>
           <Button variant='contained' color='primary' onClick={toggleListDialog}>
             <Trans>Create a list</Trans>
           </Button>
-        </React.Fragment>
+        </div>
       )}
 
       {isAddListDialogVisible && typeof lists !== 'undefined' ? (

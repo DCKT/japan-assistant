@@ -23,7 +23,7 @@ import Select from 'react-select'
 import { map, filter, intersection } from 'lodash'
 import { withStyles } from '@material-ui/core/styles'
 import { removeFirebaseValue, addFirebaseValue, updateFirebaseValue } from '../../../../services/firebase'
-import emptyListSvg from '../../assets/empty-list.svg'
+import noWordsSvg from '../../assets/no-words.svg'
 import type { FirebaseViewer } from '../../../../services/utils/types'
 
 const styles = theme => ({
@@ -196,7 +196,7 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
         ) : (
           <Grid container alignItems='center' justify='center' className={classes.emptyContainer}>
             <Grid item xs={5}>
-              <img src={emptyListSvg} alt='No words' className={classes.emptyListPicture} />
+              <img src={noWordsSvg} alt='No words' className={classes.emptyListPicture} />
               <Typography component='h3' variant='h4' gutterBottom>
                 <Trans>No words yet</Trans>
               </Typography>
