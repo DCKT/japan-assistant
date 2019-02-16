@@ -85,13 +85,13 @@ export default withStyles(styles)(({ classes, lists, onSubmit }: SelectTrainingC
               </em>
             </MenuItem>
             <MenuItem value='kanji_to_kana'>
-              <Trans>Kanji -> Kana</Trans>
+              <Trans>Find Kana</Trans>
             </MenuItem>
             <MenuItem value='kanji_to_traduction'>
-              <Trans>Kanji -> Traduction</Trans>
+              <Trans>Find traduction</Trans>
             </MenuItem>
             <MenuItem value='traduction_to_kanji'>
-              <Trans>Traduction -> Kanji</Trans>
+              <Trans>Find Kanji</Trans>
             </MenuItem>
           </Select>
         </FormControl>
