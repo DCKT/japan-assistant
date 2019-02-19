@@ -1,9 +1,17 @@
 {
+  "Add a new word": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/home/Home.js",
+        143
+      ]
+    ]
+  },
   "Search lists": {
     "origin": [
       [
         "src/scenes/private/scenes/home/Home.js",
-        158
+        172
       ]
     ]
   },
@@ -11,11 +19,11 @@
     "origin": [
       [
         "src/scenes/private/scenes/home/Home.js",
-        164
+        178
       ],
       [
         "src/scenes/private/scenes/home/Home.js",
-        195
+        209
       ]
     ]
   },
@@ -23,7 +31,7 @@
     "origin": [
       [
         "src/scenes/private/scenes/home/Home.js",
-        187
+        201
       ]
     ]
   },
@@ -31,15 +39,7 @@
     "origin": [
       [
         "src/scenes/private/scenes/home/Home.js",
-        191
-      ]
-    ]
-  },
-  "Add a new word": {
-    "origin": [
-      [
-        "src/scenes/private/scenes/home/Home.js",
-        203
+        205
       ]
     ]
   }

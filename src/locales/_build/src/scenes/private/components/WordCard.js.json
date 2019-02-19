@@ -1,0 +1,18 @@
+{
+  "Edit": {
+    "origin": [
+      [
+        "src/scenes/private/components/WordCard.js",
+        118
+      ]
+    ]
+  },
+  "Remove": {
+    "origin": [
+      [
+        "src/scenes/private/components/WordCard.js",
+        133
+      ]
+    ]
+  }
+}

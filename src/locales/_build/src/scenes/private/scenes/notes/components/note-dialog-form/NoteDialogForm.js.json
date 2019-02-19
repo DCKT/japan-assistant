@@ -3,7 +3,7 @@
     "origin": [
       [
         "src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js",
-        95
+        128
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js",
-        95
+        128
       ]
     ]
   },
@@ -19,7 +19,7 @@
     "origin": [
       [
         "src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js",
-        98
+        131
       ]
     ]
   },
@@ -27,7 +27,7 @@
     "origin": [
       [
         "src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js",
-        98
+        131
       ]
     ]
   },
@@ -35,7 +35,15 @@
     "origin": [
       [
         "src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js",
-        110
+        143
+      ]
+    ]
+  },
+  "Associate with lists": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/components/note-dialog-form/NoteDialogForm.js",
+        170
       ]
     ]
   }

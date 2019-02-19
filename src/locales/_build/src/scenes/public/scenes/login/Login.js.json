@@ -3,7 +3,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/login/Login.js",
-        70
+        84
       ]
     ]
   },
@@ -11,7 +11,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/login/Login.js",
-        83
+        97
       ]
     ]
   },
@@ -19,7 +19,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/login/Login.js",
-        96
+        110
       ]
     ]
   },
@@ -27,7 +27,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/login/Login.js",
-        107
+        121
       ]
     ]
   },
@@ -35,7 +35,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/login/Login.js",
-        115
+        129
       ]
     ]
   },
@@ -43,7 +43,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/login/Login.js",
-        129
+        143
       ]
     ]
   }
