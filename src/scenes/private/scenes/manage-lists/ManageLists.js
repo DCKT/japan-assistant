@@ -68,18 +68,20 @@ export default ({ lists, viewer, words }: ManageListsProps) => {
   return (
     <div>
       <Grid container alignItems='center' spacing={16} style={{ marginBottom: 15 }}>
-        <Grid item xs='auto'>
-          <Typography component='h1' variant='h3'>
-            <Trans>Manage lists</Trans>
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm='auto'>
-          {lists ? (
-            <Button variant='contained' color='primary' onClick={toggleListDialog}>
-              <Trans>Create a list</Trans>
-            </Button>
-          ) : null}
-        </Grid>
+        {lists ? (
+          <React.Fragment>
+            <Grid item xs='auto'>
+              <Typography component='h1' variant='h3'>
+                <Trans>Manage lists</Trans>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm='auto'>
+              <Button variant='contained' color='primary' onClick={toggleListDialog}>
+                <Trans>Create a list</Trans>
+              </Button>
+            </Grid>
+          </React.Fragment>
+        ) : null}
       </Grid>
 
       {lists ? (
@@ -91,9 +93,9 @@ export default ({ lists, viewer, words }: ManageListsProps) => {
           </List>
         </Paper>
       ) : (
-        <div style={{ maxWidth: 600, margin: 'auto', textAlign: 'center' }}>
+        <div style={{ maxWidth: 600, margin: 'auto', textAlign: 'center', marginTop: 60 }}>
           <img src={emptyListSvg} alt='Blank paper' style={{ maxWidth: 300 }} />
-          <Typography component='p' gutterBottom>
+          <Typography component='h3' variant='h4' gutterBottom>
             <Trans>No list yet</Trans>
           </Typography>
           <Button variant='contained' color='primary' onClick={toggleListDialog}>

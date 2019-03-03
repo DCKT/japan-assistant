@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 
 /**
  * Components
@@ -56,6 +56,27 @@ const styles = theme => ({
   }
 })
 
+const filterWords = ({ words, listsFilters, searchFilter }) => {
+  return filter(words, ({ list }) => {
+    if (listsFilters.length && list) {
+      return intersection(list, listsFilters).length === listsFilters.length
+    } else {
+      return true
+    }
+  }).filter(({ kana, kanji, traduction, secondaryTraduction }) => {
+    if (searchFilter) {
+      return [
+        kana,
+        kanji,
+        traduction.toLowerCase(),
+        secondaryTraduction ? secondaryTraduction.toLowerCase() : ''
+      ].includes(searchFilter.toLowerCase())
+    } else {
+      return true
+    }
+  })
+}
+
 type HomeProps = {|
   classes: Object,
   viewer: FirebaseViewer,
@@ -70,27 +91,12 @@ export default withStyles(styles)(({ classes, viewer, lists, words }: HomeProps)
   const [listsFilter, setListsFilter] = useState([])
   const [wordFilter, setWordFilter] = useState('')
   const hasWords = words !== undefined && words !== null
-
-  const wordsList = words
-    ? filter(words, ({ list }) => {
-      if (listsFilter.length && list) {
-        return intersection(list, listsFilter).length === listsFilter.length
-      } else {
-        return true
-      }
-    }).filter(({ kana, kanji, traduction, secondaryTraduction }) => {
-      if (wordFilter) {
-        return [
-          kana,
-          kanji,
-          traduction.toLowerCase(),
-          secondaryTraduction ? secondaryTraduction.toLowerCase() : ''
-        ].includes(wordFilter.toLowerCase())
-      } else {
-        return true
-      }
-    })
-    : null
+  const f = useCallback(() => filterWords({ words, searchFilter: wordFilter, listsFilters: listsFilter }), [
+    words,
+    listsFilter,
+    wordFilter
+  ])
+  const wordsList = words ? f() : null
 
   const listsOptions = map(lists, list => ({
     label: list.name,

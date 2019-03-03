@@ -47,7 +47,7 @@
     "@lingui/macro": "2.7.3",
     "babel-core": "7.0.0-bridge.0",
     "bs-platform": "4.0.18",
-    "eslint-config-dck": "1.1.0",
+    "eslint-config-dck": "1.1.1",
     "flow-bin": "0.93.0"
   }
 }

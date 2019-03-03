@@ -4362,10 +4362,10 @@ escodegen@^1.9.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-dck@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-dck/-/eslint-config-dck-1.1.0.tgz#bbcd615a03c14fdb7de284a63c17d71b52ff8463"
-  integrity sha512-OaFR2LoGJXIhp0dsdQhKlx2B9MApy6iJjTsonPsKZLxGqLRxXrTD1nMuBlfd0FMvUhwAHWVAWllYg0nXbtUiLw==
+eslint-config-dck@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-dck/-/eslint-config-dck-1.1.1.tgz#ec93c698068ceee02c4e056db9eca8b3f4b58183"
+  integrity sha512-ilvrRW2BuY07lu3koR7sy+k3VkwoC1eQPvr70s9QaY/MJwDVaPtjID/vYEKzB2gYlNITvVRIDcIylDx95N2fZw==
   dependencies:
     babel-eslint "^8.0.1"
     eslint "^4.8.0"
@@ -4376,6 +4376,7 @@ eslint-config-dck@1.1.0:
     eslint-plugin-node "^5.2.0"
     eslint-plugin-promise "^3.5.0"
     eslint-plugin-react "^7.4.0"
+    eslint-plugin-react-hooks "^1.0.2"
     eslint-plugin-standard "^3.0.1"
 
 eslint-config-react-app@^3.0.7:
@@ -4487,6 +4488,11 @@ eslint-plugin-promise@^3.5.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-3.8.0.tgz#65ebf27a845e3c1e9d6f6a5622ddd3801694b621"
   integrity sha512-JiFL9UFR15NKpHyGii1ZcvmtIqa3UTwiDAGb8atSffe43qJ3+1czVGN6UtkklpcJ2DVnqvTMzEKRaJdBkAL2aQ==
+
+eslint-plugin-react-hooks@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.0.2.tgz#89d9ab0690a45956696e652368a952fb09f7134d"
+  integrity sha512-pY1RSD3CGkGOV+e+rzjfs+JXKRum7VlJKPHznhU0GnFWfDm6zKLmOmg/lKcwNRH3LTSnF2PbfF8x3w90tyHlYw==
 
 eslint-plugin-react@7.12.4:
   version "7.12.4"
