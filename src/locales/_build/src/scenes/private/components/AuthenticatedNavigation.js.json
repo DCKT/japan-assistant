@@ -55,7 +55,7 @@
       ]
     ]
   },
-  "Oral": {
+  "[WIP] Oral": {
     "origin": [
       [
         "src/scenes/private/components/AuthenticatedNavigation.js",

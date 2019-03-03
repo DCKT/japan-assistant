@@ -3,7 +3,7 @@
     "origin": [
       [
         "src/scenes/private/scenes/notes/scenes/details/NoteDetails.js",
-        65
+        83
       ]
     ]
   },
@@ -11,7 +11,23 @@
     "origin": [
       [
         "src/scenes/private/scenes/notes/scenes/details/NoteDetails.js",
-        78
+        115
+      ]
+    ]
+  },
+  "Remove": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/scenes/details/NoteDetails.js",
+        128
+      ]
+    ]
+  },
+  "Associated cards": {
+    "origin": [
+      [
+        "src/scenes/private/scenes/notes/scenes/details/NoteDetails.js",
+        158
       ]
     ]
   }

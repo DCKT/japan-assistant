@@ -23,7 +23,7 @@
       ]
     ]
   },
-  "Kanji -> Kana": {
+  "Find Kana": {
     "origin": [
       [
         "src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js",
@@ -31,7 +31,7 @@
       ]
     ]
   },
-  "Kanji -> Traduction": {
+  "Find traduction": {
     "origin": [
       [
         "src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js",
@@ -39,7 +39,7 @@
       ]
     ]
   },
-  "Traduction -> Kanji": {
+  "Find Kanji": {
     "origin": [
       [
         "src/scenes/private/scenes/training/components/select-training-config/SelectTrainingConfig.js",

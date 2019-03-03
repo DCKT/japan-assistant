@@ -1,0 +1,34 @@
+{
+  "Confirm this action": {
+    "origin": [
+      [
+        "src/scenes/private/components/ActionConfirmationDialog.js",
+        31
+      ]
+    ]
+  },
+  "Are you sure about this action ?": {
+    "origin": [
+      [
+        "src/scenes/private/components/ActionConfirmationDialog.js",
+        35
+      ]
+    ]
+  },
+  "Cancel": {
+    "origin": [
+      [
+        "src/scenes/private/components/ActionConfirmationDialog.js",
+        40
+      ]
+    ]
+  },
+  "OK": {
+    "origin": [
+      [
+        "src/scenes/private/components/ActionConfirmationDialog.js",
+        43
+      ]
+    ]
+  }
+}

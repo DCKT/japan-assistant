@@ -6,6 +6,8 @@ export default () => {
   return (
     <div>
       <h1>Support</h1>
+
+      <p>TODO</p>
     </div>
   )
 }

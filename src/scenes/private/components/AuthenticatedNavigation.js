@@ -103,36 +103,36 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
     setAnchorEl(null)
   }
 
-  function closeMobileMenu () {
+  function closeMobileMenu() {
     setMobileOpen(false)
   }
 
-  function toggleMenuTraining () {
+  function toggleMenuTraining() {
     setTrainingMenuVisibility(!isTrainingMenuVisible)
   }
 
   return (
     <div className={classes.root}>
-      <AppBar position='fixed' className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
-            color='inherit'
-            aria-label='Open drawer'
+            color="inherit"
+            aria-label="Open drawer"
             onClick={() => setMobileOpen(!isMobileOpen)}
             className={classes.menuButton}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' color='inherit' noWrap>
+          <Typography variant="h6" color="inherit" noWrap>
             Japan Assistant
           </Typography>
 
           <div className={classes.grow} />
           <IconButton
             aria-owns={isMenuOpen ? 'material-appbar' : null}
-            aria-haspopup='true'
+            aria-haspopup="true"
             onClick={e => setAnchorEl(e.currentTarget)}
-            color='inherit'
+            color="inherit"
           >
             <AccountCircle />
           </IconButton>
@@ -151,7 +151,7 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
         </MenuItem>
         <MenuItem
           component={Link}
-          to='/'
+          to="/"
           onClick={() => {
             handleMenuClose()
             onLogout()
@@ -160,11 +160,11 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
           <Trans>Logout</Trans>
         </MenuItem>
       </Menu>
-      <Media query='(max-width: 599px)'>
+      <Media query="(max-width: 599px)">
         {matches => (
           <Drawer
             variant={matches ? 'temporary' : 'permanent'}
-            anchor='left'
+            anchor="left"
             className={classes.drawer}
             open={isMobileOpen}
             onClose={() => setMobileOpen(false)}
@@ -175,9 +175,9 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
             <div className={classes.toolbar} />
             <Divider />
             <List>
-              <Match path='/app'>
+              <Match path="/app">
                 {({ match }) => (
-                  <ListItem button component={Link} to='/app' onClick={closeMobileMenu} selected={!!match}>
+                  <ListItem button component={Link} to="/app" onClick={closeMobileMenu} selected={!!match}>
                     <ListItemIcon>
                       <HomeIcon />
                     </ListItemIcon>
@@ -186,9 +186,9 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
                 )}
               </Match>
 
-              <Match path='lists'>
+              <Match path="lists">
                 {({ match }) => (
-                  <ListItem button component={Link} to='lists' onClick={closeMobileMenu} selected={!!match}>
+                  <ListItem button component={Link} to="lists" onClick={closeMobileMenu} selected={!!match}>
                     <ListItemIcon>
                       <CategoryIcon />
                     </ListItemIcon>
@@ -197,9 +197,9 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
                 )}
               </Match>
 
-              <Match path='notes'>
+              <Match path="notes">
                 {({ match }) => (
-                  <ListItem button component={Link} to='notes' onClick={closeMobileMenu} selected={!!match}>
+                  <ListItem button component={Link} to="notes" onClick={closeMobileMenu} selected={!!match}>
                     <ListItemIcon>
                       <NoteIcon />
                     </ListItemIcon>
@@ -216,14 +216,14 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
                 {isTrainingMenuVisible ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
 
-              <Collapse in={isTrainingMenuVisible} timeout='auto' unmountOnExit>
-                <List component='div' disablePadding>
-                  <Match path='training'>
+              <Collapse in={isTrainingMenuVisible} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  <Match path="training">
                     {({ match }) => (
                       <ListItem
                         button
                         component={Link}
-                        to='training'
+                        to="training"
                         onClick={closeMobileMenu}
                         selected={!!match}
                         className={classes.nested}
@@ -236,12 +236,12 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
                     )}
                   </Match>
 
-                  <Match path='oral-training'>
+                  <Match path="oral-training">
                     {({ match }) => (
                       <ListItem
                         button
                         component={Link}
-                        to='oral-training'
+                        to="oral-training"
                         onClick={closeMobileMenu}
                         selected={!!match}
                         className={classes.nested}
@@ -249,7 +249,7 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
                         <ListItemIcon>
                           <RecordVoiceOverIcon />
                         </ListItemIcon>
-                        <ListItemText primary={<Trans>Oral</Trans>} />
+                        <ListItemText primary={<Trans>[WIP] Oral</Trans>} />
                       </ListItem>
                     )}
                   </Match>
@@ -258,9 +258,9 @@ export default withStyles(styles, { withTheme: true })(({ classes, theme, childr
 
               <Divider />
 
-              <Match path='support'>
+              <Match path="support">
                 {({ match }) => (
-                  <ListItem button component={Link} to='support' onClick={closeMobileMenu} selected={!!match}>
+                  <ListItem button component={Link} to="support" onClick={closeMobileMenu} selected={!!match}>
                     <ListItemIcon>
                       <HelpIcon />
                     </ListItemIcon>

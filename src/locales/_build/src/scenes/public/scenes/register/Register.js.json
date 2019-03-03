@@ -3,7 +3,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/register/Register.js",
-        49
+        59
       ]
     ]
   },
@@ -11,11 +11,11 @@
     "origin": [
       [
         "src/scenes/public/scenes/register/Register.js",
-        65
+        79
       ],
       [
         "src/scenes/public/scenes/register/Register.js",
-        116
+        130
       ]
     ]
   },
@@ -23,7 +23,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/register/Register.js",
-        80
+        94
       ]
     ]
   },
@@ -31,7 +31,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/register/Register.js",
-        93
+        107
       ]
     ]
   },
@@ -39,7 +39,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/register/Register.js",
-        105
+        119
       ]
     ]
   },
@@ -47,7 +47,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/register/Register.js",
-        124
+        138
       ]
     ]
   },
@@ -55,7 +55,7 @@
     "origin": [
       [
         "src/scenes/public/scenes/register/Register.js",
-        139
+        153
       ]
     ]
   }

@@ -43,8 +43,8 @@ type AddWordDialogProps = {|
   }
 |}
 
-function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, onEdit, classes }: AddWordDialogProps) {
-  async function onFormSubmit (values) {
+function AddWordDialog({ isVisible, initialValues, onClose, lists, onCreate, onEdit, classes }: AddWordDialogProps) {
+  async function onFormSubmit(values) {
     if (initialValues) {
       onEdit(values)
     } else {
@@ -56,18 +56,19 @@ function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, on
 
   return (
     <Dialog
-      scroll='body'
+      scroll="body"
       open={isVisible}
       onClose={onClose}
-      aria-labelledby='add-word-dialog-form'
+      aria-labelledby="add-word-dialog-form"
       classes={{
         paper: classes.root
       }}
+      disableEscapeKeyDown
     >
       <Form initialValues={initialValues} onSubmit={onFormSubmit}>
         {({ handleSubmit, pristine, invalid, submitting }) => (
           <form onSubmit={handleSubmit}>
-            <DialogTitle id='form-dialog-title'>
+            <DialogTitle id="form-dialog-title">
               {initialValues ? <Trans>Update {initialValues.traduction}</Trans> : <Trans>Add a new word</Trans>}
             </DialogTitle>
             <DialogContent style={{ overflowY: 'visible' }}>
@@ -75,15 +76,15 @@ function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, on
                 <Grid item xs={12}>
                   <Grid container spacing={16}>
                     <Grid item xs={12}>
-                      <Field name='traduction' validate={formRules.required}>
+                      <Field name="traduction" validate={formRules.required}>
                         {({ input, meta }) => (
                           <FormControl error={meta.error && meta.touched} fullWidth>
                             <TextField
-                              margin='dense'
-                              id='traduction'
+                              margin="dense"
+                              id="traduction"
                               label={<Trans>Traduction</Trans>}
-                              type='text'
-                              variant='outlined'
+                              type="text"
+                              variant="outlined"
                               fullWidth
                               {...input}
                             />
@@ -93,15 +94,15 @@ function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, on
                       </Field>
                     </Grid>
                     <Grid item xs={12}>
-                      <Field name='secondaryTraduction'>
+                      <Field name="secondaryTraduction">
                         {({ input, meta }) => (
                           <FormControl error={meta.error && meta.touched} fullWidth>
                             <TextField
-                              margin='dense'
-                              id='secondaryTraduction'
+                              margin="dense"
+                              id="secondaryTraduction"
                               label={<Trans>Secondary traduction</Trans>}
-                              type='text'
-                              variant='outlined'
+                              type="text"
+                              variant="outlined"
                               fullWidth
                               {...input}
                             />
@@ -110,16 +111,16 @@ function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, on
                       </Field>
                     </Grid>
                     <Grid item xs={6}>
-                      <Field name='kanji' validate={formRules.japaneseCharacterOnly}>
+                      <Field name="kanji" validate={formRules.japaneseCharacterOnly}>
                         {({ input, meta }) => (
                           <FormControl error={meta.error && meta.touched} fullWidth>
                             <TextField
-                              margin='dense'
-                              id='kanji'
+                              margin="dense"
+                              id="kanji"
                               label={<Trans>Kanji</Trans>}
-                              type='text'
+                              type="text"
                               fullWidth
-                              variant='outlined'
+                              variant="outlined"
                               {...input}
                             />
                             {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
@@ -129,18 +130,18 @@ function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, on
                     </Grid>
                     <Grid item xs={6}>
                       <Field
-                        name='kana'
+                        name="kana"
                         validate={formRules.composeValidators(formRules.required, formRules.japaneseCharacterOnly)}
                       >
                         {({ input, meta }) => (
                           <FormControl error={meta.error && meta.touched} fullWidth>
                             <TextField
-                              margin='dense'
-                              id='kana'
+                              margin="dense"
+                              id="kana"
                               label={<Trans>Kana</Trans>}
-                              type='text'
+                              type="text"
                               fullWidth
-                              variant='outlined'
+                              variant="outlined"
                               {...input}
                             />
                             {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
@@ -154,7 +155,7 @@ function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, on
                   <Grid container spacing={16}>
                     <Grid item xs={12}>
                       {lists.length ? (
-                        <Field name='list'>
+                        <Field name="list">
                           {({ input, meta }) => (
                             <FormControl error={meta.error && meta.touched} fullWidth>
                               <Select
@@ -176,19 +177,19 @@ function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, on
                       ) : null}
                     </Grid>
                     <Grid item xs={12}>
-                      <Field name='note'>
+                      <Field name="note">
                         {({ input, meta }) => (
                           <FormControl error={meta.error && meta.touched} fullWidth>
                             <TextField
-                              margin='dense'
-                              id='note'
+                              margin="dense"
+                              id="note"
                               label={<Trans>Note</Trans>}
-                              type='text'
+                              type="text"
                               multiline
                               fullWidth
-                              rowsMax='6'
-                              rows='6'
-                              variant='outlined'
+                              rowsMax="6"
+                              rows="6"
+                              variant="outlined"
                               {...input}
                             />
                             {meta.error && meta.touched && <FormHelperText>{meta.error}</FormHelperText>}
@@ -204,7 +205,7 @@ function AddWordDialog ({ isVisible, initialValues, onClose, lists, onCreate, on
               <Button onClick={onClose}>
                 <Trans>Cancel</Trans>
               </Button>
-              <Button type='submit' variant='contained' color='primary'>
+              <Button type="submit" variant="contained" color="primary">
                 {initialValues ? <Trans>Update</Trans> : <Trans>Add</Trans>}
               </Button>
             </DialogActions>

@@ -3,7 +3,7 @@
     "origin": [
       [
         "src/scenes/private/components/AddWordDialogForm.js",
-        56
+        71
       ]
     ]
   },
@@ -11,15 +11,23 @@
     "origin": [
       [
         "src/scenes/private/components/AddWordDialogForm.js",
-        56
+        71
       ]
     ]
   },
-  "Name": {
+  "Traduction": {
     "origin": [
       [
         "src/scenes/private/components/AddWordDialogForm.js",
-        69
+        84
+      ]
+    ]
+  },
+  "Secondary traduction": {
+    "origin": [
+      [
+        "src/scenes/private/components/AddWordDialogForm.js",
+        102
       ]
     ]
   },
@@ -27,7 +35,7 @@
     "origin": [
       [
         "src/scenes/private/components/AddWordDialogForm.js",
-        87
+        119
       ]
     ]
   },
@@ -35,7 +43,7 @@
     "origin": [
       [
         "src/scenes/private/components/AddWordDialogForm.js",
-        108
+        140
       ]
     ]
   },
@@ -43,7 +51,7 @@
     "origin": [
       [
         "src/scenes/private/components/AddWordDialogForm.js",
-        137
+        169
       ]
     ]
   },
@@ -51,7 +59,7 @@
     "origin": [
       [
         "src/scenes/private/components/AddWordDialogForm.js",
-        153
+        185
       ]
     ]
   },
@@ -59,7 +67,7 @@
     "origin": [
       [
         "src/scenes/private/components/AddWordDialogForm.js",
-        173
+        205
       ]
     ]
   },
@@ -67,7 +75,7 @@
     "origin": [
       [
         "src/scenes/private/components/AddWordDialogForm.js",
-        176
+        208
       ]
     ]
   },
@@ -75,7 +83,7 @@
     "origin": [
       [
         "src/scenes/private/components/AddWordDialogForm.js",
-        176
+        208
       ]
     ]
   }
